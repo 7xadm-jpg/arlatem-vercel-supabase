@@ -1,0 +1,12 @@
+{
+  "name": "arlatem-vercel-supabase",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Site e painel administrativo ARLATEM com Vercel + Supabase",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.53.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
