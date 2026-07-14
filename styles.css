@@ -698,10 +698,6 @@ img { max-width: 100%; display: block; }
   .floating-whatsapp span { display: none; }
   .floating-whatsapp { width: 58px; height: 58px; padding: 0; justify-content: center; }
 }
-.brand-logo-only {
-  display: inline-flex;
-  align-items: center;
-}
 
 .brand-logo-wide {
   height: 72px;
