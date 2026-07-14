@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel ARLATEM</title>
+  <link rel="stylesheet" href="/admin.css" />
+</head>
+<body>
+  <div class="admin-shell">
+    <section class="login-screen" id="loginScreen">
+      <div class="login-card">
+        <span class="admin-badge">Acesso técnico oculto</span>
+        <h1>Painel de Gerenciamento ARLATEM</h1>
+        <p>Altere fotos, nomes, textos, FAQ, blog, depoimentos e produtos do site com segurança.</p>
+        <form id="loginForm" class="login-form">
+          <label>
+            Usuário
+            <input type="text" id="loginUsername" placeholder="Usuário" required />
+          </label>
+          <label>
+            Senha
+            <input type="password" id="loginPassword" placeholder="Senha" required />
+          </label>
+          <button type="submit" class="btn primary">Entrar no painel</button>
+        </form>
+        <div class="hint-box">
+          <strong>Dica:</strong>
+          <span>Depois do login, suas alterações ficam salvas no servidor e podem ser acessadas de qualquer dispositivo onde o site estiver hospedado.</span>
+        </div>
+        <p class="login-message" id="loginMessage"></p>
+      </div>
+    </section>
+
+    <section class="dashboard hidden" id="dashboard">
+      <aside class="sidebar">
+        <div>
+          <span class="admin-badge">ARLATEM CMS</span>
+          <h2>Gerenciador do site</h2>
+          <p>Edite o conteúdo comercial sem mexer no código.</p>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="#geral">Geral</a>
+          <a href="#hero">Hero e Banner</a>
+          <a href="#sobre">Quem Somos</a>
+          <a href="#categorias">Categorias</a>
+          <a href="#produtos">Produtos</a>
+          <a href="#blog">Blog</a>
+          <a href="#depoimentos">Depoimentos</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+        <div class="sidebar-footer">
+          <small>Rota oculta</small>
+          <code id="adminPathInfo">/acesso-tecnico-arlatem</code>
+        </div>
+      </aside>
+
+      <main class="dashboard-content">
+        <header class="dashboard-header">
+          <div>
+            <h1>Painel Administrativo</h1>
+            <p>Atualize fotos, textos, nomes e produtos do site da ARLATEM.</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn ghost" id="backupBtn">Baixar backup</button>
+            <button class="btn primary" id="saveBtn">Salvar alterações</button>
+            <button class="btn danger" id="logoutBtn">Sair</button>
+          </div>
+        </header>
+
+        <div class="status-bar" id="statusBar">Pronto para editar.</div>
+
+        <section class="panel" id="geral">
+          <div class="panel-head">
+            <h3>Informações Gerais</h3>
+            <p>Esses dados aparecem no topo, rodapé, links e contato.</p>
+          </div>
+          <div class="form-grid two">
+            <label>Nome do site<input id="settings_siteName" type="text" /></label>
+            <label>Tagline<input id="settings_tagline" type="text" /></label>
+            <label>WhatsApp (somente números com DDI)<input id="settings_whatsappNumber" type="text" /></label>
+            <label>E-mail<input id="settings_email" type="email" /></label>
+            <label>Instagram<input id="settings_instagram" type="text" /></label>
+            <label>Facebook<input id="settings_facebook" type="text" /></label>
+            <label>Localização<input id="settings_location" type="text" /></label>
+            <label>Horário<input id="settings_hours" type="text" /></label>
+            <label class="full">Texto de copyright<input id="settings_copyrightText" type="text" /></label>
+          </div>
+          <div class="inline-editor">
+            <div class="inline-head"><h4>Destaques rápidos</h4><button class="btn small" data-add-simple="highlights">Adicionar destaque</button></div>
+            <div id="highlightsListEditor" class="simple-list"></div>
+          </div>
+          <div class="inline-editor">
+            <div class="inline-head"><h4>Marcas atendidas</h4><button class="btn small" data-add-object="brands">Adicionar marca</button></div>
+            <div id="brandsEditor" class="repeat-list"></div>
+          </div>
+        </section>
+
+        <section class="panel" id="hero">
+          <div class="panel-head">
+            <h3>Hero e Banner Principal</h3>
+            <p>Troque a imagem principal, headline e chamadas comerciais.</p>
+          </div>
+          <div class="form-grid two">
+            <label class="full">Texto superior do hero<input id="hero_eyebrow" type="text" /></label>
+            <label class="full">Título principal<input id="hero_title" type="text" /></label>
+            <label class="full">Subtítulo<textarea id="hero_subtitle" rows="3"></textarea></label>
+            <label class="full">Placeholder da busca<input id="hero_searchPlaceholder" type="text" /></label>
+            <label class="full">Imagem principal (URL interna)<input id="hero_backgroundImage" type="text" /></label>
+          </div>
+          <div class="upload-box">
+            <img id="heroImagePreview" alt="Preview hero" />
+            <div>
+              <label class="upload-label">Trocar imagem do hero<input type="file" id="heroImageUpload" accept="image/*" /></label>
+              <small>Envie PNG, JPG ou WEBP.</small>
+            </div>
+          </div>
+          <div class="form-grid two banner-grid">
+            <label>Texto superior do banner<input id="banner_eyebrow" type="text" /></label>
+            <label>Título do banner<input id="banner_title" type="text" /></label>
+            <label class="full">Subtítulo do banner<textarea id="banner_subtitle" rows="3"></textarea></label>
+          </div>
+        </section>
+
+        <section class="panel" id="sobre">
+          <div class="panel-head">
+            <h3>Quem Somos</h3>
+            <p>Atualize os textos institucionais e os diferenciais de confiança.</p>
+          </div>
+          <div class="form-grid two">
+            <label class="full">Título<input id="about_title" type="text" /></label>
+            <label class="full">Parágrafo 1<textarea id="about_paragraph1" rows="4"></textarea></label>
+            <label class="full">Parágrafo 2<textarea id="about_paragraph2" rows="4"></textarea></label>
+          </div>
+          <div class="inline-editor">
+            <div class="inline-head"><h4>Pontos principais</h4><button class="btn small" data-add-simple="aboutPoints">Adicionar ponto</button></div>
+            <div id="aboutPointsEditor" class="simple-list"></div>
+          </div>
+          <div class="inline-editor">
+            <div class="inline-head"><h4>Especificações / números</h4><button class="btn small" data-add-object="aboutSpecs">Adicionar linha</button></div>
+            <div id="aboutSpecsEditor" class="repeat-list"></div>
+          </div>
+        </section>
+
+        <section class="panel" id="categorias">
+          <div class="panel-head">
+            <h3>Categorias e Diferenciais</h3>
+            <p>Adicione, remova ou renomeie categorias e benefícios.</p>
+          </div>
+          <div class="inline-editor">
+            <div class="inline-head"><h4>Categorias</h4><button class="btn small" data-add-object="categories">Adicionar categoria</button></div>
+            <div id="categoriesEditor" class="repeat-list"></div>
+          </div>
+          <div class="inline-editor">
+            <div class="inline-head"><h4>Diferenciais</h4><button class="btn small" data-add-object="benefits">Adicionar diferencial</button></div>
+            <div id="benefitsEditor" class="repeat-list"></div>
+          </div>
+        </section>
+
+        <section class="panel" id="produtos">
+          <div class="panel-head">
+            <h3>Produtos do Catálogo</h3>
+            <p>Edite nome, foto, código, aplicação, filtros e disponibilidade.</p>
+          </div>
+          <div class="inline-head sticky-inline">
+            <h4>Lista de produtos</h4>
+            <button class="btn small primary" id="addProductBtn">Adicionar produto</button>
+          </div>
+          <div id="productsEditor" class="products-list"></div>
+        </section>
+
+        <section class="panel" id="blog">
+          <div class="panel-head">
+            <h3>Blog</h3>
+            <p>Edite os cards de conteúdo técnico.</p>
+          </div>
+          <div class="inline-editor">
+            <div class="inline-head"><h4>Artigos</h4><button class="btn small" data-add-object="blog">Adicionar artigo</button></div>
+            <div id="blogEditor" class="repeat-list"></div>
+          </div>
+        </section>
+
+        <section class="panel" id="depoimentos">
+          <div class="panel-head">
+            <h3>Depoimentos</h3>
+            <p>Altere frases, autores e quantidade de estrelas.</p>
+          </div>
+          <div class="inline-editor">
+            <div class="inline-head"><h4>Lista de depoimentos</h4><button class="btn small" data-add-object="testimonials">Adicionar depoimento</button></div>
+            <div id="testimonialsEditor" class="repeat-list"></div>
+          </div>
+        </section>
+
+        <section class="panel" id="faq">
+          <div class="panel-head">
+            <h3>Perguntas Frequentes</h3>
+            <p>Mantenha o FAQ sempre atualizado.</p>
+          </div>
+          <div class="inline-editor">
+            <div class="inline-head"><h4>FAQ</h4><button class="btn small" data-add-object="faq">Adicionar pergunta</button></div>
+            <div id="faqEditor" class="repeat-list"></div>
+          </div>
+        </section>
+      </main>
+    </section>
+  </div>
+
+  <script src="/admin.js"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
