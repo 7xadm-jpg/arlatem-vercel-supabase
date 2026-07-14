@@ -699,10 +699,25 @@ img { max-width: 100%; display: block; }
   .floating-whatsapp { width: 58px; height: 58px; padding: 0; justify-content: center; }
 }
 
-.brand-logo-wide {
-  height: 72px;
-  width: auto;
-  max-width: 320px;
+.brand-logo-img {
+  width: 52px;
+  height: 52px;
   object-fit: contain;
   display: block;
+  flex-shrink: 0;
+}
+
+.footer-brand-text strong {
+  display: block;
+  color: var(--white);
+  font-family: 'Poppins', 'Inter', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: -0.04em;
+}
+
+.footer-brand-text small {
+  color: rgba(255, 255, 255, 0.72);
+  display: block;
+  font-size: 0.82rem;
+  margin-top: 4px;
 }
