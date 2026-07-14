@@ -3,85 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ARLATEM | Peças para Sistema de ARLA 32, SCR e Pós-Tratamento Diesel</title>
-  <meta name="description" content="Catálogo profissional de peças e componentes para ARLA 32, SCR e pós-tratamento diesel. Bombas, sensores NOx, dosadores, filtros, módulos e catalisadores para linha pesada. Solicite orçamento pelo WhatsApp." />
-  <meta name="keywords" content="ARLA 32, SCR, sensor NOx, bomba ARLA, catalisador, dosador, pós-tratamento diesel, linha pesada, peças para caminhão, orçamento WhatsApp" />
+  <title>ARLATEM | Catálogo Profissional</title>
+  <meta name="description" content="Peças e componentes para ARLA 32, SCR e pós-tratamento diesel com foco em orçamento via WhatsApp." />
   <meta name="theme-color" content="#0B5ED7" />
-  <meta property="og:title" content="ARLATEM | Catálogo de Peças para Sistema de ARLA" />
-  <meta property="og:description" content="Encontre bombas, módulos, sensores NOx, dosadores, filtros, catalisadores e muito mais para linha pesada." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/hero-trucks-arla.png" />
-  <meta property="og:locale" content="pt_BR" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "AutoPartsStore",
-      "name": "ARLATEM",
-      "description": "Loja especializada em peças e componentes para ARLA 32, sistemas SCR, pós-tratamento diesel e linha pesada.",
-      "areaServed": "BR",
-      "image": "assets/hero-trucks-arla.png",
-      "telephone": "+55 31 00000-0000",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Belo Horizonte",
-        "addressRegion": "MG",
-        "addressCountry": "BR"
-      },
-      "url": "https://arlatem.com.br"
-    }
-  </script>
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Vocês enviam para todo Brasil?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Sim. A ARLATEM atende clientes em todo o Brasil com suporte comercial para envio rápido e seguro."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Como solicitar orçamento?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Você pode solicitar orçamento pelo WhatsApp informando a peça, código, veículo ou aplicação desejada."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Trabalham com peças originais?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Sim. Trabalhamos com peças originais, homologadas e de alta qualidade, conforme a aplicação."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Possuem garantia?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Sim. Os produtos comercializados contam com garantia, conforme fabricante e categoria."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Vendem para oficinas e frotistas?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Sim. Atendemos oficinas, frotistas, transportadoras e clientes finais em todo o país."
-          }
-        }
-      ]
-    }
-  </script>
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
   <div class="preloader" id="preloader" aria-hidden="true">
@@ -98,8 +23,8 @@
         <a href="#home" class="brand" aria-label="ARLATEM - página inicial">
           <span class="brand-mark"></span>
           <div>
-            <strong>ARLATEM</strong>
-            <small>ARLA 32 • SCR • Linha Pesada</small>
+            <strong id="brandName">ARLATEM</strong>
+            <small id="brandTagline">ARLA 32 • SCR • Linha Pesada</small>
           </div>
         </a>
 
@@ -115,7 +40,7 @@
 
         <div class="nav-actions">
           <a class="btn btn-ghost desktop-only" href="#produtos">Ver catálogo</a>
-          <a class="btn btn-primary whatsapp-cta" data-message="Olá! Quero solicitar um orçamento na ARLATEM.">Solicitar Orçamento</a>
+          <a class="btn btn-primary whatsapp-cta" id="navWhatsapp">Solicitar Orçamento</a>
           <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
             <span></span><span></span><span></span>
           </button>
@@ -128,53 +53,34 @@
         <div class="hero-bg-grid"></div>
         <div class="container hero-grid">
           <div class="hero-copy reveal">
-            <span class="eyebrow">Catálogo profissional para ARLA 32 e pós-tratamento diesel</span>
-            <h1>Tudo para o Sistema de <span>ARLA</span> do seu Caminhão.</h1>
-            <p>Bombas, módulos, sensores NOx, dosadores, filtros, catalisadores, chicotes e componentes de alta performance para linha pesada.</p>
-
+            <span class="eyebrow" id="heroEyebrow"></span>
+            <h1 id="heroTitle"></h1>
+            <p id="heroSubtitle"></p>
             <div class="hero-actions">
-              <a class="btn btn-primary btn-lg whatsapp-cta" data-message="Olá! Quero solicitar um orçamento para peças do sistema de ARLA.">🟢 Solicitar orçamento</a>
+              <a class="btn btn-primary btn-lg whatsapp-cta" id="heroWhatsapp">🟢 Solicitar orçamento</a>
               <a class="btn btn-secondary btn-lg" href="#produtos">🔵 Ver catálogo</a>
             </div>
-
             <form class="hero-search glass-card" id="heroSearchForm">
               <label for="heroSearch" class="search-label">Encontre sua peça em segundos</label>
               <div class="search-input-wrap">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 3a7.5 7.5 0 1 1 0 15 7.5 7.5 0 0 1 0-15Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Zm7.9 11.48 2.82 2.82-1.42 1.41-2.82-2.82 1.42-1.41Z"/></svg>
-                <input id="heroSearch" type="search" placeholder="Pesquisar por Sensor NOx, Bomba ARLA, Catalisador, Dosador, Chicote, Filtro, Módulo, Válvula..." list="heroSuggestions" />
+                <input id="heroSearch" type="search" />
                 <button type="submit">Buscar</button>
               </div>
-              <datalist id="heroSuggestions">
-                <option value="Sensor NOx"></option>
-                <option value="Bomba ARLA"></option>
-                <option value="Catalisador"></option>
-                <option value="Dosador"></option>
-                <option value="Chicote"></option>
-                <option value="Filtro"></option>
-                <option value="Módulo"></option>
-                <option value="Válvula"></option>
-              </datalist>
-              <div class="search-tags">
-                <button type="button" class="tag-pill search-chip">Sensor NOx</button>
-                <button type="button" class="tag-pill search-chip">Bomba ARLA</button>
-                <button type="button" class="tag-pill search-chip">Catalisador</button>
-                <button type="button" class="tag-pill search-chip">Dosador</button>
-                <button type="button" class="tag-pill search-chip">Filtro</button>
-                <button type="button" class="tag-pill search-chip">Módulo</button>
-              </div>
+              <div class="search-tags" id="searchTags"></div>
             </form>
           </div>
 
           <div class="hero-visual reveal delay-1">
             <div class="hero-image-card">
-              <img src="assets/hero-trucks-arla.png" alt="Caminhões modernos e componentes do sistema de ARLA e SCR" fetchpriority="high" />
+              <img id="heroImage" alt="Caminhões modernos e componentes do sistema de ARLA e SCR" />
               <div class="floating-panel panel-top-right glass-card">
                 <span class="panel-label">Especialidade</span>
                 <strong>ARLA 32 • SCR</strong>
                 <small>Peças técnicas para linha pesada</small>
               </div>
               <div class="floating-panel panel-bottom-left glass-card">
-                <span class="panel-number">+500</span>
+                <span class="panel-number" id="productCountBadge">+0</span>
                 <small>Aplicações e componentes</small>
               </div>
             </div>
@@ -188,13 +94,7 @@
       </section>
 
       <section class="quick-highlights">
-        <div class="container quick-strip reveal">
-          <div class="quick-item"><span>✔</span> Peças Originais</div>
-          <div class="quick-item"><span>✔</span> Atendimento Especializado</div>
-          <div class="quick-item"><span>✔</span> Produtos Testados</div>
-          <div class="quick-item"><span>✔</span> Suporte Técnico</div>
-          <div class="quick-item"><span>✔</span> Envio para Todo Brasil</div>
-        </div>
+        <div class="container quick-strip reveal" id="highlightsList"></div>
       </section>
 
       <section class="section" id="categorias">
@@ -204,21 +104,7 @@
             <h2>Encontre a categoria certa para sua aplicação</h2>
             <p>Navegação rápida, visual e intuitiva para localizar a peça ideal em poucos segundos.</p>
           </div>
-
-          <div class="category-grid" id="categoryGrid">
-            <button class="category-card reveal" data-category="Bombas ARLA"><span class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M6 8h8a4 4 0 0 1 4 4v4h-2v-4a2 2 0 0 0-2-2H6v6H4V7a3 3 0 0 1 3-3h3v2H7a1 1 0 0 0-1 1v1Zm4 4h3l2 2v5H8v-5l2-2Z"/></svg></span><strong>Bombas ARLA</strong><small>Pressão e alimentação do sistema</small></button>
-            <button class="category-card reveal delay-1" data-category="Sensores NOx"><span class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M11 2h2v7h-2V2Zm0 13h2v7h-2v-7ZM2 11h7v2H2v-2Zm13 0h7v2h-7v-2ZM5.64 4.22l1.41-1.41 4.95 4.95-1.41 1.41-4.95-4.95Zm7.36 7.36 1.41-1.41 4.95 4.95-1.41 1.41L13 11.58ZM4.22 18.36l4.95-4.95 1.41 1.41-4.95 4.95-1.41-1.41Zm9.78-9.78 4.95-4.95 1.41 1.41-4.95 4.95L14 8.58Z"/></svg></span><strong>Sensores NOx</strong><small>Leitura precisa das emissões</small></button>
-            <button class="category-card reveal delay-2" data-category="Catalisadores"><span class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M6 6h12v12H6V6Zm2 2v8h8V8H8Zm1 1h2v2H9V9Zm4 0h2v2h-2V9ZM9 13h2v2H9v-2Zm4 0h2v2h-2v-2Z"/></svg></span><strong>Catalisadores</strong><small>Eficiência no pós-tratamento</small></button>
-            <button class="category-card reveal" data-category="Dosadores"><span class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M10 3h4v5h-4V3Zm-4 7h12l-1 10H7L6 10Zm3 2v6h2v-6H9Zm4 0v6h2v-6h-2Z"/></svg></span><strong>Dosadores</strong><small>Injeção controlada de ARLA</small></button>
-            <button class="category-card reveal delay-1" data-category="Filtros"><span class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M5 4h14l-5 7v7l-4 2v-9L5 4Z"/></svg></span><strong>Filtros</strong><small>Proteção e durabilidade</small></button>
-            <button class="category-card reveal delay-2" data-category="Módulos"><span class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M7 7h10v10H7V7Zm-4 4h2v2H3v-2Zm16 0h2v2h-2v-2ZM11 3h2v2h-2V3Zm0 16h2v2h-2v-2ZM9 9h6v6H9V9Z"/></svg></span><strong>Módulos</strong><small>Controle eletrônico do sistema</small></button>
-            <button class="category-card reveal" data-category="Chicotes"><span class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M7 6a3 3 0 1 1 2.83 4H10a3 3 0 0 1-3-4Zm10 8a3 3 0 1 1-2.83 4H14a3 3 0 0 1 3-4ZM8 9h8a3 3 0 0 1 0 6H8V9Zm2 2v2h6a1 1 0 0 0 0-2h-6Z"/></svg></span><strong>Chicotes</strong><small>Conectividade elétrica confiável</small></button>
-            <button class="category-card reveal delay-1" data-category="Reservatórios"><span class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M7 4h10l1 4v9a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3V8l1-4Zm2 2-.5 2h7L15 6H9Zm1 5h4v6h-4v-6Z"/></svg></span><strong>Reservatórios</strong><small>Armazenamento e vedação</small></button>
-            <button class="category-card reveal delay-2" data-category="Tubulações"><span class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M6 5h3v3H6V5Zm9 0h3v3h-3V5ZM7.5 6.5h4A3.5 3.5 0 0 1 15 10v4a2.5 2.5 0 1 0 5 0V11h2v3a4.5 4.5 0 1 1-9 0v-4a1.5 1.5 0 0 0-1.5-1.5h-4v-2Z"/></svg></span><strong>Tubulações</strong><small>Linhas de alimentação e retorno</small></button>
-            <button class="category-card reveal" data-category="Peças Pneumáticas"><span class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M5 10h6V5h2v5h6v2h-6v7h-2v-7H5v-2Z"/></svg></span><strong>Peças Pneumáticas</strong><small>Controle e acionamento auxiliar</small></button>
-            <button class="category-card reveal delay-1" data-category="Kits de Reparo"><span class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M20.71 7.04 16.96 3.3a1 1 0 0 0-1.41 0l-2.27 2.27 5.15 5.15 2.28-2.27a1 1 0 0 0 0-1.41ZM12.57 6.29 4 14.86V20h5.14l8.57-8.57-5.14-5.14Z"/></svg></span><strong>Kits de Reparo</strong><small>Manutenção ágil e inteligente</small></button>
-            <button class="category-card reveal delay-2" data-category="Acessórios"><span class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 3 4 7v5c0 5 3.4 9.74 8 11 4.6-1.26 8-6 8-11V7l-8-4Zm0 2.18L18 8v4c0 3.82-2.33 7.46-6 8.82C8.33 19.46 6 15.82 6 12V8l6-2.82Z"/></svg></span><strong>Acessórios</strong><small>Complementos e soluções técnicas</small></button>
-          </div>
+          <div class="category-grid" id="categoryGrid"></div>
         </div>
       </section>
 
@@ -272,10 +158,7 @@
             <h2>Compatibilidade com as principais montadoras da linha pesada</h2>
             <p>Catálogo preparado para aplicações em frotas, oficinas e transportadoras.</p>
           </div>
-
-          <div class="brand-grid reveal delay-1">
-            <div class="brand-pill">Mercedes</div><div class="brand-pill">Volvo</div><div class="brand-pill">Scania</div><div class="brand-pill">DAF</div><div class="brand-pill">MAN</div><div class="brand-pill">Volkswagen</div><div class="brand-pill">Ford</div><div class="brand-pill">Iveco</div><div class="brand-pill">Renault</div><div class="brand-pill">Agrale</div>
-          </div>
+          <div class="brand-grid reveal delay-1" id="brandGrid"></div>
         </div>
       </section>
 
@@ -285,26 +168,18 @@
             <span class="section-kicker">Diferenciais ARLATEM</span>
             <h2>Confiança, velocidade e suporte técnico para vender mais</h2>
           </div>
-
-          <div class="benefits-grid">
-            <article class="benefit-card glass-card reveal"><span class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5.25 3.4 10.17 8 11 4.6-.83 8-5.75 8-11V5l-8-3Zm-1 14-4-4 1.41-1.41L11 13.17l4.59-4.58L17 10l-6 6Z"/></svg></span><h3>Peças Originais</h3><p>Itens originais, homologados e selecionados para aplicações exigentes.</p></article>
-            <article class="benefit-card glass-card reveal delay-1"><span class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M3 6h13v8h5l-2 3h-3a3 3 0 1 1-6 0H8a3 3 0 1 1-6 0H1V9l2-3Zm2 2-1 1.5V15h1a3 3 0 0 1 6 0h3V8H5Zm13 2v5h1.9l1-1.5V10H18Zm-12 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm10 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/></svg></span><h3>Envio para Todo Brasil</h3><p>Atendimento nacional com logística eficiente e comunicação ágil.</p></article>
-            <article class="benefit-card glass-card reveal delay-2"><span class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7v2h1a2 2 0 0 1 2 2v4a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5v-4a2 2 0 0 1 2-2h1V9a7 7 0 0 1 7-7Zm0 2a5 5 0 0 0-5 5v2h10V9a5 5 0 0 0-5-5Zm-4 9H4v4a3 3 0 0 0 3 3h1v-7Zm2 0v7h4v-7h-4Zm6 0v7h1a3 3 0 0 0 3-3v-4h-4Z"/></svg></span><h3>Atendimento Especializado</h3><p>Equipe preparada para apoiar a escolha correta da peça por aplicação.</p></article>
-            <article class="benefit-card glass-card reveal"><span class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M4 5h16v2H4V5Zm2 4h12v10H6V9Zm3 2v2h6v-2H9Zm0 4v2h4v-2H9Z"/></svg></span><h3>Qualidade Garantida</h3><p>Processos orientados para durabilidade, confiabilidade e performance.</p></article>
-            <article class="benefit-card glass-card reveal delay-1"><span class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 3a8 8 0 0 1 8 8c0 5.25-8 10-8 10S4 16.25 4 11a8 8 0 0 1 8-8Zm0 4a1 1 0 0 0-1 1v4.59l3.7 3.7 1.4-1.42-3.1-3.08V8a1 1 0 0 0-1-1Z"/></svg></span><h3>Suporte Técnico</h3><p>Orientação para sintomas, códigos e compatibilidades do sistema SCR.</p></article>
-            <article class="benefit-card glass-card reveal delay-2"><span class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 0 0-2 2v14l4-3h12a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Zm-8 9-3-3 1.4-1.4 1.6 1.6 4.6-4.6L17 6l-6 6Z"/></svg></span><h3>Produtos Testados</h3><p>Mais segurança para oficinas, frotistas e operações de alta demanda.</p></article>
-          </div>
+          <div class="benefits-grid" id="benefitsGrid"></div>
         </div>
       </section>
 
       <section class="cta-banner reveal">
         <div class="container cta-banner-wrap">
           <div>
-            <span class="section-kicker white">Suporte comercial rápido</span>
-            <h2>Não encontrou sua peça?</h2>
-            <p>Nossa equipe encontra para você com base no código, chassi, montadora ou aplicação.</p>
+            <span class="section-kicker white" id="bannerEyebrow"></span>
+            <h2 id="bannerTitle"></h2>
+            <p id="bannerSubtitle"></p>
           </div>
-          <a class="btn btn-primary btn-lg whatsapp-cta" data-message="Olá! Não encontrei minha peça no catálogo e preciso de ajuda para localizar.">Falar no WhatsApp</a>
+          <a class="btn btn-primary btn-lg whatsapp-cta" id="bannerWhatsapp">Falar no WhatsApp</a>
         </div>
       </section>
 
@@ -312,22 +187,12 @@
         <div class="container about-grid">
           <div class="about-copy reveal">
             <span class="section-kicker">Quem Somos</span>
-            <h2>Especialistas em ARLA 32, SCR e pós-tratamento diesel para linha pesada</h2>
-            <p>A ARLATEM foi pensada para atender quem precisa de rapidez, segurança técnica e assertividade na compra de componentes para sistemas de emissões.</p>
-            <p>Nosso foco está em facilitar a jornada de oficinas, transportadoras, frotistas e compradores técnicos, com catálogo organizado, atendimento especializado e conversão direta via WhatsApp.</p>
-            <div class="about-points">
-              <div class="about-point">Busca por código, peça ou veículo</div>
-              <div class="about-point">Curadoria técnica para aplicações complexas</div>
-              <div class="about-point">Experiência digital premium e objetiva</div>
-            </div>
+            <h2 id="aboutTitle"></h2>
+            <p id="aboutParagraph1"></p>
+            <p id="aboutParagraph2"></p>
+            <div class="about-points" id="aboutPoints"></div>
           </div>
-          <div class="about-card glass-card reveal delay-1">
-            <div class="spec-line"><span>Foco principal</span><strong>Conversão em orçamentos</strong></div>
-            <div class="spec-line"><span>Público atendido</span><strong>Frotistas, oficinas e transportadoras</strong></div>
-            <div class="spec-line"><span>Segmento</span><strong>ARLA, SCR e pós-tratamento diesel</strong></div>
-            <div class="spec-line"><span>Atuação</span><strong>Envio para todo o Brasil</strong></div>
-            <div class="spec-line"><span>Experiência</span><strong>Catálogo rápido e intuitivo</strong></div>
-          </div>
+          <div class="about-card glass-card reveal delay-1" id="aboutSpecs"></div>
         </div>
       </section>
 
@@ -338,15 +203,7 @@
             <h2>Blog com temas que geram confiança e autoridade</h2>
             <p>Artigos pensados para educar o cliente, atrair tráfego orgânico e acelerar a decisão de compra.</p>
           </div>
-
-          <div class="blog-grid">
-            <article class="blog-card reveal"><span class="blog-tag">SCR</span><h3>Como funciona o sistema SCR</h3><p>Entenda os principais componentes, o papel do ARLA 32 e como o pós-tratamento reduz emissões.</p><a href="#contato">Ler mais</a></article>
-            <article class="blog-card reveal delay-1"><span class="blog-tag">Sensor NOx</span><h3>Quando trocar o Sensor NOx</h3><p>Os sinais mais comuns de falha, sintomas no painel e o impacto no desempenho do caminhão.</p><a href="#contato">Ler mais</a></article>
-            <article class="blog-card reveal delay-2"><span class="blog-tag">Diagnóstico</span><h3>Como identificar falhas no ARLA</h3><p>Veja como cruzar código, aplicação e sintomas para escolher o componente correto.</p><a href="#contato">Ler mais</a></article>
-            <article class="blog-card reveal"><span class="blog-tag">Catalisador</span><h3>Catalisador entupido: principais causas</h3><p>Descubra os riscos operacionais e como agir antes que a falha comprometa a frota.</p><a href="#contato">Ler mais</a></article>
-            <article class="blog-card reveal delay-1"><span class="blog-tag">SCR</span><h3>Erros mais comuns do sistema SCR</h3><p>Falhas recorrentes em sensores, dosadores, bombas e módulos que afetam a operação.</p><a href="#contato">Ler mais</a></article>
-            <article class="blog-card reveal delay-2"><span class="blog-tag">Manutenção</span><h3>Manutenção preventiva em pós-tratamento</h3><p>Boas práticas para prolongar a vida útil dos componentes e evitar paradas não programadas.</p><a href="#contato">Ler mais</a></article>
-          </div>
+          <div class="blog-grid" id="blogGrid"></div>
         </div>
       </section>
 
@@ -356,7 +213,6 @@
             <span class="section-kicker">Depoimentos</span>
             <h2>Quem compra valoriza rapidez, qualidade e assertividade</h2>
           </div>
-
           <div class="testimonials-slider glass-card reveal delay-1">
             <button class="slider-nav prev" id="prevTestimonial" aria-label="Depoimento anterior">‹</button>
             <div class="testimonials-track" id="testimonialsTrack"></div>
@@ -371,14 +227,7 @@
             <span class="section-kicker">FAQ</span>
             <h2>Perguntas frequentes</h2>
           </div>
-
-          <div class="faq-list">
-            <details class="faq-item reveal" open><summary>Vocês enviam para todo Brasil?</summary><p>Sim. Atendemos clientes de todo o país com suporte comercial e logística orientada para envio rápido.</p></details>
-            <details class="faq-item reveal delay-1"><summary>Como solicitar orçamento?</summary><p>Basta clicar em qualquer botão de WhatsApp no site e informar a peça, o código ou o veículo desejado.</p></details>
-            <details class="faq-item reveal delay-2"><summary>Trabalham com peças originais?</summary><p>Sim. Trabalhamos com itens originais, homologados e linhas de alta qualidade, conforme a necessidade da aplicação.</p></details>
-            <details class="faq-item reveal"><summary>Possuem garantia?</summary><p>Sim. Os produtos possuem garantia conforme política do fabricante e categoria da peça.</p></details>
-            <details class="faq-item reveal delay-1"><summary>Vendem para oficinas?</summary><p>Sim. Atendemos oficinas, transportadoras, frotistas e compradores técnicos de manutenção diesel.</p></details>
-          </div>
+          <div class="faq-list" id="faqList"></div>
         </div>
       </section>
     </main>
@@ -388,13 +237,13 @@
         <div class="footer-brand">
           <a href="#home" class="brand footer-brand-link">
             <span class="brand-mark"></span>
-            <div><strong>ARLATEM</strong><small>Catálogo de alta performance</small></div>
+            <div><strong id="footerBrandName">ARLATEM</strong><small>Catálogo de alta performance</small></div>
           </a>
           <p>Loja especializada em peças e componentes para ARLA 32, SCR, pós-tratamento diesel e linha pesada.</p>
           <div class="social-row">
-            <a href="#" aria-label="Instagram">Instagram</a>
-            <a href="#" aria-label="Facebook">Facebook</a>
-            <a href="#" aria-label="WhatsApp" class="whatsapp-cta" data-message="Olá! Quero falar com a ARLATEM.">WhatsApp</a>
+            <a id="instagramLink" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a id="facebookLink" target="_blank" rel="noopener noreferrer">Facebook</a>
+            <a class="whatsapp-cta" id="footerWhatsapp">WhatsApp</a>
           </div>
         </div>
 
@@ -405,29 +254,29 @@
 
         <div class="footer-contact">
           <h3>Contato</h3>
-          <a class="footer-contact-item whatsapp-cta" data-message="Olá! Preciso de um orçamento na ARLATEM.">WhatsApp: (31) 00000-0000</a>
-          <a class="footer-contact-item" href="/cdn-cgi/l/email-protection#34575b5a4055405b74554658554051591a575b591a5646"><span class="__cf_email__" data-cfemail="f2919d9c8693869db293809e9386979fdc919d9fdc9080">[email&#160;protected]</span></a>
-          <p class="footer-contact-item">Belo Horizonte - MG • Atendimento em todo o Brasil</p>
-          <p class="footer-contact-item">Seg a Sex • 08h às 18h</p>
+          <a class="footer-contact-item whatsapp-cta" id="contactWhatsapp"></a>
+          <a class="footer-contact-item" id="contactEmail"></a>
+          <p class="footer-contact-item" id="contactLocation"></p>
+          <p class="footer-contact-item" id="contactHours"></p>
         </div>
 
         <div class="footer-map glass-card">
           <h3>Mapa / Base de atendimento</h3>
           <div class="map-card">
             <div class="map-dot"></div>
-            <strong>Belo Horizonte - MG</strong>
+            <strong id="mapLocation"></strong>
             <span>Atendimento nacional com suporte comercial especializado.</span>
           </div>
         </div>
       </div>
       <div class="container footer-bottom">
-        <p>© <span id="currentYear"></span> ARLATEM. Todos os direitos reservados.</p>
-        <p>SEO otimizado • Google Analytics e Meta Pixel prontos para configuração</p>
+        <p>© <span id="currentYear"></span> <span id="copyrightText"></span></p>
+        <p>SEO otimizado • Painel administrativo oculto para gestão do catálogo</p>
       </div>
     </footer>
   </div>
 
-  <a class="floating-whatsapp whatsapp-cta" data-message="Olá! Quero solicitar um orçamento para peças do sistema de ARLA." aria-label="Falar no WhatsApp">
+  <a class="floating-whatsapp whatsapp-cta" id="floatingWhatsapp" aria-label="Falar no WhatsApp">
     <svg viewBox="0 0 32 32"><path d="M19.11 17.24c-.27-.14-1.58-.78-1.82-.87-.24-.09-.42-.14-.59.14-.17.27-.68.87-.83 1.05-.15.18-.31.2-.58.07-.27-.14-1.13-.42-2.15-1.33-.8-.71-1.34-1.58-1.5-1.85-.16-.27-.02-.41.12-.55.12-.12.27-.31.41-.46.14-.15.18-.27.27-.46.09-.18.05-.35-.02-.49-.07-.14-.59-1.43-.81-1.96-.21-.51-.43-.44-.59-.45l-.5-.01c-.18 0-.46.07-.71.35-.24.27-.93.91-.93 2.22 0 1.3.95 2.56 1.08 2.73.14.18 1.87 2.84 4.54 3.98.63.27 1.12.43 1.51.55.63.2 1.21.17 1.66.1.51-.08 1.58-.65 1.8-1.28.22-.63.22-1.16.16-1.28-.06-.12-.24-.2-.51-.34ZM16.18 3C8.88 3 2.96 8.84 2.96 16.05c0 2.31.61 4.56 1.77 6.55L3 29l6.58-1.72a13.3 13.3 0 0 0 6.6 1.68h.01c7.29 0 13.22-5.84 13.22-13.05C29.41 8.84 23.47 3 16.18 3Zm0 23.72h-.01a11.1 11.1 0 0 1-5.66-1.55l-.41-.24-3.9 1.02 1.04-3.78-.27-.43a10.83 10.83 0 0 1-1.68-5.74c0-6 4.95-10.88 11.01-10.88 2.94 0 5.7 1.13 7.78 3.17a10.8 10.8 0 0 1 3.23 7.72c0 6-4.95 10.88-11.12 10.88Z"/></svg>
     <span>Orçamento</span>
   </a>
@@ -440,23 +289,6 @@
     <div class="modal-body" id="modalBody"></div>
   </dialog>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    /*
-      Google Analytics 4:
-      Substitua G-XXXXXXXXXX pelo seu ID real e descomente o bloco abaixo.
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-XXXXXXXXXX');
-      </script>
-
-      Meta Pixel:
-      Substitua PIXEL_ID pelo seu ID real e adicione o script oficial antes do fechamento do body.
-    */
-  </script>
-  <script src="script.js"></script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+  <script src="/site.js"></script>
 </body>
 </html>
