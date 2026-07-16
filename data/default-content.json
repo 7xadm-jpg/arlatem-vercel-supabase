@@ -1,15 +1,16 @@
 {
-  "settings": {
-    "siteName": "ARLATEM",
-    "tagline": "ARLA 32 • SCR • Linha Pesada",
-   "whatsappNumber": "5531992007778"
-    "email": "contato@arlatem.com.br",
-    "instagram": "#",
-    "facebook": "#",
-    "location": "Belo Horizonte - MG",
-    "hours": "Seg a Sex • 08h às 18h",
-    "copyrightText": "ARLATEM. Todos os direitos reservados.",
-    "adminPath": "/acesso-tecnico-arlatem"
+ "settings": {
+  "siteName": "ARLATEM",
+  "tagline": "ARLA 32 • SCR • Linha Pesada",
+  "whatsappNumber": "5531992007778",
+  "email": "contato@arlatem.com.br",
+  "instagram": "#",
+  "facebook": "#",
+  "location": "Belo Horizonte - MG",
+  "hours": "Seg a Sex • 08h às 18h",
+  "copyrightText": "ARLATEM. Todos os direitos reservados.",
+  "adminPath": "/acesso-tecnico-arlatem"
+},
   },
   "hero": {
     "eyebrow": "Catálogo profissional para ARLA 32 e pós-tratamento diesel",
