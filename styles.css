@@ -255,9 +255,9 @@ img {
   align-items: center;
 }
 .brand-logo-wide {
-  height: 120px;
+  height: 140px;
   width: auto;
-  max-width: 460px;
+  max-width: 520px;
   object-fit: contain;
   display: block;
 }
