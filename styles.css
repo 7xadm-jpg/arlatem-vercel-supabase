@@ -736,11 +736,15 @@ img { max-width: 100%; display: block; }
   display: block;
   border: 0;
 }
-.brand-logo-img {
-  width: 52px;
-  height: 52px;
+.brand-logo-only {
+  display: inline-flex;
+  align-items: center;
+}
+
+.brand-logo-wide {
+  height: 72px;
+  width: auto;
+  max-width: 280px;
   object-fit: contain;
   display: block;
-  flex-shrink: 0;
-  border-radius: 14px;
 }
