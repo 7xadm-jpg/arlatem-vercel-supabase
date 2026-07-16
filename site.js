@@ -165,8 +165,6 @@ function renderBrand() {
 
   document.title = `${settings.siteName} | Catálogo Profissional`;
 }
-}
-
 function renderHero() {
   const { hero } = state.content;
   document.getElementById('heroEyebrow').textContent = hero.eyebrow;
