@@ -6,10 +6,11 @@
   <title>ARLATEM | Catálogo Profissional</title>
   <meta name="description" content="Peças e componentes para ARLA 32, SCR e pós-tratamento diesel com foco em orçamento via WhatsApp." />
   <meta name="theme-color" content="#0B5ED7" />
- <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.png" />
-<link rel="icon" type="image/png" sizes="192x192" href="/uploads/favicon.png" />
-<link rel="shortcut icon" href="/uploads/favicon.png" />
-<link rel="apple-touch-icon" sizes="180x180" href="/uploads/favicon.png" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/uploads/favicon.png" />
+  <link rel="shortcut icon" href="/uploads/favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/favicon.png" />
 
   <link rel="stylesheet" href="/styles.css" />
 </head>
@@ -25,9 +26,10 @@
   <div class="site-shell">
     <header class="site-header" id="siteHeader">
       <div class="container nav-wrap">
- <a href="#home" class="brand brand-logo-only" aria-label="ARLATEM - página inicial">
-  <img src="/uploads/logo-icon.png" alt="ARLATEM" class="brand-logo-wide" />
-</a>
+        <a href="#home" class="brand brand-logo-only" aria-label="ARLATEM - página inicial">
+          <img src="/uploads/logo-icon.png" alt="ARLATEM" class="brand-logo-wide" />
+        </a>
+
         <nav class="main-nav" id="mainNav">
           <a href="#home">Home</a>
           <a href="#produtos">Produtos</a>
@@ -56,14 +58,18 @@
             <span class="eyebrow" id="heroEyebrow"></span>
             <h1 id="heroTitle"></h1>
             <p id="heroSubtitle"></p>
+
             <div class="hero-actions">
               <a class="btn btn-primary btn-lg whatsapp-cta" id="heroWhatsapp">🟢 Solicitar orçamento</a>
               <a class="btn btn-secondary btn-lg" href="#produtos">🔵 Ver catálogo</a>
             </div>
+
             <form class="hero-search glass-card" id="heroSearchForm">
               <label for="heroSearch" class="search-label">Encontre sua peça em segundos</label>
               <div class="search-input-wrap">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 3a7.5 7.5 0 1 1 0 15 7.5 7.5 0 0 1 0-15Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Zm7.9 11.48 2.82 2.82-1.42 1.41-2.82-2.82 1.42-1.41Z"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M10.5 3a7.5 7.5 0 1 1 0 15 7.5 7.5 0 0 1 0-15Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Zm7.9 11.48 2.82 2.82-1.42 1.41-2.82-2.82 1.42-1.41Z"/>
+                </svg>
                 <input id="heroSearch" type="search" />
                 <button type="submit">Buscar</button>
               </div>
@@ -84,10 +90,20 @@
                 <small>Aplicações e componentes</small>
               </div>
             </div>
+
             <div class="hero-stats">
-              <div class="stat-card glass-card"><strong>Busca inteligente</strong><span>Por peça, código e veículo</span></div>
-              <div class="stat-card glass-card"><strong>Atendimento rápido</strong><span>Orçamento direto no WhatsApp</span></div>
-              <div class="stat-card glass-card"><strong>Envio nacional</strong><span>Atendemos todo o Brasil</span></div>
+              <div class="stat-card glass-card">
+                <strong>Busca inteligente</strong>
+                <span>Por peça, código e veículo</span>
+              </div>
+              <div class="stat-card glass-card">
+                <strong>Atendimento rápido</strong>
+                <span>Orçamento direto no WhatsApp</span>
+              </div>
+              <div class="stat-card glass-card">
+                <strong>Envio nacional</strong>
+                <span>Atendemos todo o Brasil</span>
+              </div>
             </div>
           </div>
         </div>
@@ -142,9 +158,13 @@
 
             <div class="catalog-results">
               <div class="catalog-toolbar reveal delay-1">
-                <div><strong id="resultCount">0 produtos</strong><span>Compatibilidade por marca, montadora, modelo e aplicação.</span></div>
+                <div>
+                  <strong id="resultCount">0 produtos</strong>
+                  <span>Compatibilidade por marca, montadora, modelo e aplicação.</span>
+                </div>
                 <div class="toolbar-tags" id="activeFilters"></div>
               </div>
+
               <div class="product-grid" id="productGrid" aria-live="polite"></div>
             </div>
           </div>
@@ -213,6 +233,7 @@
             <span class="section-kicker">Depoimentos</span>
             <h2>Quem compra valoriza rapidez, qualidade e assertividade</h2>
           </div>
+
           <div class="testimonials-slider glass-card reveal delay-1">
             <button class="slider-nav prev" id="prevTestimonial" aria-label="Depoimento anterior">‹</button>
             <div class="testimonials-track" id="testimonialsTrack"></div>
@@ -249,7 +270,11 @@
 
         <div class="footer-links">
           <h3>Links rápidos</h3>
-          <a href="#produtos">Produtos</a><a href="#categorias">Categorias</a><a href="#marcas">Marcas</a><a href="#quem-somos">Quem Somos</a><a href="#blog">Blog</a>
+          <a href="#produtos">Produtos</a>
+          <a href="#categorias">Categorias</a>
+          <a href="#marcas">Marcas</a>
+          <a href="#quem-somos">Quem Somos</a>
+          <a href="#blog">Blog</a>
         </div>
 
         <div class="footer-contact">
@@ -259,29 +284,29 @@
           <p class="footer-contact-item" id="contactLocation"></p>
           <p class="footer-contact-item" id="contactHours"></p>
         </div>
-<div class="footer-map glass-card">
-  <h3>Mapa / Base de atendimento</h3>
 
-  <p class="map-caption">
-    <strong id="mapLocation">Contagem - MG</strong><br>
-    Atendimento nacional com suporte comercial especializado.
-  </p>
+        <div class="footer-map glass-card">
+          <h3>Mapa / Base de atendimento</h3>
 
-  <div class="map-embed-wrap">
-    <iframe
-      src="https://www.google.com/maps?q=R.%20Maestro%20Az%C3%A9rias,%20133%20-%20Inconfidentes,%20Contagem%20-%20MG,%2032260-270&z=15&output=embed"
-      width="100%"
-      height="300"
-      style="border:0;"
-      allowfullscreen=""
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
-  </div>
-</div>
+          <p class="map-caption">
+            <strong id="mapLocation">Contagem - MG</strong><br>
+            Atendimento nacional com suporte comercial especializado.
+          </p>
+
+          <div class="map-embed-wrap">
+            <iframe
+              src="https://www.google.com/maps?q=R.%20Maestro%20Az%C3%A9rias,%20133%20-%20Inconfidentes,%20Contagem%20-%20MG,%2032260-270&z=15&output=embed"
+              width="100%"
+              height="300"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
           </div>
         </div>
       </div>
+
       <div class="container footer-bottom">
         <p>© <span id="currentYear"></span> <span id="copyrightText"></span></p>
         <p>SEO otimizado • Painel administrativo oculto para gestão do catálogo</p>
@@ -290,7 +315,9 @@
   </div>
 
   <a class="floating-whatsapp whatsapp-cta" id="floatingWhatsapp" aria-label="Falar no WhatsApp">
-    <svg viewBox="0 0 32 32"><path d="M19.11 17.24c-.27-.14-1.58-.78-1.82-.87-.24-.09-.42-.14-.59.14-.17.27-.68.87-.83 1.05-.15.18-.31.2-.58.07-.27-.14-1.13-.42-2.15-1.33-.8-.71-1.34-1.58-1.5-1.85-.16-.27-.02-.41.12-.55.12-.12.27-.31.41-.46.14-.15.18-.27.27-.46.09-.18.05-.35-.02-.49-.07-.14-.59-1.43-.81-1.96-.21-.51-.43-.44-.59-.45l-.5-.01c-.18 0-.46.07-.71.35-.24.27-.93.91-.93 2.22 0 1.3.95 2.56 1.08 2.73.14.18 1.87 2.84 4.54 3.98.63.27 1.12.43 1.51.55.63.2 1.21.17 1.66.1.51-.08 1.58-.65 1.8-1.28.22-.63.22-1.16.16-1.28-.06-.12-.24-.2-.51-.34ZM16.18 3C8.88 3 2.96 8.84 2.96 16.05c0 2.31.61 4.56 1.77 6.55L3 29l6.58-1.72a13.3 13.3 0 0 0 6.6 1.68h.01c7.29 0 13.22-5.84 13.22-13.05C29.41 8.84 23.47 3 16.18 3Zm0 23.72h-.01a11.1 11.1 0 0 1-5.66-1.55l-.41-.24-3.9 1.02 1.04-3.78-.27-.43a10.83 10.83 0 0 1-1.68-5.74c0-6 4.95-10.88 11.01-10.88 2.94 0 5.7 1.13 7.78 3.17a10.8 10.8 0 0 1 3.23 7.72c0 6-4.95 10.88-11.12 10.88Z"/></svg>
+    <svg viewBox="0 0 32 32">
+      <path d="M19.11 17.24c-.27-.14-1.58-.78-1.82-.87-.24-.09-.42-.14-.59.14-.17.27-.68.87-.83 1.05-.15.18-.31.2-.58.07-.27-.14-1.13-.42-2.15-1.33-.8-.71-1.34-1.58-1.5-1.85-.16-.27-.02-.41.12-.55.12-.12.27-.31.41-.46.14-.15.18-.27.27-.46.09-.18.05-.35-.02-.49-.07-.14-.59-1.43-.81-1.96-.21-.51-.43-.44-.59-.45l-.5-.01c-.18 0-.46.07-.71.35-.24.27-.93.91-.93 2.22 0 1.3.95 2.56 1.08 2.73.14.18 1.87 2.84 4.54 3.98.63.27 1.12.43 1.51.55.63.2 1.21.17 1.66.1.51-.08 1.58-.65 1.8-1.28.22-.63.22-1.16.16-1.28-.06-.12-.24-.2-.51-.34ZM16.18 3C8.88 3 2.96 8.84 2.96 16.05c0 2.31.61 4.56 1.77 6.55L3 29l6.58-1.72a13.3 13.3 0 0 0 6.6 1.68h.01c7.29 0 13.22-5.84 13.22-13.05C29.41 8.84 23.47 3 16.18 3Zm0 23.72h-.01a11.1 11.1 0 0 1-5.66-1.55l-.41-.24-3.9 1.02 1.04-3.78-.27-.43a10.83 10.83 0 0 1-1.68-5.74c0-6 4.95-10.88 11.01-10.88 2.94 0 5.7 1.13 7.78 3.17a10.8 10.8 0 0 1 3.23 7.72c0 6-4.95 10.88-11.12 10.88Z"/>
+    </svg>
     <span>Orçamento</span>
   </a>
 
