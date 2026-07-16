@@ -107,9 +107,8 @@ function productImage(product) {
     </svg>`;
   return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
 }
-
 function buildWhatsAppLink(message) {
-  const number = state.content.settings.whatsappNumber || '';
+  const number = String(state.content.settings.whatsappNumber || '').replace(/\D/g, '');
   return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
 }
 
