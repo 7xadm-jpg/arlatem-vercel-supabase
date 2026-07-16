@@ -478,6 +478,7 @@ function removeProduct(index) {
 async function handleHeroUpload(event) {
   const file = event.target.files?.[0];
   if (!file) return;
+
   try {
     showStatus('Enviando imagem do hero...', 'warning');
     const imagePath = await uploadImage(file, 'hero');
@@ -492,6 +493,7 @@ async function handleHeroUpload(event) {
 async function handleProductUpload(input) {
   const file = input.files?.[0];
   if (!file) return;
+
   try {
     showStatus('Enviando imagem do produto...', 'warning');
     const imagePath = await uploadImage(file, `produto-${input.dataset.index || 'item'}`);
@@ -517,7 +519,10 @@ function wireEvents() {
   refs.saveBtn.addEventListener('click', saveAll);
   refs.backupBtn.addEventListener('click', backupData);
   refs.heroImageUpload.addEventListener('change', handleHeroUpload);
-  refs.addProductBtn.addEventListener('click', addProduct);
+
+  if (refs.addProductBtn) {
+    refs.addProductBtn.addEventListener('click', addProduct);
+  }
 
   document.addEventListener('click', (event) => {
     const addSimple = event.target.dataset.addSimple;
@@ -537,10 +542,15 @@ function wireEvents() {
     if (event.target.matches('.product-upload-input')) {
       await handleProductUpload(event.target);
     }
+
     if (event.target.matches('[data-product-field="image"]')) {
       const card = event.target.closest('[data-product-item]');
-      card.querySelector('.image-preview').src = event.target.value.trim();
+      if (card) {
+        const preview = card.querySelector('.image-preview');
+        if (preview) preview.src = event.target.value.trim();
+      }
     }
+
     if (event.target.id === 'hero_backgroundImage') {
       refs.heroImagePreview.src = event.target.value.trim();
     }
@@ -549,7 +559,10 @@ function wireEvents() {
   document.addEventListener('input', (event) => {
     if (event.target.matches('[data-product-field="name"]')) {
       const card = event.target.closest('[data-product-item]');
-      card.querySelector('.product-head strong').textContent = event.target.value.trim() || 'Novo produto';
+      if (card) {
+        const title = card.querySelector('.product-head strong');
+        if (title) title.textContent = event.target.value.trim() || 'Novo produto';
+      }
     }
   });
 }
