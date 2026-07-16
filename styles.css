@@ -742,9 +742,9 @@ img { max-width: 100%; display: block; }
 }
 
 .brand-logo-wide {
-  height: 72px;
+  height: 86px;
   width: auto;
-  max-width: 280px;
+  max-width: 340px;
   object-fit: contain;
   display: block;
 }
