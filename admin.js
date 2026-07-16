@@ -429,8 +429,11 @@ function removeObjectItem(key, index) {
   renderObjectList(key, values);
 }
 
-function addProduct() {
+function addProduct(event) {
+  if (event) event.preventDefault();
+
   const products = getProductsValues();
+
   products.push({
     id: products.length + 1,
     name: '',
@@ -450,7 +453,20 @@ function addProduct() {
     applications: '',
     image: ''
   });
+
   renderProducts(products);
+
+  requestAnimationFrame(() => {
+    const items = refs.productsEditor.querySelectorAll('[data-product-item]');
+    const lastItem = items[items.length - 1];
+
+    if (lastItem) {
+      lastItem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      const firstInput = lastItem.querySelector('[data-product-field="name"]');
+      if (firstInput) firstInput.focus();
+    }
+  });
 }
 
 function removeProduct(index) {
