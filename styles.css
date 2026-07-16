@@ -736,11 +736,6 @@ img { max-width: 100%; display: block; }
   display: block;
   border: 0;
 }
-.brand-logo-only {
-  display: inline-flex;
-  align-items: center;
-}
-
 .brand-logo-wide {
   height: 86px;
   width: auto;
