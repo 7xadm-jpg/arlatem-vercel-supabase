@@ -195,7 +195,7 @@ function renderBrand() {
   setText('brandTagline', settings.tagline);
   setText('footerBrandName', settings.siteName);
 
-  document.title = `${settings.siteName} | Catálogo Profissional`;
+  document.title = `Peças para ARLA 32 e Sistema SCR | ARLATEM`;
 }
 
 function renderHero() {
