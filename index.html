@@ -3,9 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ARLATEM | Catálogo Profissional</title>
-  <meta name="description" content="Peças e componentes para ARLA 32, SCR e pós-tratamento diesel com foco em orçamento via WhatsApp." />
+
+  <title>Peças para ARLA 32 e Sistema SCR | ARLATEM</title>
+  <meta name="description" content="Compre peças para ARLA 32, sistema SCR e pós-tratamento diesel para linha pesada. Sensores NOx, bombas ARLA, dosadores, catalisadores, filtros e módulos. Solicite orçamento na ARLATEM." />
+  <meta name="keywords" content="peças ARLA 32, sistema SCR, sensor NOx, bomba ARLA, dosador ARLA, catalisador SCR, pós-tratamento diesel, peças linha pesada, peças para caminhão, ARLATEM" />
   <meta name="theme-color" content="#0B5ED7" />
+  <meta name="robots" content="index, follow" />
+
+  <meta property="og:title" content="Peças para ARLA 32 e Sistema SCR | ARLATEM" />
+  <meta property="og:description" content="Peças para ARLA 32, SCR e pós-tratamento diesel para linha pesada com atendimento rápido e orçamento via WhatsApp." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:image" content="/uploads/favicon.png" />
 
   <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="/uploads/favicon.png" />
@@ -32,7 +41,7 @@
 
         <nav class="main-nav" id="mainNav">
           <a href="#home">Home</a>
-          <a href="#produtos">Produtos</a>
+          <a href="/catalogo.html">Produtos</a>
           <a href="#categorias">Categorias</a>
           <a href="#marcas">Marcas</a>
           <a href="#quem-somos">Quem Somos</a>
@@ -41,7 +50,7 @@
         </nav>
 
         <div class="nav-actions">
-          <a class="btn btn-ghost desktop-only" href="#produtos">Ver catálogo</a>
+          <a class="btn btn-ghost desktop-only" href="/catalogo.html">Ver catálogo</a>
           <a class="btn btn-primary whatsapp-cta" id="navWhatsapp">Solicitar Orçamento</a>
           <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
             <span></span><span></span><span></span>
@@ -56,12 +65,12 @@
         <div class="container hero-grid">
           <div class="hero-copy reveal">
             <span class="eyebrow" id="heroEyebrow"></span>
-            <h1 id="heroTitle"></h1>
-            <p id="heroSubtitle"></p>
+            <h1 id="heroTitle">Tudo em Peças para ARLA 32, Sistema SCR e Pós-Tratamento Diesel</h1>
+            <p id="heroSubtitle">Encontre sensores NOx, bombas ARLA, dosadores, catalisadores, filtros, módulos e componentes para linha pesada com atendimento rápido e orçamento via WhatsApp.</p>
 
             <div class="hero-actions">
               <a class="btn btn-primary btn-lg whatsapp-cta" id="heroWhatsapp">🟢 Solicitar orçamento</a>
-              <a class="btn btn-secondary btn-lg" href="#produtos">🔵 Ver catálogo</a>
+              <a class="btn btn-secondary btn-lg" href="/catalogo.html">🔵 Ver catálogo</a>
             </div>
 
             <form class="hero-search glass-card" id="heroSearchForm">
@@ -79,7 +88,7 @@
 
           <div class="hero-visual reveal delay-1">
             <div class="hero-image-card">
-              <img id="heroImage" alt="Caminhões modernos e componentes do sistema de ARLA e SCR" />
+              <img id="heroImage" alt="Peças para ARLA 32, sistema SCR e pós-tratamento diesel para linha pesada" />
               <div class="floating-panel panel-top-right glass-card">
                 <span class="panel-label">Especialidade</span>
                 <strong>ARLA 32 • SCR</strong>
@@ -117,7 +126,7 @@
         <div class="container">
           <div class="section-heading reveal">
             <span class="section-kicker">Categorias em destaque</span>
-            <h2>Encontre a categoria certa para sua aplicação</h2>
+            <h2>Principais Categorias de Peças para ARLA 32 e SCR</h2>
             <p>Navegação rápida, visual e intuitiva para localizar a peça ideal em poucos segundos.</p>
           </div>
           <div class="category-grid" id="categoryGrid"></div>
@@ -128,8 +137,8 @@
         <div class="container">
           <div class="section-heading reveal">
             <span class="section-kicker">Catálogo técnico</span>
-            <h2>Produtos com busca rápida e filtros inteligentes</h2>
-            <p>Experiência inspirada em grandes marketplaces, adaptada para conversão via orçamento.</p>
+            <h2>Peças para Caminhões e Linha Pesada</h2>
+            <p>Veja os principais produtos em destaque e acesse o catálogo completo para visualizar todos os itens.</p>
           </div>
 
           <div class="catalog-layout">
@@ -166,6 +175,10 @@
               </div>
 
               <div class="product-grid" id="productGrid" aria-live="polite"></div>
+
+              <div style="margin-top: 24px; text-align: center;">
+                <a class="btn btn-primary btn-lg" href="/catalogo.html">Ver catálogo completo</a>
+              </div>
             </div>
           </div>
         </div>
@@ -175,7 +188,7 @@
         <div class="container">
           <div class="section-heading reveal">
             <span class="section-kicker">Marcas atendidas</span>
-            <h2>Compatibilidade com as principais montadoras da linha pesada</h2>
+            <h2>Peças Compatíveis com as Principais Montadoras</h2>
             <p>Catálogo preparado para aplicações em frotas, oficinas e transportadoras.</p>
           </div>
           <div class="brand-grid reveal delay-1" id="brandGrid"></div>
@@ -186,7 +199,7 @@
         <div class="container">
           <div class="section-heading reveal">
             <span class="section-kicker">Diferenciais ARLATEM</span>
-            <h2>Confiança, velocidade e suporte técnico para vender mais</h2>
+            <h2>Por Que Comprar Peças para ARLA 32 na ARLATEM</h2>
           </div>
           <div class="benefits-grid" id="benefitsGrid"></div>
         </div>
@@ -207,7 +220,7 @@
         <div class="container about-grid">
           <div class="about-copy reveal">
             <span class="section-kicker">Quem Somos</span>
-            <h2 id="aboutTitle"></h2>
+            <h2 id="aboutTitle">Especialistas em Peças para ARLA 32 e Sistema SCR</h2>
             <p id="aboutParagraph1"></p>
             <p id="aboutParagraph2"></p>
             <div class="about-points" id="aboutPoints"></div>
@@ -220,7 +233,7 @@
         <div class="container">
           <div class="section-heading reveal">
             <span class="section-kicker">Conteúdo técnico</span>
-            <h2>Blog com temas que geram confiança e autoridade</h2>
+            <h2>Dicas e Informações Sobre ARLA 32, SCR e Pós-Tratamento Diesel</h2>
             <p>Artigos pensados para educar o cliente, atrair tráfego orgânico e acelerar a decisão de compra.</p>
           </div>
           <div class="blog-grid" id="blogGrid"></div>
@@ -246,7 +259,7 @@
         <div class="container">
           <div class="section-heading reveal">
             <span class="section-kicker">FAQ</span>
-            <h2>Perguntas frequentes</h2>
+            <h2>Perguntas Frequentes Sobre Peças para ARLA e SCR</h2>
           </div>
           <div class="faq-list" id="faqList"></div>
         </div>
@@ -270,7 +283,7 @@
 
         <div class="footer-links">
           <h3>Links rápidos</h3>
-          <a href="#produtos">Produtos</a>
+          <a href="/catalogo.html">Produtos</a>
           <a href="#categorias">Categorias</a>
           <a href="#marcas">Marcas</a>
           <a href="#quem-somos">Quem Somos</a>
