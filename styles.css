@@ -12,7 +12,7 @@
   --radius-xl: 28px;
   --radius-lg: 22px;
   --container: 1240px;
-  --header-height: 86px;
+  --header-height: 72px;
 }
 
 * { box-sizing: border-box; }
@@ -133,9 +133,7 @@ img {
   visibility: hidden;
 }
 
-.loader-shell {
-  text-align: center;
-}
+.loader-shell { text-align: center; }
 
 .loader-ring {
   width: 76px;
@@ -154,13 +152,8 @@ img {
   letter-spacing: -0.04em;
 }
 
-.loader-brand span {
-  color: var(--primary);
-}
-
-.loader-brand strong {
-  color: var(--secondary-dark);
-}
+.loader-brand span { color: var(--primary); }
+.loader-brand strong { color: var(--secondary-dark); }
 
 .loader-shell p {
   color: var(--text-soft);
@@ -171,7 +164,7 @@ img {
   position: sticky;
   top: 0;
   z-index: 1000;
-  padding: 18px 0;
+  padding: 10px 0;
   transition: all 0.3s ease;
 }
 
@@ -186,7 +179,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 18px;
 }
 
 .brand {
@@ -254,10 +247,11 @@ img {
   display: inline-flex;
   align-items: center;
 }
+
 .brand-logo-wide {
-  height: 140px;
+  height: 78px;
   width: auto;
-  max-width: 520px;
+  max-width: 300px;
   object-fit: contain;
   display: block;
 }
@@ -265,12 +259,13 @@ img {
 .main-nav {
   display: flex;
   align-items: center;
-  gap: 22px;
+  gap: 18px;
 }
 
 .main-nav a {
   color: var(--text-soft);
   font-weight: 600;
+  font-size: 0.98rem;
   position: relative;
   transition: color 0.25s ease;
 }
@@ -309,7 +304,7 @@ img {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 14px 20px;
+  padding: 12px 18px;
   border-radius: 999px;
   border: 1px solid transparent;
   font-weight: 700;
@@ -419,23 +414,6 @@ img {
 
 .hero-copy h1 {
   font-size: clamp(2.8rem, 5vw, 5rem);
-}
-
-.hero-copy h1 span {
-  color: var(--primary);
-  position: relative;
-}
-
-.hero-copy h1 span::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 6px;
-  height: 10px;
-  border-radius: 999px;
-  background: rgba(46, 204, 113, 0.25);
-  z-index: -1;
 }
 
 .hero-actions {
@@ -1066,13 +1044,8 @@ img {
   line-height: 1;
 }
 
-.slider-nav.prev {
-  left: 18px;
-}
-
-.slider-nav.next {
-  right: 18px;
-}
+.slider-nav.prev { left: 18px; }
+.slider-nav.next { right: 18px; }
 
 .faq-list {
   display: grid;
@@ -1132,12 +1105,19 @@ img {
   gap: 24px;
 }
 
-.footer-brand .brand strong,
-.footer-links h3,
-.footer-contact h3,
-.footer-map h3,
-.map-card strong {
+.footer-brand-text strong {
+  display: block;
   color: var(--white);
+  font-family: 'Poppins', 'Inter', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: -0.04em;
+}
+
+.footer-brand-text small {
+  color: rgba(255, 255, 255, 0.72);
+  display: block;
+  font-size: 0.82rem;
+  margin-top: 4px;
 }
 
 .footer-links,
@@ -1159,46 +1139,11 @@ img {
   color: var(--secondary);
 }
 
-.footer-brand-text strong {
-  display: block;
-  color: var(--white);
-  font-family: 'Poppins', 'Inter', sans-serif;
-  font-size: 1.4rem;
-  letter-spacing: -0.04em;
-}
-
-.footer-brand-text small {
-  color: rgba(255, 255, 255, 0.72);
-  display: block;
-  font-size: 0.82rem;
-  margin-top: 4px;
-}
-
 .footer-map {
   border-radius: 26px;
   padding: 22px;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.map-card {
-  padding: 22px;
-  border-radius: 24px;
-  min-height: 210px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: auto, 26px 26px, 26px 26px;
-}
-
-.map-dot {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--secondary);
-  box-shadow: 0 0 0 10px rgba(46, 204, 113, 0.14);
-  margin-bottom: 18px;
 }
 
 .map-caption {
@@ -1423,7 +1368,7 @@ img {
   }
 
   .menu-toggle { display: inline-block; }
-  .site-header { padding: 14px 0; }
+  .site-header { padding: 10px 0; }
   .nav-actions .btn-primary { display: none; }
   .hero { padding-top: 18px; }
   .hero-image-card img { min-height: 420px; }
@@ -1451,6 +1396,7 @@ img {
 
   .search-input-wrap button { grid-column: 1 / -1; }
   .product-actions { grid-template-columns: 1fr; }
+
   .btn-card,
   .hero-actions .btn,
   .modal-actions .btn {
