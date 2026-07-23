@@ -241,15 +241,16 @@ function renderCategories() {
     categories
       .map(
         (category, index) => `
-      <button class="category-card reveal ${index % 3 === 1 ? 'delay-1' : index % 3 === 2 ? 'delay-2' : ''}" data-category="${category.name}">
+      <a class="category-card reveal ${index % 3 === 1 ? 'delay-1' : index % 3 === 2 ? 'delay-2' : ''}" href="/catalogo.html?categoria=${encodeURIComponent(category.name)}">
         <span class="icon-wrap">${iconMarkup(category.icon)}</span>
         <strong>${category.name}</strong>
         <small>${category.description}</small>
-      </button>
+      </a>
     `
       )
       .join('')
   );
+}
 
   document.querySelectorAll('.category-card').forEach((button) => {
     button.addEventListener('click', () => {
