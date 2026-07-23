@@ -16,7 +16,6 @@
 }
 
 * { box-sizing: border-box; }
-
 html { scroll-behavior: smooth; }
 
 body {
@@ -33,19 +32,9 @@ body {
 body.menu-open { overflow: hidden; }
 
 a { color: inherit; text-decoration: none; }
-
-button,
-input,
-select {
-  font: inherit;
-}
-
+button, input, select { font: inherit; }
 button { cursor: pointer; }
-
-img {
-  max-width: 100%;
-  display: block;
-}
+img { max-width: 100%; display: block; }
 
 .container {
   width: min(calc(100% - 32px), var(--container));
@@ -188,61 +177,6 @@ img {
   gap: 14px;
 }
 
-.brand strong {
-  display: block;
-  font-family: 'Poppins', 'Inter', sans-serif;
-  font-size: 1.4rem;
-  letter-spacing: -0.04em;
-}
-
-.brand small {
-  color: var(--text-soft);
-  display: block;
-  font-size: 0.78rem;
-}
-
-.brand-mark {
-  width: 46px;
-  height: 46px;
-  border-radius: 16px;
-  background: linear-gradient(135deg, rgba(11, 94, 215, 0.95), rgba(46, 204, 113, 0.9));
-  position: relative;
-  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.35), 0 12px 28px rgba(11, 94, 215, 0.22);
-}
-
-.brand-mark::before,
-.brand-mark::after {
-  content: '';
-  position: absolute;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 999px;
-}
-
-.brand-mark::before {
-  width: 24px;
-  height: 4px;
-  left: 10px;
-  top: 14px;
-  transform: rotate(-35deg);
-}
-
-.brand-mark::after {
-  width: 18px;
-  height: 4px;
-  left: 14px;
-  top: 24px;
-  transform: rotate(35deg);
-}
-
-.brand-logo-img {
-  width: 52px;
-  height: 52px;
-  object-fit: contain;
-  display: block;
-  flex-shrink: 0;
-  border-radius: 14px;
-}
-
 .brand-logo-only {
   display: inline-flex;
   align-items: center;
@@ -336,9 +270,7 @@ img {
   box-shadow: 0 10px 26px rgba(11, 94, 215, 0.08);
 }
 
-.btn-lg {
-  padding: 16px 26px;
-}
+.btn-lg { padding: 16px 26px; }
 
 .menu-toggle {
   display: none;
@@ -529,15 +461,8 @@ img {
   border-radius: 22px;
 }
 
-.panel-top-right {
-  right: 18px;
-  top: 18px;
-}
-
-.panel-bottom-left {
-  left: 18px;
-  bottom: 18px;
-}
+.panel-top-right { right: 18px; top: 18px; }
+.panel-bottom-left { left: 18px; bottom: 18px; }
 
 .panel-label,
 .floating-panel small {
@@ -633,6 +558,11 @@ img {
   transform: translateY(-6px);
   box-shadow: var(--shadow-hover);
   border-color: rgba(11, 94, 215, 0.18);
+}
+
+.category-card {
+  display: block;
+  width: 100%;
 }
 
 .icon-wrap {
@@ -1423,8 +1353,4 @@ img {
     padding: 0;
     justify-content: center;
   }
-}
-.category-card {
-  display: block;
-  width: 100%;
 }
