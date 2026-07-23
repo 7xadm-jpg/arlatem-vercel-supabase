@@ -187,7 +187,6 @@ function renderAll() {
   setupMisc();
   setupObserver();
 }
-
 function renderBrand() {
   const { settings } = state.content;
 
@@ -195,7 +194,7 @@ function renderBrand() {
   setText('brandTagline', settings.tagline);
   setText('footerBrandName', settings.siteName);
 
-  document.title = `Peças para ARLA 32 e Sistema SCR | ARLATEM`;
+  document.title = `Peças para ARLA 32 e Sistema SCR em Contagem e BH | ARLATEM`;
 }
 
 function renderHero() {
