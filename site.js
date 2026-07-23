@@ -136,14 +136,8 @@ function normalizeSocialUrl(value, platform) {
 
   const username = raw.replace(/^@/, '');
 
-  if (platform === 'instagram') {
-    return `https://www.instagram.com/${username}/`;
-  }
-
-  if (platform === 'facebook') {
-    return `https://www.facebook.com/${username}`;
-  }
-
+  if (platform === 'instagram') return `https://www.instagram.com/${username}/`;
+  if (platform === 'facebook') return `https://www.facebook.com/${username}`;
   return raw;
 }
 
@@ -157,6 +151,25 @@ function setWhatsAppLink(element, message) {
   element.href = buildWhatsAppLink(message);
   element.target = '_blank';
   element.rel = 'noopener noreferrer';
+}
+
+function categorySlug(name) {
+  const map = {
+    'Bombas ARLA': 'bombas-arla',
+    'Sensores NOx': 'sensores-nox',
+    'Catalisadores': 'catalisadores',
+    'Dosadores': 'dosadores',
+    'Filtros': 'filtros',
+    'Módulos': 'modulos',
+    'Chicotes': 'chicotes',
+    'Reservatórios': 'reservatorios',
+    'Tubulações': 'tubulacoes',
+    'Peças Pneumáticas': 'pecas-pneumaticas',
+    'Kits de Reparo': 'kits-de-reparo',
+    'Acessórios': 'acessorios'
+  };
+
+  return map[name] || name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-');
 }
 
 async function loadData() {
@@ -187,13 +200,12 @@ function renderAll() {
   setupMisc();
   setupObserver();
 }
+
 function renderBrand() {
   const { settings } = state.content;
-
   setText('brandName', settings.siteName);
   setText('brandTagline', settings.tagline);
   setText('footerBrandName', settings.siteName);
-
   document.title = `Peças para ARLA 32 e Sistema SCR em Contagem e BH | ARLATEM`;
 }
 
@@ -232,24 +244,6 @@ function renderHighlights() {
     list.map((item) => `<div class="quick-item"><span>✔</span> ${item}</div>`).join('')
   );
 }
-function categorySlug(name) {
-  const map = {
-    'Bombas ARLA': 'bombas-arla',
-    'Sensores NOx': 'sensores-nox',
-    'Catalisadores': 'catalisadores',
-    'Dosadores': 'dosadores',
-    'Filtros': 'filtros',
-    'Módulos': 'modulos',
-    'Chicotes': 'chicotes',
-    'Reservatórios': 'reservatorios',
-    'Tubulações': 'tubulacoes',
-    'Peças Pneumáticas': 'pecas-pneumaticas',
-    'Kits de Reparo': 'kits-de-reparo',
-    'Acessórios': 'acessorios'
-  };
-
-  return map[name] || name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-');
-}
 
 function renderCategories() {
   const categories = state.content.categories || [];
@@ -268,17 +262,6 @@ function renderCategories() {
       )
       .join('')
   );
-}
-}
-
-  document.querySelectorAll('.category-card').forEach((button) => {
-    button.addEventListener('click', () => {
-      if (filterElements.category) filterElements.category.value = button.dataset.category;
-      state.category = button.dataset.category;
-      renderProducts();
-      document.getElementById('produtos')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  });
 }
 
 function renderBrands() {
