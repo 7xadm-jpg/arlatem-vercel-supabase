@@ -1,0 +1,74 @@
+.arla-hero {
+  padding: 140px 0 40px;
+  position: relative;
+}
+
+.arla-hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 24px;
+  align-items: center;
+}
+
+.arla-hero-grid h1 {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  font-size: clamp(2.4rem, 4vw, 4rem);
+  letter-spacing: -0.03em;
+  margin: 10px 0 14px;
+}
+
+.arla-hero-grid p {
+  color: var(--text-soft);
+  line-height: 1.8;
+  margin: 0;
+}
+
+.arla-hero-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.arla-mini-card {
+  border-radius: 22px;
+  padding: 18px;
+  text-align: left;
+}
+
+.arla-mini-card strong {
+  display: block;
+  font-family: 'Poppins', 'Inter', sans-serif;
+  font-size: 1.4rem;
+  margin-bottom: 6px;
+}
+
+.arla-mini-card span {
+  color: var(--text-soft);
+  font-size: 0.94rem;
+}
+
+.arla-section {
+  padding-top: 20px;
+}
+
+@media (max-width: 1180px) {
+  .arla-hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .arla-hero-cards,
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .arla-hero {
+    padding-top: 120px;
+  }
+
+  .arla-hero-cards,
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+}
