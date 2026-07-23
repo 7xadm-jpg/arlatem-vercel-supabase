@@ -83,10 +83,6 @@
   gap: 18px;
 }
 
-.catalog-empty-state {
-  grid-column: 1 / -1;
-}
-
 .pagination-wrap {
   margin-top: 26px;
   display: flex;
@@ -148,13 +144,8 @@
   cursor: not-allowed;
 }
 
-.page-dots {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 36px;
-  color: var(--text-soft);
-  font-weight: 700;
+.catalog-empty-state {
+  grid-column: 1 / -1;
 }
 
 @media (max-width: 1180px) {
