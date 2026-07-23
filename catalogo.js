@@ -580,6 +580,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     bindEvents();
     await loadData();
+    applyFiltersFromUrl();
   } catch (error) {
     console.error(error);
     alert('Não foi possível carregar o catálogo completo.');
