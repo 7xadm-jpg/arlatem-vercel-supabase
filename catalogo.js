@@ -456,7 +456,31 @@ function formatPhone(number) {
   }
   return number || '(00) 00000-0000';
 }
+function applyFiltersFromUrl() {
+  const params = new URLSearchParams(window.location.search);
 
+  const categoria = params.get('categoria');
+  const marca = params.get('marca');
+  const montadora = params.get('montadora');
+
+  if (categoria) {
+    state.category = categoria;
+    if (refs.filterCategory) refs.filterCategory.value = categoria;
+  }
+
+  if (marca) {
+    state.brand = marca;
+    if (refs.filterBrand) refs.filterBrand.value = marca;
+  }
+
+  if (montadora) {
+    state.montadora = montadora;
+    if (refs.filterMontadora) refs.filterMontadora.value = montadora;
+  }
+
+  state.page = 1;
+  renderProducts();
+}
 function resetFilters() {
   state.search = '';
   state.category = '';
