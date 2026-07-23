@@ -1424,3 +1424,7 @@ img {
     justify-content: center;
   }
 }
+.category-card {
+  display: block;
+  width: 100%;
+}
