@@ -245,25 +245,6 @@ function renderHighlights() {
   );
 }
 
-function categorySlug(name) {
-  const map = {
-    'Bombas ARLA': 'bombas-arla',
-    'Sensores NOx': 'sensores-nox',
-    'Catalisadores': 'catalisadores',
-    'Dosadores': 'dosadores',
-    'Filtros': 'filtros',
-    'Módulos': 'modulos',
-    'Chicotes': 'chicotes',
-    'Reservatórios': 'reservatorios',
-    'Tubulações': 'tubulacoes',
-    'Peças Pneumáticas': 'pecas-pneumaticas',
-    'Kits de Reparo': 'kits-de-reparo',
-    'Acessórios': 'acessorios'
-  };
-
-  return map[name] || name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-');
-}
-
 function renderCategories() {
   const categories = state.content.categories || [];
 
