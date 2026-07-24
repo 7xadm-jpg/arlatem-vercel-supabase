@@ -152,7 +152,6 @@ function setWhatsAppLink(element, message) {
   element.target = '_blank';
   element.rel = 'noopener noreferrer';
 }
-
 function categorySlug(name) {
   const map = {
     'Bombas ARLA': 'bombas-arla',
@@ -169,7 +168,12 @@ function categorySlug(name) {
     'Acessórios': 'acessorios'
   };
 
-  return map[name] || name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-');
+  return map[name] || name
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/\s+/g, '-');
+}
 }
 
 async function loadData() {
@@ -244,6 +248,7 @@ function renderHighlights() {
     list.map((item) => `<div class="quick-item"><span>✔</span> ${item}</div>`).join('')
   );
 }
+
 function renderCategories() {
   const categories = state.content.categories || [];
 
@@ -261,7 +266,6 @@ function renderCategories() {
       )
       .join('')
   );
-}
 }
 
 function renderBrands() {
