@@ -245,6 +245,25 @@ function renderHighlights() {
   );
 }
 
+function categorySlug(name) {
+  const map = {
+    'Bombas ARLA': 'bombas-arla',
+    'Sensores NOx': 'sensores-nox',
+    'Catalisadores': 'catalisadores',
+    'Dosadores': 'dosadores',
+    'Filtros': 'filtros',
+    'Módulos': 'modulos',
+    'Chicotes': 'chicotes',
+    'Reservatórios': 'reservatorios',
+    'Tubulações': 'tubulacoes',
+    'Peças Pneumáticas': 'pecas-pneumaticas',
+    'Kits de Reparo': 'kits-de-reparo',
+    'Acessórios': 'acessorios'
+  };
+
+  return map[name] || name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-');
+}
+
 function renderCategories() {
   const categories = state.content.categories || [];
 
@@ -253,7 +272,7 @@ function renderCategories() {
     categories
       .map(
         (category, index) => `
-      <a class="category-card reveal ${index % 3 === 1 ? 'delay-1' : index % 3 === 2 ? 'delay-2' : ''}" href="/categoria/${categorySlug(category.name)}.html">
+      <a class="category-card reveal ${index % 3 === 1 ? 'delay-1' : index % 3 === 2 ? 'delay-2' : ''}" href="/${categorySlug(category.name)}.html">
         <span class="icon-wrap">${iconMarkup(category.icon)}</span>
         <strong>${category.name}</strong>
         <small>${category.description}</small>
