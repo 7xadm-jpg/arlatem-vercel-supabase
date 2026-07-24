@@ -244,8 +244,7 @@ function renderHighlights() {
     list.map((item) => `<div class="quick-item"><span>✔</span> ${item}</div>`).join('')
   );
 }
-
-function renderCategories() {
+function renderCategories() 
   const categories = state.content.categories || [];
 
   setHtml(
