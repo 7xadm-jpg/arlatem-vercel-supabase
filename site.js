@@ -136,8 +136,14 @@ function normalizeSocialUrl(value, platform) {
 
   const username = raw.replace(/^@/, '');
 
-  if (platform === 'instagram') return `https://www.instagram.com/${username}/`;
-  if (platform === 'facebook') return `https://www.facebook.com/${username}`;
+  if (platform === 'instagram') {
+    return `https://www.instagram.com/${username}/`;
+  }
+
+  if (platform === 'facebook') {
+    return `https://www.facebook.com/${username}`;
+  }
+
   return raw;
 }
 
@@ -152,6 +158,7 @@ function setWhatsAppLink(element, message) {
   element.target = '_blank';
   element.rel = 'noopener noreferrer';
 }
+
 function categorySlug(name) {
   const map = {
     'Bombas ARLA': 'bombas-arla',
@@ -173,33 +180,6 @@ function categorySlug(name) {
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/\s+/g, '-');
-}
-
-function renderCategories() {
-  const categories = state.content.categories || [];
-
-  setHtml(
-    'categoryGrid',
-    categories
-      .map(
-        (category, index) => `
-      <a class="category-card reveal ${index % 3 === 1 ? 'delay-1' : index % 3 === 2 ? 'delay-2' : ''}" href="/${categorySlug(category.name)}.html">
-        <span class="icon-wrap">${iconMarkup(category.icon)}</span>
-        <strong>${category.name}</strong>
-        <small>${category.description}</small>
-      </a>
-    `
-      )
-      .join('')
-  );
-}
-
-  return map[name] || name
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/\s+/g, '-');
-}
 }
 
 async function loadData() {
