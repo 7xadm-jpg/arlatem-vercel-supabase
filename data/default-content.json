@@ -243,3 +243,248 @@
     }
   ]
 }
+{
+  "settings": {
+    "siteName": "ARLATEM",
+    "tagline": "ARLA 32 • SCR • Linha Pesada",
+    "whatsappNumber": "5531992007778",
+    "email": "arlatem.sac@gmail.com",
+    "instagram": "@arlatem.oficial",
+    "facebook": "arlatem",
+    "location": "R. Maestro Azérias, 133 - Inconfidentes, Contagem - MG, 32260-270",
+    "hours": "Seg a Sex • 08h às 18h",
+    "copyrightText": "ARLATEM — Contagem/MG. Especialistas em peças para ARLA 32, sistema SCR e pós-tratamento diesel.",
+    "adminPath": "/acesso-tecnico-arlatem"
+  },
+  "hero": {
+    "eyebrow": "A maior distribuidora de peças ARLA de Minas Gerais",
+    "title": "Peças para ARLA 32, Sistema SCR e Catalisadores em Contagem, Belo Horizonte e Região Metropolitana",
+    "subtitle": "Sensores NOx, bombas dosadoras, módulos eletrônicos, catalisadores e componentes de pós-tratamento diesel para linha pesada, com estoque local em Contagem/MG e envio para Belo Horizonte, Betim, Nova Lima, RMBH e todo o Brasil.",
+    "backgroundImage": "/uploads/hero-trucks-arla.png",
+    "searchPlaceholder": "Pesquisar por Sensor NOx, Bomba ARLA, Catalisador, Dosador, Chicote, Filtro, Módulo, Válvula..."
+  },
+  "highlights": [
+    "Peças Originais",
+    "Atendimento Técnico Especializado",
+    "Estoque em Contagem",
+    "Entrega para BH e RMBH",
+    "Envio para Todo o Brasil"
+  ],
+  "categories": [
+    {
+      "name": "Bombas ARLA",
+      "description": "Bombas dosadoras e componentes de alimentação para ARLA 32 e sistema SCR em caminhões e linha pesada.",
+      "icon": "pump"
+    },
+    {
+      "name": "Sensores NOx",
+      "description": "Sensores NOx para monitoramento de emissões e desempenho do sistema SCR em veículos diesel.",
+      "icon": "sensor"
+    },
+    {
+      "name": "Catalisadores",
+      "description": "Catalisadores SCR para redução de emissões em aplicações Euro 5 e Euro 6 na linha pesada.",
+      "icon": "grid"
+    },
+    {
+      "name": "Dosadores",
+      "description": "Dosadores de ARLA 32 para aplicações em pós-tratamento diesel, com foco em precisão e durabilidade.",
+      "icon": "doser"
+    },
+    {
+      "name": "Filtros",
+      "description": "Filtros para ARLA 32, sistema SCR e linha pesada, voltados para proteção e maior vida útil do conjunto.",
+      "icon": "filter"
+    },
+    {
+      "name": "Módulos",
+      "description": "Módulos eletrônicos de controle para ARLA 32 e sistema SCR em caminhões e ônibus.",
+      "icon": "chip"
+    },
+    {
+      "name": "Chicotes",
+      "description": "Chicotes e conexões elétricas para sensores, módulos e componentes do sistema de emissões.",
+      "icon": "cable"
+    },
+    {
+      "name": "Reservatórios",
+      "description": "Reservatórios e peças de armazenamento para ARLA 32, com aplicações em linha pesada.",
+      "icon": "tank"
+    },
+    {
+      "name": "Tubulações",
+      "description": "Tubulações e linhas de alimentação para ARLA 32 e pós-tratamento diesel em caminhões.",
+      "icon": "pipe"
+    },
+    {
+      "name": "Peças Pneumáticas",
+      "description": "Componentes pneumáticos de apoio ao sistema SCR e ao pós-tratamento diesel.",
+      "icon": "plus"
+    },
+    {
+      "name": "Kits de Reparo",
+      "description": "Kits de manutenção preventiva e reparo para sistema ARLA 32, SCR e componentes correlatos.",
+      "icon": "repair"
+    },
+    {
+      "name": "Acessórios",
+      "description": "Acessórios e itens complementares para instalação, manutenção e reposição do sistema ARLA 32.",
+      "icon": "shield"
+    }
+  ],
+  "brands": [
+    { "name": "Mercedes" },
+    { "name": "Volvo" },
+    { "name": "Scania" },
+    { "name": "DAF" },
+    { "name": "MAN" },
+    { "name": "Volkswagen" },
+    { "name": "Ford" },
+    { "name": "Iveco" },
+    { "name": "Renault" },
+    { "name": "Agrale" }
+  ],
+  "benefits": [
+    {
+      "title": "Peças Originais",
+      "text": "Itens originais, homologados e selecionados para aplicações exigentes em ARLA 32, SCR e pós-tratamento diesel.",
+      "icon": "check"
+    },
+    {
+      "title": "Envio para Todo Brasil",
+      "text": "Atendimento nacional com logística eficiente para oficinas, transportadoras, frotistas e centros de manutenção.",
+      "icon": "truck"
+    },
+    {
+      "title": "Atendimento Especializado",
+      "text": "Equipe preparada para orientar a escolha correta da peça por aplicação, código, montadora e sistema de emissões.",
+      "icon": "support"
+    },
+    {
+      "title": "Qualidade Garantida",
+      "text": "Processos voltados para confiabilidade, desempenho e durabilidade na linha pesada e no sistema SCR.",
+      "icon": "doc"
+    },
+    {
+      "title": "Suporte Técnico",
+      "text": "Orientação para sintomas, códigos de falha e compatibilidades em componentes ARLA 32 e SCR.",
+      "icon": "clock"
+    },
+    {
+      "title": "Produtos Testados",
+      "text": "Mais segurança para oficinas, transportadoras, mecânicos e operações de frota em Minas Gerais e todo o Brasil.",
+      "icon": "verified"
+    }
+  ],
+  "banner": {
+    "eyebrow": "Suporte comercial rápido",
+    "title": "Não encontrou sua peça?",
+    "subtitle": "Nossa equipe localiza para você por código, aplicação, montadora, modelo ou sistema SCR."
+  },
+  "about": {
+    "title": "Especialistas em peças para ARLA 32 e sistema SCR em Minas Gerais",
+    "paragraph1": "A ARLATEM atende oficinas, transportadoras, frotistas e compradores técnicos que precisam de rapidez, segurança técnica e assertividade na compra de componentes para sistemas de emissões.",
+    "paragraph2": "Com base em Contagem/MG, atendemos Belo Horizonte, Betim, Nova Lima, toda a Região Metropolitana de BH e também clientes em todo o estado de Minas Gerais e no Brasil com catálogo técnico organizado e orçamento via WhatsApp.",
+    "points": [
+      "Busca por código, peça ou veículo",
+      "Atendimento para Contagem, BH, Betim, Nova Lima e RMBH",
+      "Especialização em ARLA 32, SCR e pós-tratamento diesel"
+    ],
+    "specs": [
+      {
+        "label": "Foco principal",
+        "value": "Conversão em orçamentos"
+      },
+      {
+        "label": "Público atendido",
+        "value": "Frotistas, oficinas e transportadoras"
+      },
+      {
+        "label": "Segmento",
+        "value": "ARLA 32, SCR e pós-tratamento diesel"
+      },
+      {
+        "label": "Atuação",
+        "value": "Contagem, BH, RMBH, Minas Gerais e todo o Brasil"
+      },
+      {
+        "label": "Experiência",
+        "value": "Catálogo técnico rápido e intuitivo"
+      }
+    ]
+  },
+  "blog": [
+    {
+      "tag": "SCR",
+      "title": "Como funciona o sistema SCR em caminhões diesel",
+      "excerpt": "Entenda o papel do ARLA 32, dos sensores NOx, dos catalisadores e dos módulos eletrônicos no controle de emissões."
+    },
+    {
+      "tag": "Sensor NOx",
+      "title": "Quando trocar o Sensor NOx",
+      "excerpt": "Veja os sinais mais comuns de falha, sintomas no painel e como identificar problemas no sistema de emissões."
+    },
+    {
+      "tag": "Diagnóstico",
+      "title": "Como identificar falhas no ARLA 32",
+      "excerpt": "Aprenda a relacionar código, aplicação e sintomas para localizar a peça correta com mais segurança."
+    },
+    {
+      "tag": "Catalisador",
+      "title": "Catalisador entupido: principais causas",
+      "excerpt": "Descubra os sinais de obstrução no catalisador SCR e o impacto disso no desempenho do caminhão."
+    },
+    {
+      "tag": "SCR",
+      "title": "Erros mais comuns do sistema SCR",
+      "excerpt": "Falhas em sensores, dosadores, bombas, módulos e componentes que comprometem o pós-tratamento diesel."
+    },
+    {
+      "tag": "Manutenção",
+      "title": "Manutenção preventiva em pós-tratamento diesel",
+      "excerpt": "Boas práticas para aumentar a vida útil dos componentes e evitar paradas não programadas na operação."
+    }
+  ],
+  "testimonials": [
+    {
+      "quote": "Encontramos o sensor NOx certo em poucos minutos. O atendimento foi técnico, rápido e muito objetivo para a necessidade da oficina.",
+      "author": "Carlos Henrique",
+      "role": "Oficina Diesel • Belo Horizonte",
+      "stars": 5
+    },
+    {
+      "quote": "O catálogo facilita muito a busca por aplicação e o orçamento via WhatsApp acelerou nossa rotina de compra para a frota.",
+      "author": "Juliana Azevedo",
+      "role": "Gestora de Frota • Transportadora",
+      "stars": 5
+    },
+    {
+      "quote": "Excelente suporte para localizar bomba de ARLA e dosador. A experiência transmite segurança e conhecimento técnico.",
+      "author": "Márcio Fernandes",
+      "role": "Comprador Técnico • Frotista",
+      "stars": 5
+    }
+  ],
+  "faq": [
+    {
+      "question": "A ARLATEM entrega em Belo Horizonte e na Região Metropolitana?",
+      "answer": "Sim. Atendemos Contagem, Belo Horizonte, Betim, Nova Lima e toda a Região Metropolitana de BH, além de envios para Minas Gerais e todo o Brasil."
+    },
+    {
+      "question": "Quais peças do sistema SCR vocês têm em estoque?",
+      "answer": "Trabalhamos com sensores NOx, bombas dosadoras, catalisadores, módulos eletrônicos, filtros, chicotes e componentes de reparo para linha pesada."
+    },
+    {
+      "question": "Vocês trabalham com orçamento por WhatsApp?",
+      "answer": "Sim. Basta enviar o nome da peça, código, montadora, modelo ou aplicação para receber atendimento rápido e direcionado."
+    },
+    {
+      "question": "A ARLATEM vende para oficinas e frotistas?",
+      "answer": "Sim. Atendemos oficinas, mecânicos, transportadoras, frotistas e compradores técnicos de manutenção diesel."
+    },
+    {
+      "question": "Vocês enviam para todo o Brasil?",
+      "answer": "Sim. A ARLATEM atende clientes de todo o país com suporte comercial ágil e logística voltada para peças de linha pesada."
+    }
+  ]
+}
