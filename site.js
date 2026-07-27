@@ -272,8 +272,6 @@ function renderCategories() {
       .join('')
   );
 }
-}
-
 function renderBrands() {
   const brands = state.content.brands || [];
   setHtml('brandGrid', brands.map((brand) => `<div class="brand-pill">${brand.name}</div>`).join(''));
