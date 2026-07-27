@@ -71,7 +71,6 @@ async function loadData() {
   if (categoria) {
     state.category = categoria;
   }
-
   renderAll();
 }
 
