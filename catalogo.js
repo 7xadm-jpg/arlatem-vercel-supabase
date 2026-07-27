@@ -58,7 +58,6 @@ function normalizeSocialUrl(value, platform) {
   if (platform === 'facebook') return `https://www.facebook.com/${username}`;
   return raw;
 }
-
 async function loadData() {
   const response = await fetch('/api/content', { cache: 'no-store' });
   const payload = await response.json();
@@ -66,6 +65,13 @@ async function loadData() {
 
   state.content = payload.data;
   state.products = payload.data.products || [];
+
+  const params = new URLSearchParams(window.location.search);
+  const categoria = params.get('categoria');
+  if (categoria) {
+    state.category = categoria;
+  }
+
   renderAll();
 }
 
