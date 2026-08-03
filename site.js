@@ -153,6 +153,7 @@ function renderAll() {
   setupMisc();
   setupObserver();
 }
+
 function renderBrand() {
   const { settings } = state.content;
   const brandName = document.getElementById('brandName');
@@ -555,9 +556,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     handleMenu();
     handleModal();
   } catch (error) {
-    console.error(error);
-    alert('Não foi possível carregar o site.');
+    console.error('Erro ao iniciar o site:', error);
   } finally {
+    document.querySelectorAll('.reveal').forEach((element) => {
+      element.classList.add('visible');
+    });
+
     setTimeout(() => {
       if (refs.preloader) refs.preloader.classList.add('hidden');
     }, 300);
