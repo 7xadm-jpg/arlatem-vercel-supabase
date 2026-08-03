@@ -101,37 +101,38 @@
     { "name": "Renault" },
     { "name": "Agrale" }
   ],
-  "benefits": [
-    {
-      "title": "Peças Originais",
-      "text": "Itens originais, homologados e selecionados para aplicações exigentes em ARLA 32, SCR e pós-tratamento diesel.",
-      "icon": "check"
-    },
-    {
-      "title": "Envio para Todo Brasil",
-      "text": "Atendimento nacional com logística eficiente para oficinas, transportadoras, frotistas e centros de manutenção.",
-      "icon": "truck"
-    },
-    {
-      "title": "Atendimento Especializado",
-      "text": "Equipe preparada para orientar a escolha correta da peça por aplicação, código, montadora e sistema de emissões.",
-      "icon": "support"
-    },
-    {
-      "title": "Qualidade Garantida",
-      "text": "Processos voltados para confiabilidade, desempenho e durabilidade na linha pesada e no sistema SCR.",
-      "icon": "doc"
-    },
-    {
-      "title": "Suporte Técnico",
-      "text": "Orientação para sintomas, códigos de falha e compatibilidades em componentes ARLA 32 e SCR.",
-      "icon": "clock"
-    },
-    {
-      "title": "Produtos Testados",
-      "text": "Mais segurança para oficinas, transportadoras, mecânicos e operações de frota em Minas Gerais e todo o Brasil.",
-      "icon": "verified"
-    }
+ "benefits": [
+  {
+    "title": "Peças Originais",
+    "text": "Itens originais, homologados e selecionados para aplicações exigentes em ARLA 32, SCR e pós-tratamento diesel.",
+    "icon": "check"
+  },
+  {
+    "title": "Envio para Todo Brasil",
+    "text": "Atendimento nacional com logística eficiente para oficinas, transportadoras, frotistas e centros de manutenção.",
+    "icon": "truck"
+  },
+  {
+    "title": "Atendimento Especializado",
+    "text": "Equipe preparada para orientar a escolha correta da peça por aplicação, código, montadora e sistema de emissões.",
+    "icon": "support"
+  },
+  {
+    "title": "Qualidade Garantida",
+    "text": "Processos voltados para confiabilidade, desempenho e durabilidade na linha pesada e no sistema SCR.",
+    "icon": "doc"
+  },
+  {
+    "title": "Suporte Técnico",
+    "text": "Orientação para sintomas, códigos de falha e compatibilidades em componentes ARLA 32 e SCR.",
+    "icon": "clock"
+  },
+  {
+    "title": "Produtos Testados",
+    "text": "Mais segurança para oficinas, transportadoras, mecânicos e operações de frota em Minas Gerais e todo o Brasil.",
+    "icon": "verified"
+  }
+] 
   ],
   "banner": {
     "eyebrow": "Suporte comercial rápido",
