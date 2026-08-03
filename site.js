@@ -34,9 +34,7 @@ const state = {
 };
 
 const filterFields = ['brand', 'category', 'montadora', 'model', 'year', 'motor', 'manufacturer', 'availability'];
-const filterElements = Object.fromEntries(
-  filterFields.map((field) => [field, document.getElementById(`filter${field.charAt(0).toUpperCase() + field.slice(1)}`)])
-);
+const filterElements = Object.fromEntries(filterFields.map((field) => [field, document.getElementById(`filter${field.charAt(0).toUpperCase() + field.slice(1)}`)]));
 
 let testimonialIndex = 0;
 let testimonialTimer;
@@ -62,27 +60,12 @@ const ICONS = {
   verified: '<svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 0 0-2 2v14l4-3h12a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Zm-8 9-3-3 1.4-1.4 1.6 1.6 4.6-4.6L17 6l-6 6Z"/></svg>'
 };
 
-function byId(id) {
-  return document.getElementById(id);
-}
-
-function setText(id, value) {
-  const el = byId(id);
-  if (el) el.textContent = value;
-}
-
-function setHtml(id, value) {
-  const el = byId(id);
-  if (el) el.innerHTML = value;
-}
-
 function iconMarkup(key) {
   return ICONS[key] || ICONS.shield;
 }
 
 function productImage(product) {
   if (product.image) return product.image;
-
   const colorMap = {
     'Bombas ARLA': ['#0b5ed7', '#2ecc71'],
     'Sensores NOx': ['#123a74', '#0b5ed7'],
@@ -97,12 +80,10 @@ function productImage(product) {
     'Kits de Reparo': ['#2563eb', '#22c55e'],
     'Acessórios': ['#0b5ed7', '#44c767']
   };
-
   const [start, end] = colorMap[product.category] || ['#0b5ed7', '#2ecc71'];
   const category = String(product.category || '').replace(/&/g, '&amp;');
   const name = String(product.name || '').slice(0, 28).replace(/&/g, '&amp;');
   const brand = String(product.brand || '').replace(/&/g, '&amp;');
-
   const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 440">
       <defs>
@@ -123,32 +104,12 @@ function productImage(product) {
       <text x="92" y="94" fill="white" font-size="28" font-family="Inter, Arial, sans-serif" font-weight="700">${category}</text>
       <text x="92" y="350" fill="white" font-size="20" font-family="Inter, Arial, sans-serif" opacity="0.92">${brand}</text>
       <text x="92" y="378" fill="white" font-size="18" font-family="Inter, Arial, sans-serif" opacity="0.74">${name}</text>
-    </svg>
-  `;
-
+    </svg>`;
   return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
 }
 
-function normalizeSocialUrl(value, platform) {
-  const raw = String(value || '').trim();
-  if (!raw || raw === '#') return '#';
-  if (raw.startsWith('http://') || raw.startsWith('https://')) return raw;
-
-  const username = raw.replace(/^@/, '');
-
-  if (platform === 'instagram') {
-    return `https://www.instagram.com/${username}/`;
-  }
-
-  if (platform === 'facebook') {
-    return `https://www.facebook.com/${username}`;
-  }
-
-  return raw;
-}
-
 function buildWhatsAppLink(message) {
-  const number = String(state.content?.settings?.whatsappNumber || '').replace(/\D/g, '');
+  const number = state.content.settings.whatsappNumber || '';
   return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
 }
 
@@ -159,35 +120,17 @@ function setWhatsAppLink(element, message) {
   element.rel = 'noopener noreferrer';
 }
 
-function categorySlug(name) {
-  const map = {
-    'Bombas ARLA': 'bombas-arla',
-    'Sensores NOx': 'sensores-nox',
-    'Catalisadores': 'catalisadores',
-    'Dosadores': 'dosadores',
-    'Filtros': 'filtros',
-    'Módulos': 'modulos',
-    'Chicotes': 'chicotes',
-    'Reservatórios': 'reservatorios',
-    'Tubulações': 'tubulacoes',
-    'Peças Pneumáticas': 'pecas-pneumaticas',
-    'Kits de Reparo': 'kits-de-reparo',
-    'Acessórios': 'acessorios'
-  };
-
-  return map[name] || name
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/\s+/g, '-');
-}
-
 async function loadData() {
+  if (window.__INITIAL_DATA__) {
+    state.content = window.__INITIAL_DATA__;
+    state.products = window.__INITIAL_DATA__.products || [];
+    renderAll();
+    return;
+  }
+
   const response = await fetch('/api/content', { cache: 'no-store' });
   const payload = await response.json();
-
   if (!payload.ok) throw new Error('Falha ao carregar conteúdo');
-
   state.content = payload.data;
   state.products = payload.data.products || [];
   renderAll();
@@ -213,176 +156,114 @@ function renderAll() {
 
 function renderBrand() {
   const { settings } = state.content;
-  setText('brandName', settings.siteName);
-  setText('brandTagline', settings.tagline);
-  setText('footerBrandName', settings.siteName);
-  document.title = `Peças para ARLA 32, Sensor NOx e Sistema SCR | ARLATEM`;
+  document.getElementById('brandName').textContent = settings.siteName;
+  document.getElementById('brandTagline').textContent = settings.tagline;
+  document.getElementById('footerBrandName').textContent = settings.siteName;
+  document.title = `${settings.siteName} | Catálogo Profissional`;
 }
 
 function renderHero() {
   const { hero } = state.content;
-
-  setText('heroEyebrow', hero.eyebrow);
-  setText('heroTitle', hero.title);
-  setText('heroSubtitle', hero.subtitle);
-
-  const heroImage = byId('heroImage');
-  if (heroImage) heroImage.src = hero.backgroundImage;
-
-  if (refs.heroSearch) refs.heroSearch.placeholder = hero.searchPlaceholder;
-
-  setText('productCountBadge', `+${state.products.length}`);
+  document.getElementById('heroEyebrow').textContent = hero.eyebrow;
+  document.getElementById('heroTitle').textContent = hero.title;
+  document.getElementById('heroSubtitle').textContent = hero.subtitle;
+  document.getElementById('heroImage').src = hero.backgroundImage;
+  refs.heroSearch.placeholder = hero.searchPlaceholder;
+  document.getElementById('productCountBadge').textContent = `+${state.products.length}`;
 
   const tags = ['Sensor NOx', 'Bomba ARLA', 'Catalisador', 'Dosador', 'Filtro', 'Módulo'];
-  setHtml(
-    'searchTags',
-    tags.map((tag) => `<button type="button" class="tag-pill search-chip">${tag}</button>`).join('')
-  );
+  document.getElementById('searchTags').innerHTML = tags
+    .map((tag) => `<button type="button" class="tag-pill search-chip">${tag}</button>`)
+    .join('');
 
-  setWhatsAppLink(byId('navWhatsapp'), 'Olá! Quero solicitar um orçamento na ARLATEM.');
-  setWhatsAppLink(byId('heroWhatsapp'), 'Olá! Quero solicitar um orçamento para peças do sistema de ARLA.');
+  setWhatsAppLink(document.getElementById('navWhatsapp'), 'Olá! Quero solicitar um orçamento na ARLATEM.');
+  setWhatsAppLink(document.getElementById('heroWhatsapp'), 'Olá! Quero solicitar um orçamento para peças do sistema de ARLA.');
+}
+
+function renderHighlights() {
+  const list = state.content.highlights || [];
+  document.getElementById('highlightsList').innerHTML = list
+    .map((item) => `<div class="quick-item"><span>✔</span> ${item}</div>`)
+    .join('');
+}
+
+function renderCategories() {
+  const categories = state.content.categories || [];
+  document.getElementById('categoryGrid').innerHTML = categories.map((category, index) => `
+    <a class="category-card reveal ${index % 3 === 1 ? 'delay-1' : index % 3 === 2 ? 'delay-2' : ''}" href="/catalogo.html?categoria=${encodeURIComponent(category.name)}">
+      <span class="icon-wrap">${iconMarkup(category.icon)}</span>
+      <strong>${category.name}</strong>
+      <small>${category.description}</small>
+    </a>
+  `).join('');
 
   document.querySelectorAll('.search-chip').forEach((chip) => {
     chip.addEventListener('click', () => applySearchTerm(chip.textContent.trim()));
   });
 }
 
-function renderHighlights() {
-  const list = state.content.highlights || [];
-  setHtml(
-    'highlightsList',
-    list.map((item) => `<div class="quick-item"><span>✔</span> ${item}</div>`).join('')
-  );
-}
-
-function renderCategories() {
-  const categories = state.content.categories || [];
-
-  setHtml(
-    'categoryGrid',
-    categories
-      .map(
-        (category, index) => `
-      <a class="category-card reveal ${index % 3 === 1 ? 'delay-1' : index % 3 === 2 ? 'delay-2' : ''}" href="/catalogo.html?categoria=${encodeURIComponent(category.name)}">
-        <span class="icon-wrap">${iconMarkup(category.icon)}</span>
-        <strong>${category.name}</strong>
-        <small>${category.description}</small>
-      </a>
-    `
-      )
-      .join('')
-  );
-}
-
 function renderBrands() {
   const brands = state.content.brands || [];
-  setHtml('brandGrid', brands.map((brand) => `<div class="brand-pill">${brand.name}</div>`).join(''));
+  document.getElementById('brandGrid').innerHTML = brands.map((brand) => `<div class="brand-pill">${brand.name}</div>`).join('');
 }
 
 function renderBenefits() {
   const benefits = state.content.benefits || [];
-  setHtml(
-    'benefitsGrid',
-    benefits
-      .map(
-        (item, index) => `
-      <article class="benefit-card glass-card reveal ${index % 3 === 1 ? 'delay-1' : index % 3 === 2 ? 'delay-2' : ''}">
-        <span class="icon-wrap">${iconMarkup(item.icon)}</span>
-        <h3>${item.title}</h3>
-        <p>${item.text}</p>
-      </article>
-    `
-      )
-      .join('')
-  );
+  document.getElementById('benefitsGrid').innerHTML = benefits.map((item, index) => `
+    <article class="benefit-card glass-card reveal ${index % 3 === 1 ? 'delay-1' : index % 3 === 2 ? 'delay-2' : ''}">
+      <span class="icon-wrap">${iconMarkup(item.icon)}</span>
+      <h3>${item.title}</h3>
+      <p>${item.text}</p>
+    </article>
+  `).join('');
 }
 
 function renderBanner() {
   const { banner } = state.content;
-  setText('bannerEyebrow', banner.eyebrow);
-  setText('bannerTitle', banner.title);
-  setText('bannerSubtitle', banner.subtitle);
-  setWhatsAppLink(byId('bannerWhatsapp'), 'Olá! Não encontrei minha peça no catálogo e preciso de ajuda para localizar.');
+  document.getElementById('bannerEyebrow').textContent = banner.eyebrow;
+  document.getElementById('bannerTitle').textContent = banner.title;
+  document.getElementById('bannerSubtitle').textContent = banner.subtitle;
+  setWhatsAppLink(document.getElementById('bannerWhatsapp'), 'Olá! Não encontrei minha peça no catálogo e preciso de ajuda para localizar.');
 }
 
 function renderAbout() {
   const { about } = state.content;
-  setText('aboutTitle', about.title);
-  setText('aboutParagraph1', about.paragraph1);
-  setText('aboutParagraph2', about.paragraph2);
-
-  setHtml(
-    'aboutPoints',
-    (about.points || []).map((item) => `<div class="about-point">${item}</div>`).join('')
-  );
-
-  setHtml(
-    'aboutSpecs',
-    (about.specs || [])
-      .map((spec) => `<div class="spec-line"><span>${spec.label}</span><strong>${spec.value}</strong></div>`)
-      .join('')
-  );
+  document.getElementById('aboutTitle').textContent = about.title;
+  document.getElementById('aboutParagraph1').textContent = about.paragraph1;
+  document.getElementById('aboutParagraph2').textContent = about.paragraph2;
+  document.getElementById('aboutPoints').innerHTML = (about.points || []).map((item) => `<div class="about-point">${item}</div>`).join('');
+  document.getElementById('aboutSpecs').innerHTML = (about.specs || []).map((spec) => `<div class="spec-line"><span>${spec.label}</span><strong>${spec.value}</strong></div>`).join('');
 }
 
 function renderBlog() {
   const blog = state.content.blog || [];
-  setHtml(
-    'blogGrid',
-    blog
-      .map(
-        (item, index) => `
-      <article class="blog-card reveal ${index % 3 === 1 ? 'delay-1' : index % 3 === 2 ? 'delay-2' : ''}">
-        <span class="blog-tag">${item.tag}</span>
-        <h3>${item.title}</h3>
-        <p>${item.excerpt}</p>
-        <a href="#contato">Ler mais</a>
-      </article>
-    `
-      )
-      .join('')
-  );
+  document.getElementById('blogGrid').innerHTML = blog.map((item, index) => `
+    <article class="blog-card reveal ${index % 3 === 1 ? 'delay-1' : index % 3 === 2 ? 'delay-2' : ''}">
+      <span class="blog-tag">${item.tag}</span>
+      <h3>${item.title}</h3>
+      <p>${item.excerpt}</p>
+      <a href="#contato">Ler mais</a>
+    </article>
+  `).join('');
 }
 
 function renderFaq() {
   const faq = state.content.faq || [];
-  setHtml(
-    'faqList',
-    faq
-      .map(
-        (item, index) => `
-      <details class="faq-item reveal ${index % 3 === 1 ? 'delay-1' : index % 3 === 2 ? 'delay-2' : ''}" ${index === 0 ? 'open' : ''}>
-        <summary>${item.question}</summary>
-        <p>${item.answer}</p>
-      </details>
-    `
-      )
-      .join('')
-  );
+  document.getElementById('faqList').innerHTML = faq.map((item, index) => `
+    <details class="faq-item reveal ${index % 3 === 1 ? 'delay-1' : index % 3 === 2 ? 'delay-2' : ''}" ${index === 0 ? 'open' : ''}>
+      <summary>${item.question}</summary>
+      <p>${item.answer}</p>
+    </details>
+  `).join('');
 }
 
 function uniqueValues(field) {
-  return [...new Set(state.products.map((product) => product[field]).filter(Boolean))].sort((a, b) =>
-    String(a).localeCompare(String(b), 'pt-BR')
-  );
+  return [...new Set(state.products.map((product) => product[field]).filter(Boolean))].sort((a, b) => String(a).localeCompare(String(b), 'pt-BR'));
 }
 
 function fillSelect(select, values) {
-  if (!select) return;
-
-  select.innerHTML = `<option value="">${
-    select.id === 'filterBrand'
-      ? 'Todas'
-      : select.id === 'filterCategory'
-      ? 'Todas'
-      : select.id === 'filterMontadora'
-      ? 'Todas'
-      : 'Todos'
-  }</option>`;
-
-  if (select.id === 'filterAvailability') {
-    select.innerHTML = '<option value="">Todas</option>';
-  }
-
+  select.innerHTML = `<option value="">${select.id === 'filterBrand' ? 'Todas' : select.id === 'filterCategory' ? 'Todas' : select.id === 'filterMontadora' ? 'Todas' : 'Todos'}</option>`;
+  if (select.id === 'filterAvailability') select.innerHTML = '<option value="">Todas</option>';
   values.forEach((value) => {
     const option = document.createElement('option');
     option.value = value;
@@ -404,371 +285,7 @@ function setupFilters() {
 
 function renderProducts() {
   const results = getFilteredProducts();
-
-  setText('resultCount', `${results.length} produto${results.length === 1 ? '' : 's'}`);
+  refs.resultCount.textContent = `${results.length} produto${results.length === 1 ? '' : 's'}`;
   renderActiveFilters();
 
   if (!results.length) {
-    setHtml(
-      'productGrid',
-      `
-      <div class="no-results">
-        <h3>Nenhum item encontrado</h3>
-        <p>Tente ajustar os filtros, pesquisar por código ou solicitar ajuda pelo WhatsApp.</p>
-        <a class="btn btn-primary" href="${buildWhatsAppLink('Olá! Não encontrei a peça desejada no catálogo e preciso de ajuda.')}" target="_blank" rel="noopener noreferrer">Solicitar ajuda</a>
-      </div>
-    `
-    );
-    return;
-  }
-
-  setHtml(
-    'productGrid',
-    results
-      .map(
-        (product) => `
-      <article class="product-card reveal visible">
-        <div class="product-media">
-          <img src="${productImage(product)}" alt="${product.name}" loading="lazy" />
-          <span class="product-badge">${product.availability || 'Consulte'}</span>
-        </div>
-        <div class="product-body">
-          <h3>${product.name}</h3>
-          <div class="product-meta">
-            <div class="meta-row"><span>Código</span><strong>${product.code || '-'}</strong></div>
-            <div class="meta-row"><span>Marca</span><strong>${product.brand || '-'}</strong></div>
-            <div class="meta-row"><span>Compatibilidade</span><strong>${product.compatibility || '-'}</strong></div>
-          </div>
-          <div class="product-tags">
-            ${(product.tags || []).map((tag) => `<span class="tag-pill">${tag}</span>`).join('')}
-          </div>
-          <div class="product-actions">
-            <button class="btn-card details-trigger" data-id="${product.id}">Ver detalhes</button>
-            <a class="btn-card primary" href="${buildWhatsAppLink(`Olá! Quero solicitar orçamento para ${product.name} (${product.code || ''}).`)}" target="_blank" rel="noopener noreferrer">Solicitar orçamento</a>
-          </div>
-        </div>
-      </article>
-    `
-      )
-      .join('')
-  );
-
-  bindDetailButtons();
-}
-
-function getFilteredProducts() {
-  return state.products.filter((product) => {
-    const haystack = [
-      product.name,
-      product.code,
-      product.brand,
-      product.compatibility,
-      product.category,
-      product.model,
-      product.montadora,
-      product.year,
-      product.motor,
-      product.manufacturer,
-      product.availability,
-      ...(product.tags || [])
-    ]
-      .join(' ')
-      .toLowerCase();
-
-    const searchMatch = !state.search || haystack.includes(state.search.toLowerCase());
-    const brandMatch = !state.brand || product.brand === state.brand;
-    const categoryMatch = !state.category || product.category === state.category;
-    const montadoraMatch = !state.montadora || product.montadora === state.montadora;
-    const modelMatch = !state.model || product.model === state.model;
-    const yearMatch = !state.year || product.year === state.year;
-    const motorMatch = !state.motor || product.motor === state.motor;
-    const manufacturerMatch = !state.manufacturer || product.manufacturer === state.manufacturer;
-    const availabilityMatch = !state.availability || product.availability === state.availability;
-
-    return searchMatch && brandMatch && categoryMatch && montadoraMatch && modelMatch && yearMatch && motorMatch && manufacturerMatch && availabilityMatch;
-  });
-}
-
-function renderActiveFilters() {
-  const labelMap = {
-    search: 'Busca',
-    brand: 'Marca',
-    category: 'Categoria',
-    montadora: 'Montadora',
-    model: 'Modelo',
-    year: 'Ano',
-    motor: 'Motor',
-    manufacturer: 'Fabricante',
-    availability: 'Disponibilidade'
-  };
-
-  const html = Object.entries(state)
-    .filter(([key, value]) => key !== 'content' && key !== 'products' && value)
-    .map(([key, value]) => `<span class="tag-pill">${labelMap[key]}: ${value}</span>`)
-    .join('');
-
-  setHtml('activeFilters', html);
-}
-
-function applySearchTerm(term) {
-  if (refs.catalogSearch) refs.catalogSearch.value = term;
-  if (refs.heroSearch) refs.heroSearch.value = term;
-  state.search = term;
-  renderProducts();
-  document.getElementById('produtos')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function syncStateFromInputs() {
-  state.search = refs.catalogSearch ? refs.catalogSearch.value.trim() : '';
-  filterFields.forEach((field) => {
-    state[field] = filterElements[field] ? filterElements[field].value : '';
-  });
-}
-
-function resetFilters() {
-  if (refs.catalogSearch) refs.catalogSearch.value = '';
-  if (refs.heroSearch) refs.heroSearch.value = '';
-  state.search = '';
-
-  filterFields.forEach((field) => {
-    state[field] = '';
-    if (filterElements[field]) filterElements[field].value = '';
-  });
-
-  renderProducts();
-}
-
-function bindFilterEvents() {
-  if (refs.catalogSearch) {
-    refs.catalogSearch.addEventListener('input', () => {
-      syncStateFromInputs();
-      renderProducts();
-    });
-  }
-
-  Object.entries(filterElements).forEach(([field, element]) => {
-    if (!element) return;
-    element.addEventListener('change', () => {
-      state[field] = element.value;
-      renderProducts();
-    });
-  });
-
-  if (refs.heroSearchForm) {
-    refs.heroSearchForm.addEventListener('submit', (event) => {
-      event.preventDefault();
-      applySearchTerm(refs.heroSearch ? refs.heroSearch.value.trim() : '');
-    });
-  }
-
-  if (refs.clearFilters) {
-    refs.clearFilters.addEventListener('click', resetFilters);
-  }
-}
-
-function openProductModal(productId) {
-  const product = state.products.find((item) => String(item.id) === String(productId));
-  if (!product) return;
-
-  if (refs.modalTitle) refs.modalTitle.textContent = product.name;
-
-  if (refs.modalBody) {
-    refs.modalBody.innerHTML = `
-      <div class="modal-grid">
-        <div class="modal-image"><img src="${productImage(product)}" alt="${product.name}" /></div>
-        <div class="modal-content">
-          <p>${product.description || ''}</p>
-          <div class="modal-specs">
-            <div class="modal-spec"><span>Código</span><strong>${product.code || '-'}</strong></div>
-            <div class="modal-spec"><span>Marca</span><strong>${product.brand || '-'}</strong></div>
-            <div class="modal-spec"><span>Categoria</span><strong>${product.category || '-'}</strong></div>
-            <div class="modal-spec"><span>Compatibilidade</span><strong>${product.compatibility || '-'}</strong></div>
-            <div class="modal-spec"><span>Modelo</span><strong>${product.model || '-'}</strong></div>
-            <div class="modal-spec"><span>Montadora</span><strong>${product.montadora || '-'}</strong></div>
-            <div class="modal-spec"><span>Motor</span><strong>${product.motor || '-'}</strong></div>
-            <div class="modal-spec"><span>Disponibilidade</span><strong>${product.availability || '-'}</strong></div>
-            <div class="modal-spec"><span>Aplicações</span><strong>${product.applications || '-'}</strong></div>
-            <div class="modal-spec"><span>Garantia</span><strong>${product.warranty || '-'}</strong></div>
-          </div>
-          <div class="product-tags">${(product.tags || []).map((tag) => `<span class="tag-pill">${tag}</span>`).join('')}</div>
-          <div class="modal-actions">
-            <a class="btn btn-primary" href="${buildWhatsAppLink(`Olá! Quero orçamento para ${product.name} (${product.code || ''}).`)}" target="_blank" rel="noopener noreferrer">Solicitar orçamento</a>
-            <a class="btn btn-secondary" href="#produtos">Continuar navegando</a>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-
-  if (refs.productModal && typeof refs.productModal.showModal === 'function') {
-    refs.productModal.showModal();
-  }
-}
-
-function bindDetailButtons() {
-  document.querySelectorAll('.details-trigger').forEach((button) => {
-    button.addEventListener('click', () => openProductModal(button.dataset.id));
-  });
-}
-
-function renderTestimonials() {
-  testimonialIndex = 0;
-  showTestimonial();
-}
-
-function showTestimonial() {
-  const testimonials = state.content.testimonials || [];
-  if (!testimonials.length || !refs.testimonialsTrack) return;
-
-  const testimonial = testimonials[testimonialIndex];
-  refs.testimonialsTrack.innerHTML = `
-    <article class="testimonial-card">
-      <div class="stars">${'★'.repeat(Number(testimonial.stars || 5))}</div>
-      <p>“${testimonial.quote}”</p>
-      <div class="testimonial-author">
-        <strong>${testimonial.author}</strong>
-        <span>${testimonial.role}</span>
-      </div>
-    </article>
-  `;
-}
-
-function nextTestimonial() {
-  const total = (state.content.testimonials || []).length || 1;
-  testimonialIndex = (testimonialIndex + 1) % total;
-  showTestimonial();
-}
-
-function prevTestimonial() {
-  const total = (state.content.testimonials || []).length || 1;
-  testimonialIndex = (testimonialIndex - 1 + total) % total;
-  showTestimonial();
-}
-
-function startTestimonials() {
-  if (refs.nextTestimonial) {
-    refs.nextTestimonial.addEventListener('click', () => {
-      nextTestimonial();
-      restartTestimonials();
-    });
-  }
-
-  if (refs.prevTestimonial) {
-    refs.prevTestimonial.addEventListener('click', () => {
-      prevTestimonial();
-      restartTestimonials();
-    });
-  }
-
-  restartTestimonials();
-}
-
-function restartTestimonials() {
-  clearInterval(testimonialTimer);
-  testimonialTimer = setInterval(nextTestimonial, 5000);
-}
-
-function setupObserver() {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    },
-    { threshold: 0.14 }
-  );
-
-  document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
-}
-
-function handleHeader() {
-  window.addEventListener('scroll', () => {
-    if (refs.header) refs.header.classList.toggle('scrolled', window.scrollY > 10);
-  });
-}
-
-function handleMenu() {
-  if (refs.menuToggle) {
-    refs.menuToggle.addEventListener('click', () => document.body.classList.toggle('menu-open'));
-  }
-
-  if (refs.nav) {
-    refs.nav.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => document.body.classList.remove('menu-open'));
-    });
-  }
-}
-
-function handleModal() {
-  if (refs.closeModal) {
-    refs.closeModal.addEventListener('click', () => refs.productModal.close());
-  }
-
-  if (refs.productModal) {
-    refs.productModal.addEventListener('click', (event) => {
-      const rect = refs.productModal.getBoundingClientRect();
-      const inside =
-        rect.top <= event.clientY &&
-        event.clientY <= rect.bottom &&
-        rect.left <= event.clientX &&
-        event.clientX <= rect.right;
-
-      if (!inside) refs.productModal.close();
-    });
-  }
-}
-
-function setupMisc() {
-  const { settings } = state.content;
-
-  setText('currentYear', new Date().getFullYear());
-  setText('contactWhatsapp', `WhatsApp: ${formatPhone(settings.whatsappNumber)}`);
-  setWhatsAppLink(byId('contactWhatsapp'), 'Olá! Preciso de um orçamento na ARLATEM.');
-  setWhatsAppLink(byId('footerWhatsapp'), 'Olá! Quero falar com a ARLATEM.');
-  setWhatsAppLink(byId('floatingWhatsapp'), 'Olá! Quero solicitar um orçamento para peças do sistema de ARLA.');
-
-  const email = byId('contactEmail');
-  if (email) {
-    email.textContent = settings.email;
-    email.href = `mailto:${settings.email}`;
-  }
-
-  const instagramLink = byId('instagramLink');
-  if (instagramLink) instagramLink.href = normalizeSocialUrl(settings.instagram, 'instagram');
-
-  const facebookLink = byId('facebookLink');
-  if (facebookLink) facebookLink.href = normalizeSocialUrl(settings.facebook, 'facebook');
-
-  setText('contactLocation', `${settings.location} • Atendimento em todo o Brasil`);
-  setText('contactHours', settings.hours);
-  setText('mapLocation', settings.location);
-  setText('copyrightText', settings.copyrightText);
-}
-
-function formatPhone(number) {
-  const digits = String(number || '').replace(/\D/g, '');
-  if (digits.length >= 12) {
-    return `(${digits.slice(2, 4)}) ${digits.slice(4, 9)}-${digits.slice(9, 13)}`;
-  }
-  return number || '(00) 00000-0000';
-}
-
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    if (refs.preloader) refs.preloader.classList.add('hidden');
-  }, 450);
-});
-
-document.addEventListener('DOMContentLoaded', async () => {
-  try {
-    await loadData();
-    bindFilterEvents();
-    startTestimonials();
-    handleHeader();
-    handleMenu();
-    handleModal();
-  } catch (error) {
-    console.error(error);
-    alert('Não foi possível carregar o site.');
-  }
-});
