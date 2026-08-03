@@ -1,9 +1,62 @@
 {
   "version": 2,
+  "trailingSlash": true,
   "rewrites": [
     {
       "source": "/acesso-tecnico-arlatem",
       "destination": "/admin.html"
+    },
+    {
+      "source": "/bombas-arla/:match*",
+      "destination": "/categoria-modelo.html?categoria=Bombas%20ARLA"
+    },
+    {
+      "source": "/sensores-nox/:match*",
+      "destination": "/categoria-modelo.html?categoria=Sensores%20NOx"
+    },
+    {
+      "source": "/catalisadores/:match*",
+      "destination": "/categoria-modelo.html?categoria=Catalisadores"
+    },
+    {
+      "source": "/dosadores/:match*",
+      "destination": "/categoria-modelo.html?categoria=Dosadores"
+    },
+    {
+      "source": "/filtros/:match*",
+      "destination": "/categoria-modelo.html?categoria=Filtros"
+    },
+    {
+      "source": "/modulos/:match*",
+      "destination": "/categoria-modelo.html?categoria=Módulos"
+    },
+    {
+      "source": "/chicotes/:match*",
+      "destination": "/categoria-modelo.html?categoria=Chicotes"
+    },
+    {
+      "source": "/reservatorios/:match*",
+      "destination": "/categoria-modelo.html?categoria=Reservatórios"
+    },
+    {
+      "source": "/tubulacoes/:match*",
+      "destination": "/categoria-modelo.html?categoria=Tubulações"
+    },
+    {
+      "source": "/pecas-pneumaticas/:match*",
+      "destination": "/categoria-modelo.html?categoria=Peças%20Pneumáticas"
+    },
+    {
+      "source": "/kits-de-reparo/:match*",
+      "destination": "/categoria-modelo.html?categoria=Kits%20de%20Reparo"
+    },
+    {
+      "source": "/acessorios/:match*",
+      "destination": "/categoria-modelo.html?categoria=Acessórios"
+    },
+    {
+      "source": "/arla/:match*",
+      "destination": "/arla.html"
     }
   ]
 }
