@@ -153,12 +153,16 @@ function renderAll() {
   setupMisc();
   setupObserver();
 }
-
 function renderBrand() {
   const { settings } = state.content;
-  document.getElementById('brandName').textContent = settings.siteName;
-  document.getElementById('brandTagline').textContent = settings.tagline;
-  document.getElementById('footerBrandName').textContent = settings.siteName;
+  const brandName = document.getElementById('brandName');
+  const brandTagline = document.getElementById('brandTagline');
+  const footerBrandName = document.getElementById('footerBrandName');
+
+  if (brandName) brandName.textContent = settings.siteName;
+  if (brandTagline) brandTagline.textContent = settings.tagline;
+  if (footerBrandName) footerBrandName.textContent = settings.siteName;
+
   document.title = `${settings.siteName} | Catálogo Profissional`;
 }
 
