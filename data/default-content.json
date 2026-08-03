@@ -12,13 +12,13 @@
   "adminPath": "/acesso-tecnico-arlatem"
 }
   },
-  "hero": {
-    "eyebrow": "A maior distribuidora de peças ARLA de Minas Gerais",
-    "title": "Peças para ARLA 32, Sistema SCR e Catalisadores em Contagem, Belo Horizonte e Região Metropolitana",
-    "subtitle": "Sensores NOx, bombas dosadoras, módulos eletrônicos, catalisadores e componentes de pós-tratamento diesel para linha pesada, com estoque local em Contagem/MG e envio para Belo Horizonte, Betim, Nova Lima, RMBH e todo o Brasil.",
-    "backgroundImage": "/uploads/hero-trucks-arla.png",
-    "searchPlaceholder": "Pesquisar por Sensor NOx, Bomba ARLA, Catalisador, Dosador, Chicote, Filtro, Módulo, Válvula..."
-  },
+"hero": {
+  "eyebrow": "A maior distribuidora de peças ARLA de Minas Gerais",
+  "title": "Peças para ARLA 32, Sistema SCR e Catalisadores em Contagem, Belo Horizonte e Região Metropolitana",
+  "subtitle": "Sensores NOx, bombas dosadoras, módulos eletrônicos, catalisadores e componentes de pós-tratamento diesel para linha pesada, com estoque local em Contagem/MG e envio para Belo Horizonte, Betim, Nova Lima, RMBH e todo o Brasil.",
+  "backgroundImage": "/uploads/hero-trucks-arla.png",
+  "searchPlaceholder": "Pesquisar por Sensor NOx, Bomba ARLA, Catalisador, Dosador, Chicote, Filtro, Módulo, Válvula..."
+}
   "highlights": [
     "Peças Originais",
     "Atendimento Técnico Especializado",
