@@ -189,7 +189,7 @@ function renderCategories() {
     categories
       .map(
         (category, index) => `
-      <a class="category-card reveal ${index % 3 === 1 ? 'delay-1' : index % 3 === 2 ? 'delay-2' : ''}" href="/${categorySlug(category.name)}/">
+      <a class="category-card reveal ${index % 3 === 1 ? 'delay-1' : index % 3 === 2 ? 'delay-2' : ''}" href="/catalogo.html?categoria=${encodeURIComponent(category.name)}">
         <span class="icon-wrap">${iconMarkup(category.icon)}</span>
         <strong>${category.name}</strong>
         <small>${category.description}</small>
@@ -198,40 +198,6 @@ function renderCategories() {
       )
       .join('')
   );
-}
-
-  return map[name] || name
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/\s+/g, '-');
-}
-
-function renderCategories() {
-  const categories = state.content.categories || [];
-
-  setHtml(
-    'categoryGrid',
-    categories
-      .map(
-        (category, index) => `
-      <a class="category-card reveal ${index % 3 === 1 ? 'delay-1' : index % 3 === 2 ? 'delay-2' : ''}" href="/${categorySlug(category.name)}.html">
-        <span class="icon-wrap">${iconMarkup(category.icon)}</span>
-        <strong>${category.name}</strong>
-        <small>${category.description}</small>
-      </a>
-    `
-      )
-      .join('')
-  );
-}
-  };
-
-  return map[name] || name
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/\s+/g, '-');
 }
 
 async function loadData() {
