@@ -199,7 +199,6 @@ function renderCategories() {
       .join('')
   );
 }
-  };
 
   return map[name] || name
     .toLowerCase()
