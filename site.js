@@ -158,6 +158,7 @@ function setWhatsAppLink(element, message) {
   element.target = '_blank';
   element.rel = 'noopener noreferrer';
 }
+
 function categorySlug(name) {
   const map = {
     'Bombas ARLA': 'bombas-arla',
@@ -179,25 +180,6 @@ function categorySlug(name) {
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/\s+/g, '-');
-}
-
-function renderCategories() {
-  const categories = state.content.categories || [];
-
-  setHtml(
-    'categoryGrid',
-    categories
-      .map(
-        (category, index) => `
-      <a class="category-card reveal ${index % 3 === 1 ? 'delay-1' : index % 3 === 2 ? 'delay-2' : ''}" href="/catalogo.html?categoria=${encodeURIComponent(category.name)}">
-        <span class="icon-wrap">${iconMarkup(category.icon)}</span>
-        <strong>${category.name}</strong>
-        <small>${category.description}</small>
-      </a>
-    `
-      )
-      .join('')
-  );
 }
 
 async function loadData() {
@@ -272,6 +254,7 @@ function renderHighlights() {
     list.map((item) => `<div class="quick-item"><span>✔</span> ${item}</div>`).join('')
   );
 }
+
 function renderCategories() {
   const categories = state.content.categories || [];
 
@@ -290,6 +273,7 @@ function renderCategories() {
       .join('')
   );
 }
+
 function renderBrands() {
   const brands = state.content.brands || [];
   setHtml('brandGrid', brands.map((brand) => `<div class="brand-pill">${brand.name}</div>`).join(''));
