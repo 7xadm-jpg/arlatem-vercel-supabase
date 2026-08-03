@@ -170,38 +170,38 @@
       }
     ]
   },
-  "blog": [
-    {
-      "tag": "SCR",
-      "title": "Como funciona o sistema SCR em caminhões diesel",
-      "excerpt": "Entenda o papel do ARLA 32, dos sensores NOx, dos catalisadores e dos módulos eletrônicos no controle de emissões."
-    },
-    {
-      "tag": "Sensor NOx",
-      "title": "Quando trocar o Sensor NOx",
-      "excerpt": "Veja os sinais mais comuns de falha, sintomas no painel e como identificar problemas no sistema de emissões."
-    },
-    {
-      "tag": "Diagnóstico",
-      "title": "Como identificar falhas no ARLA 32",
-      "excerpt": "Aprenda a relacionar código, aplicação e sintomas para localizar a peça correta com mais segurança."
-    },
-    {
-      "tag": "Catalisador",
-      "title": "Catalisador entupido: principais causas",
-      "excerpt": "Descubra os sinais de obstrução no catalisador SCR e o impacto disso no desempenho do caminhão."
-    },
-    {
-      "tag": "SCR",
-      "title": "Erros mais comuns do sistema SCR",
-      "excerpt": "Falhas em sensores, dosadores, bombas, módulos e componentes que comprometem o pós-tratamento diesel."
-    },
-    {
-      "tag": "Manutenção",
-      "title": "Manutenção preventiva em pós-tratamento diesel",
-      "excerpt": "Boas práticas para aumentar a vida útil dos componentes e evitar paradas não programadas na operação."
-    }
-  ],
+"blog": [
+  {
+    "tag": "SCR",
+    "title": "Como funciona o sistema SCR em caminhões diesel",
+    "excerpt": "Entenda o papel do ARLA 32, dos sensores NOx, dos catalisadores e dos módulos eletrônicos no controle de emissões."
+  },
+  {
+    "tag": "Sensor NOx",
+    "title": "Quando trocar o Sensor NOx",
+    "excerpt": "Veja os sinais mais comuns de falha, sintomas no painel e como identificar problemas no sistema de emissões."
+  },
+  {
+    "tag": "Diagnóstico",
+    "title": "Como identificar falhas no ARLA 32",
+    "excerpt": "Aprenda a relacionar código, aplicação e sintomas para localizar a peça correta com mais segurança."
+  },
+  {
+    "tag": "Catalisador",
+    "title": "Catalisador entupido: principais causas",
+    "excerpt": "Descubra os sinais de obstrução no catalisador SCR e o impacto disso no desempenho do caminhão."
+  },
+  {
+    "tag": "SCR",
+    "title": "Erros mais comuns do sistema SCR",
+    "excerpt": "Falhas em sensores, dosadores, bombas, módulos e componentes que comprometem o pós-tratamento diesel."
+  },
+  {
+    "tag": "Manutenção",
+    "title": "Manutenção preventiva em pós-tratamento diesel",
+    "excerpt": "Boas práticas para aumentar a vida útil dos componentes e evitar paradas não programadas na operação."
+  }
+]
   "testimonials": [
     {
       "quote": "Encontramos o sensor NOx certo em poucos minutos. O atendimento foi técnico, rápido e muito objetivo para a necessidade da oficina.",
@@ -222,26 +222,25 @@
       "stars": 5
     }
   ],
-  "faq": [
-    {
-      "question": "A ARLATEM entrega em Belo Horizonte e na Região Metropolitana?",
-      "answer": "Sim. Atendemos Contagem, Belo Horizonte, Betim, Nova Lima e toda a Região Metropolitana de BH, além de envios para Minas Gerais e todo o Brasil."
-    },
-    {
-      "question": "Quais peças do sistema SCR vocês têm em estoque?",
-      "answer": "Trabalhamos com sensores NOx, bombas dosadoras, catalisadores, módulos eletrônicos, filtros, chicotes e componentes de reparo para linha pesada."
-    },
-    {
-      "question": "Vocês trabalham com orçamento por WhatsApp?",
-      "answer": "Sim. Basta enviar o nome da peça, código, montadora, modelo ou aplicação para receber atendimento rápido e direcionado."
-    },
-    {
-      "question": "A ARLATEM vende para oficinas e frotistas?",
-      "answer": "Sim. Atendemos oficinas, mecânicos, transportadoras, frotistas e compradores técnicos de manutenção diesel."
-    },
-    {
-      "question": "Vocês enviam para todo o Brasil?",
-      "answer": "Sim. A ARLATEM atende clientes de todo o país com suporte comercial ágil e logística voltada para peças de linha pesada."
-    }
-  ]
-}
+ "faq": [
+  {
+    "question": "A ARLATEM entrega em Belo Horizonte e na Região Metropolitana?",
+    "answer": "Sim. Atendemos Contagem, Belo Horizonte, Betim, Nova Lima e toda a Região Metropolitana de BH, além de envios para Minas Gerais e todo o Brasil."
+  },
+  {
+    "question": "Quais peças do sistema SCR vocês têm em estoque?",
+    "answer": "Trabalhamos com sensores NOx, bombas dosadoras, catalisadores, módulos eletrônicos, filtros, chicotes e componentes de reparo para linha pesada."
+  },
+  {
+    "question": "Vocês trabalham com orçamento por WhatsApp?",
+    "answer": "Sim. Basta enviar o nome da peça, código, montadora, modelo ou aplicação para receber atendimento rápido e direcionado."
+  },
+  {
+    "question": "A ARLATEM vende para oficinas e frotistas?",
+    "answer": "Sim. Atendemos oficinas, mecânicos, transportadoras, frotistas e compradores técnicos de manutenção diesel."
+  },
+  {
+    "question": "Vocês enviam para todo o Brasil?",
+    "answer": "Sim. A ARLATEM atende clientes de todo o país com suporte comercial ágil e logística voltada para peças de linha pesada."
+  }
+]
