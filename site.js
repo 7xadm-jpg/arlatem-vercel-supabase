@@ -216,7 +216,7 @@ function renderBrand() {
   setText('brandName', settings.siteName);
   setText('brandTagline', settings.tagline);
   setText('footerBrandName', settings.siteName);
-  document.title = `Peças para ARLA 32 e Sistema SCR em Contagem e BH | ARLATEM`;
+  document.title = `Peças para ARLA 32, Sensor NOx e Sistema SCR | ARLATEM`;
 }
 
 function renderHero() {
