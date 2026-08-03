@@ -289,3 +289,273 @@ function renderProducts() {
   renderActiveFilters();
 
   if (!results.length) {
+    refs.productGrid.innerHTML = `
+      <div class="no-results">
+        <h3>Nenhum item encontrado</h3>
+        <p>Tente ajustar os filtros, pesquisar por código ou solicitar ajuda pelo WhatsApp.</p>
+        <a class="btn btn-primary" href="${buildWhatsAppLink('Olá! Não encontrei a peça desejada no catálogo e preciso de ajuda.')}" target="_blank" rel="noopener noreferrer">Solicitar ajuda</a>
+      </div>`;
+    return;
+  }
+
+  refs.productGrid.innerHTML = results.map((product) => `
+    <article class="product-card reveal visible">
+      <div class="product-media">
+        <img src="${productImage(product)}" alt="${product.name}" loading="lazy" />
+        <span class="product-badge">${product.availability || 'Consulte'}</span>
+      </div>
+      <div class="product-body">
+        <h3>${product.name}</h3>
+        <div class="product-meta">
+          <div class="meta-row"><span>Código</span><strong>${product.code || '-'}</strong></div>
+          <div class="meta-row"><span>Marca</span><strong>${product.brand || '-'}</strong></div>
+          <div class="meta-row"><span>Compatibilidade</span><strong>${product.compatibility || '-'}</strong></div>
+        </div>
+        <div class="product-tags">
+          ${(product.tags || []).map((tag) => `<span class="tag-pill">${tag}</span>`).join('')}
+        </div>
+        <div class="product-actions">
+          <button class="btn-card details-trigger" data-id="${product.id}">Ver detalhes</button>
+          <a class="btn-card primary" href="${buildWhatsAppLink(`Olá! Quero solicitar orçamento para ${product.name} (${product.code}).`)}" target="_blank" rel="noopener noreferrer">Solicitar orçamento</a>
+        </div>
+      </div>
+    </article>
+  `).join('');
+
+  bindDetailButtons();
+}
+
+function getFilteredProducts() {
+  return state.products.filter((product) => {
+    const haystack = [
+      product.name,
+      product.code,
+      product.brand,
+      product.compatibility,
+      product.category,
+      product.model,
+      product.montadora,
+      product.year,
+      product.motor,
+      product.manufacturer,
+      product.availability,
+      ...(product.tags || [])
+    ].join(' ').toLowerCase();
+
+    const searchMatch = !state.search || haystack.includes(state.search.toLowerCase());
+    const brandMatch = !state.brand || product.brand === state.brand;
+    const categoryMatch = !state.category || product.category === state.category;
+    const montadoraMatch = !state.montadora || product.montadora === state.montadora;
+    const modelMatch = !state.model || product.model === state.model;
+    const yearMatch = !state.year || product.year === state.year;
+    const motorMatch = !state.motor || product.motor === state.motor;
+    const manufacturerMatch = !state.manufacturer || product.manufacturer === state.manufacturer;
+    const availabilityMatch = !state.availability || product.availability === state.availability;
+    return searchMatch && brandMatch && categoryMatch && montadoraMatch && modelMatch && yearMatch && motorMatch && manufacturerMatch && availabilityMatch;
+  });
+}
+
+function renderActiveFilters() {
+  const labelMap = {
+    search: 'Busca',
+    brand: 'Marca',
+    category: 'Categoria',
+    montadora: 'Montadora',
+    model: 'Modelo',
+    year: 'Ano',
+    motor: 'Motor',
+    manufacturer: 'Fabricante',
+    availability: 'Disponibilidade'
+  };
+  refs.activeFilters.innerHTML = Object.entries(state)
+    .filter(([key, value]) => key !== 'content' && key !== 'products' && value)
+    .map(([key, value]) => `<span class="tag-pill">${labelMap[key]}: ${value}</span>`)
+    .join('');
+}
+
+function applySearchTerm(term) {
+  refs.catalogSearch.value = term;
+  refs.heroSearch.value = term;
+  state.search = term;
+  renderProducts();
+  document.getElementById('produtos').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function syncStateFromInputs() {
+  state.search = refs.catalogSearch.value.trim();
+  filterFields.forEach((field) => { state[field] = filterElements[field].value; });
+}
+
+function resetFilters() {
+  refs.catalogSearch.value = '';
+  refs.heroSearch.value = '';
+  state.search = '';
+  filterFields.forEach((field) => {
+    state[field] = '';
+    filterElements[field].value = '';
+  });
+  renderProducts();
+}
+
+function bindFilterEvents() {
+  refs.catalogSearch.addEventListener('input', () => { syncStateFromInputs(); renderProducts(); });
+  Object.entries(filterElements).forEach(([field, element]) => {
+    element.addEventListener('change', () => { state[field] = element.value; renderProducts(); });
+  });
+  refs.heroSearchForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    applySearchTerm(refs.heroSearch.value.trim());
+  });
+  refs.clearFilters.addEventListener('click', resetFilters);
+}
+
+function openProductModal(productId) {
+  const product = state.products.find((item) => String(item.id) === String(productId));
+  if (!product) return;
+  refs.modalTitle.textContent = product.name;
+  refs.modalBody.innerHTML = `
+    <div class="modal-grid">
+      <div class="modal-image"><img src="${productImage(product)}" alt="${product.name}" /></div>
+      <div class="modal-content">
+        <p>${product.description || ''}</p>
+        <div class="modal-specs">
+          <div class="modal-spec"><span>Código</span><strong>${product.code || '-'}</strong></div>
+          <div class="modal-spec"><span>Marca</span><strong>${product.brand || '-'}</strong></div>
+          <div class="modal-spec"><span>Categoria</span><strong>${product.category || '-'}</strong></div>
+          <div class="modal-spec"><span>Compatibilidade</span><strong>${product.compatibility || '-'}</strong></div>
+          <div class="modal-spec"><span>Modelo</span><strong>${product.model || '-'}</strong></div>
+          <div class="modal-spec"><span>Montadora</span><strong>${product.montadora || '-'}</strong></div>
+          <div class="modal-spec"><span>Motor</span><strong>${product.motor || '-'}</strong></div>
+          <div class="modal-spec"><span>Disponibilidade</span><strong>${product.availability || '-'}</strong></div>
+          <div class="modal-spec"><span>Aplicações</span><strong>${product.applications || '-'}</strong></div>
+          <div class="modal-spec"><span>Garantia</span><strong>${product.warranty || '-'}</strong></div>
+        </div>
+        <div class="product-tags">${(product.tags || []).map((tag) => `<span class="tag-pill">${tag}</span>`).join('')}</div>
+        <div class="modal-actions">
+          <a class="btn btn-primary" href="${buildWhatsAppLink(`Olá! Quero orçamento para ${product.name} (${product.code}).`)}" target="_blank" rel="noopener noreferrer">Solicitar orçamento</a>
+          <a class="btn btn-secondary" href="#produtos">Continuar navegando</a>
+        </div>
+      </div>
+    </div>`;
+  refs.productModal.showModal();
+}
+
+function bindDetailButtons() {
+  document.querySelectorAll('.details-trigger').forEach((button) => {
+    button.addEventListener('click', () => openProductModal(button.dataset.id));
+  });
+}
+
+function renderTestimonials() {
+  testimonialIndex = 0;
+  showTestimonial();
+}
+
+function showTestimonial() {
+  const testimonials = state.content.testimonials || [];
+  if (!testimonials.length) return;
+  const testimonial = testimonials[testimonialIndex];
+  refs.testimonialsTrack.innerHTML = `
+    <article class="testimonial-card">
+      <div class="stars">${'★'.repeat(Number(testimonial.stars || 5))}</div>
+      <p>“${testimonial.quote}”</p>
+      <div class="testimonial-author">
+        <strong>${testimonial.author}</strong>
+        <span>${testimonial.role}</span>
+      </div>
+    </article>`;
+}
+
+function nextTestimonial() {
+  const total = (state.content.testimonials || []).length || 1;
+  testimonialIndex = (testimonialIndex + 1) % total;
+  showTestimonial();
+}
+
+function prevTestimonial() {
+  const total = (state.content.testimonials || []).length || 1;
+  testimonialIndex = (testimonialIndex - 1 + total) % total;
+  showTestimonial();
+}
+
+function startTestimonials() {
+  refs.nextTestimonial.addEventListener('click', () => { nextTestimonial(); restartTestimonials(); });
+  refs.prevTestimonial.addEventListener('click', () => { prevTestimonial(); restartTestimonials(); });
+  restartTestimonials();
+}
+
+function restartTestimonials() {
+  clearInterval(testimonialTimer);
+  testimonialTimer = setInterval(nextTestimonial, 5000);
+}
+
+function setupObserver() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.14 });
+  document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+}
+
+function handleHeader() {
+  window.addEventListener('scroll', () => refs.header.classList.toggle('scrolled', window.scrollY > 10));
+}
+
+function handleMenu() {
+  refs.menuToggle.addEventListener('click', () => document.body.classList.toggle('menu-open'));
+  refs.nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => document.body.classList.remove('menu-open')));
+}
+
+function handleModal() {
+  refs.closeModal.addEventListener('click', () => refs.productModal.close());
+  refs.productModal.addEventListener('click', (event) => {
+    const rect = refs.productModal.getBoundingClientRect();
+    const inside = rect.top <= event.clientY && event.clientY <= rect.bottom && rect.left <= event.clientX && event.clientX <= rect.right;
+    if (!inside) refs.productModal.close();
+  });
+}
+
+function setupMisc() {
+  const { settings } = state.content;
+  document.getElementById('currentYear').textContent = new Date().getFullYear();
+  document.getElementById('contactWhatsapp').textContent = `WhatsApp: ${formatPhone(settings.whatsappNumber)}`;
+  setWhatsAppLink(document.getElementById('contactWhatsapp'), 'Olá! Preciso de um orçamento na ARLATEM.');
+  setWhatsAppLink(document.getElementById('footerWhatsapp'), 'Olá! Quero falar com a ARLATEM.');
+  setWhatsAppLink(document.getElementById('floatingWhatsapp'), 'Olá! Quero solicitar um orçamento para peças do sistema de ARLA.');
+  const email = document.getElementById('contactEmail');
+  email.textContent = settings.email;
+  email.href = `mailto:${settings.email}`;
+  document.getElementById('instagramLink').href = settings.instagram || '#';
+  document.getElementById('facebookLink').href = settings.facebook || '#';
+  document.getElementById('contactLocation').textContent = `${settings.location} • Atendimento em todo o Brasil`;
+  document.getElementById('contactHours').textContent = settings.hours;
+  document.getElementById('mapLocation').textContent = settings.location;
+  document.getElementById('copyrightText').textContent = settings.copyrightText;
+}
+
+function formatPhone(number) {
+  const digits = String(number || '').replace(/\D/g, '');
+  if (digits.length >= 12) {
+    return `(${digits.slice(2, 4)}) ${digits.slice(4, 9)}-${digits.slice(9, 13)}`;
+  }
+  return number || '(00) 00000-0000';
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    await loadData();
+    bindFilterEvents();
+    startTestimonials();
+    handleHeader();
+    handleMenu();
+    handleModal();
+  } catch (error) {
+    console.error(error);
+    alert('Não foi possível carregar o site.');
+  } finally {
+    setTimeout(() => {
+      if (refs.preloader) refs.preloader.classList.add('hidden');
+    }, 300);
+  }
+});
