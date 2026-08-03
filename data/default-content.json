@@ -1,15 +1,16 @@
 {
-  "settings": {
-    "siteName": "ARLATEM",
-    "tagline": "Peças ARLA 32 • Sistema SCR • Linha Pesada",
-    "whatsappNumber": "5531992007778",
-    "email": "arlatem.sac@gmail.com",
-    "instagram": "@arlatem.oficial",
-    "facebook": "arlatem",
-    "location": "R. Maestro Azérias, 133 - Inconfidentes, Contagem - MG, 32260-270",
-    "hours": "Seg a Sex • 08h às 18h",
-    "copyrightText": "ARLATEM — Contagem/MG. Especialistas em peças para ARLA 32, sistema SCR e pós-tratamento diesel.",
-    "adminPath": "/acesso-tecnico-arlatem"
+"settings": {
+  "siteName": "ARLATEM",
+  "tagline": "Peças ARLA 32 • Sistema SCR • Linha Pesada",
+  "whatsappNumber": "5531992007778",
+  "email": "arlatem.sac@gmail.com",
+  "instagram": "@arlatem.oficial",
+  "facebook": "arlatem",
+  "location": "R. Maestro Azérias, 133 - Inconfidentes, Contagem - MG, 32260-270",
+  "hours": "Seg a Sex • 08h às 18h",
+  "copyrightText": "ARLATEM — Contagem/MG. Especialistas em peças para ARLA 32, sistema SCR e pós-tratamento diesel.",
+  "adminPath": "/acesso-tecnico-arlatem"
+}
   },
   "hero": {
     "eyebrow": "A maior distribuidora de peças ARLA de Minas Gerais",
