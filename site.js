@@ -1,4 +1,3 @@
-const refs = {
   preloader: document.getElementById('preloader'),
   header: document.getElementById('siteHeader'),
   menuToggle: document.getElementById('menuToggle'),
@@ -62,6 +61,20 @@ const ICONS = {
 
 function iconMarkup(key) {
   return ICONS[key] || ICONS.shield;
+}
+
+function normalizeText(value) {
+  return String(value || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .trim();
+}
+
+function slugify(value) {
+  return normalizeText(value)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
 }
 
 function productImage(product) {
@@ -195,7 +208,7 @@ function renderHighlights() {
 function renderCategories() {
   const categories = state.content.categories || [];
   document.getElementById('categoryGrid').innerHTML = categories.map((category, index) => `
-    <a class="category-card reveal ${index % 3 === 1 ? 'delay-1' : index % 3 === 2 ? 'delay-2' : ''}" href="/catalogo.html?categoria=${encodeURIComponent(category.name)}">
+    <a class="category-card reveal ${index % 3 === 1 ? 'delay-1' : index % 3 === 2 ? 'delay-2' : ''}" href="/${slugify(category.name)}/">
       <span class="icon-wrap">${iconMarkup(category.icon)}</span>
       <strong>${category.name}</strong>
       <small>${category.description}</small>
