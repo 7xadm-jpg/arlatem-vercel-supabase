@@ -3,33 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sensores NOx | ARLATEM</title>
-  <meta name="description" content="Sensores NOx para sistema SCR e pós-tratamento diesel em caminhões e linha pesada." />
+
+  <title>Dosadores | Catálogo de Peças ARLATEM</title>
+  <meta name="description" content="Veja produtos da categoria Dosadores no catálogo da ARLATEM. Peças para ARLA 32, sistema SCR e pós-tratamento diesel com atendimento rápido para linha pesada." />
+  <meta name="keywords" content="catálogo peças ARLA 32, catálogo SCR, sensores NOx, bombas ARLA, módulos SCR, dosadores ARLA, filtros linha pesada, catalisadores, ARLATEM" />
   <meta name="theme-color" content="#0B5ED7" />
+  <meta name="robots" content="index, follow" />
+
+  <meta property="og:title" content="Dosadores | Catálogo de Peças ARLATEM" />
+  <meta property="og:description" content="Veja produtos da categoria Dosadores no catálogo da ARLATEM. Peças para ARLA 32, sistema SCR e pós-tratamento diesel com atendimento rápido para linha pesada." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:url" content="https://www.arlatem.com.br/dosadores/" />
+  <meta property="og:image" content="https://www.arlatem.com.br/uploads/favicon.png" />
+
+  <link rel="canonical" href="https://www.arlatem.com.br/dosadores/" />
 
   <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="/uploads/favicon.png" />
   <link rel="shortcut icon" href="/uploads/favicon.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/uploads/favicon.png" />
 
-  <link rel="stylesheet" href="/styles.css" />
-  <link rel="stylesheet" href="/categoria.css" />
-
-  <script>
-  window.CATEGORY_CONFIG = {
-  name: "Dosadores",
-  title: "Dosadores | ARLATEM",
-  heading: "Dosadores",
-  description: "Dosadores de ARLA 32 para aplicações em sistema SCR e linha pesada."
-};
-  </script>
+  <link rel="stylesheet" href="/styles.css?v=17" />
+  <link rel="stylesheet" href="/catalogo.css?v=17" />
 </head>
 <body>
   <div class="preloader" id="preloader" aria-hidden="true">
     <div class="loader-shell">
       <div class="loader-ring"></div>
       <div class="loader-brand"><span>ARLA</span><strong>TEM</strong></div>
-      <p>Carregando categoria...</p>
+      <p>Carregando catálogo completo...</p>
     </div>
   </div>
 
@@ -51,7 +54,7 @@
         </nav>
 
         <div class="nav-actions">
-          <a class="btn btn-ghost desktop-only" href="/catalogo.html">Ver catálogo completo</a>
+          <a class="btn btn-ghost desktop-only" href="/">Voltar ao site</a>
           <a class="btn btn-primary whatsapp-cta" id="navWhatsapp">Solicitar Orçamento</a>
           <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
             <span></span><span></span><span></span>
@@ -61,73 +64,78 @@
     </header>
 
     <main>
-      <section class="category-page-hero">
-        <div class="container category-page-hero-grid">
+      <section class="catalog-page-hero">
+        <div class="container catalog-page-hero-grid">
           <div>
-            <span class="section-kicker">Categoria de peças</span>
-            <h1 id="categoryTitle">Carregando categoria...</h1>
-            <p id="categorySubtitle">Selecione filtros e encontre a peça certa.</p>
+            <span class="section-kicker">Catálogo completo</span>
+            <h1>Dosadores para ARLA 32, Sistema SCR e Linha Pesada</h1>
+            <p>Navegue pelos produtos da categoria Dosadores no catálogo da ARLATEM e solicite orçamento rápido para peças de pós-tratamento diesel, caminhões e linha pesada.</p>
           </div>
 
-          <div class="category-page-hero-stats">
-            <div class="category-mini-card glass-card">
-              <strong id="categoryTotalProducts">0</strong>
-              <span>Produtos nesta categoria</span>
+          <div class="catalog-page-hero-stats">
+            <div class="catalog-mini-card glass-card">
+              <strong id="totalProductsHero">0</strong>
+              <span>Produtos cadastrados</span>
             </div>
-            <div class="category-mini-card glass-card">
+            <div class="catalog-mini-card glass-card">
+              <strong id="totalCategoriesHero">0</strong>
+              <span>Categorias</span>
+            </div>
+            <div class="catalog-mini-card glass-card">
               <strong>WhatsApp</strong>
               <span>Atendimento rápido</span>
-            </div>
-            <div class="category-mini-card glass-card">
-              <strong>ARLATEM</strong>
-              <span>Peças para linha pesada</span>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="section category-full-section">
-        <div class="container category-full-layout">
-          <aside class="category-sidebar glass-card">
+      <section class="section catalog-full-section">
+        <div class="container catalog-full-layout">
+          <aside class="catalog-sidebar glass-card">
             <div class="filters-header">
-              <h3>Filtros da categoria</h3>
-              <button class="link-button" id="clearFiltersCategory">Limpar tudo</button>
+              <h3>Filtros do catálogo</h3>
+              <button class="link-button" id="clearFiltersPage">Limpar tudo</button>
             </div>
 
             <div class="filter-block full-width">
-              <label for="categorySearch">Pesquisar por peça, código ou aplicação</label>
-              <input type="search" id="categorySearch" placeholder="Ex.: Sensor NOx, código, aplicação..." />
+              <label for="catalogSearchPage">Pesquisar por peça, código ou aplicação</label>
+              <input type="search" id="catalogSearchPage" placeholder="Ex.: Sensor NOx, dosador, bomba ARLA, código..." />
             </div>
 
-            <div class="filters-grid category-filters-grid">
+            <div class="filters-grid filters-grid-page">
               <div class="filter-block">
-                <label for="filterBrandCategory">Marca</label>
-                <select id="filterBrandCategory"><option value="">Todas</option></select>
+                <label for="filterCategoryPage">Categoria</label>
+                <select id="filterCategoryPage"><option value="">Todas</option></select>
               </div>
 
               <div class="filter-block">
-                <label for="filterMontadoraCategory">Montadora</label>
-                <select id="filterMontadoraCategory"><option value="">Todas</option></select>
+                <label for="filterBrandPage">Marca</label>
+                <select id="filterBrandPage"><option value="">Todas</option></select>
               </div>
 
               <div class="filter-block">
-                <label for="filterAvailabilityCategory">Disponibilidade</label>
-                <select id="filterAvailabilityCategory"><option value="">Todas</option></select>
+                <label for="filterMontadoraPage">Montadora</label>
+                <select id="filterMontadoraPage"><option value="">Todas</option></select>
+              </div>
+
+              <div class="filter-block">
+                <label for="filterAvailabilityPage">Disponibilidade</label>
+                <select id="filterAvailabilityPage"><option value="">Todas</option></select>
               </div>
             </div>
           </aside>
 
-          <div class="category-main-area">
-            <div class="catalog-toolbar category-toolbar">
+          <div class="catalog-main-area">
+            <div class="catalog-toolbar catalog-toolbar-page">
               <div>
-                <strong id="categoryResultsInfo">0 produtos encontrados</strong>
-                <span id="categoryRangeInfo">Exibindo 0–0 de 0 produtos</span>
+                <strong id="catalogResultsInfo">0 produtos encontrados</strong>
+                <span id="catalogRangeInfo">Exibindo 0–0 de 0 produtos</span>
               </div>
-              <div class="toolbar-tags" id="activeFiltersCategory"></div>
+              <div class="toolbar-tags" id="activeFiltersPage"></div>
             </div>
 
-            <div class="category-grid-full" id="categoryProductGrid"></div>
-            <div class="pagination-wrap" id="categoryPaginationWrap"></div>
+            <div class="catalog-grid-full" id="productGridFull"></div>
+            <div class="pagination-wrap" id="paginationWrap"></div>
           </div>
         </div>
       </section>
@@ -140,11 +148,54 @@
             <strong id="footerBrandName">ARLATEM</strong>
             <small>Catálogo de alta performance</small>
           </div>
+          <p>Loja especializada em peças e componentes para ARLA 32, SCR, pós-tratamento diesel e linha pesada.</p>
+          <div class="social-row">
+            <a id="instagramLink" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a id="facebookLink" target="_blank" rel="noopener noreferrer">Facebook</a>
+            <a class="whatsapp-cta" id="footerWhatsapp">WhatsApp</a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <h3>Links rápidos</h3>
+          <a href="/catalogo.html">Produtos</a>
+          <a href="/#categorias">Categorias</a>
+          <a href="/#marcas">Marcas</a>
+          <a href="/#quem-somos">Quem Somos</a>
+          <a href="/#blog">Blog</a>
+        </div>
+
+        <div class="footer-contact">
+          <h3>Contato</h3>
+          <a class="footer-contact-item whatsapp-cta" id="contactWhatsapp"></a>
+          <a class="footer-contact-item" id="contactEmail"></a>
+          <p class="footer-contact-item" id="contactLocation"></p>
+          <p class="footer-contact-item" id="contactHours"></p>
+        </div>
+
+        <div class="footer-map glass-card">
+          <h3>Mapa / Base de atendimento</h3>
+          <p class="map-caption">
+            <strong id="mapLocation">Contagem - MG</strong><br>
+            Atendimento nacional com suporte comercial especializado.
+          </p>
+          <div class="map-embed-wrap">
+            <iframe
+              src="https://www.google.com/maps?q=R.%20Maestro%20Az%C3%A9rias,%20133%20-%20Inconfidentes,%20Contagem%20-%20MG,%2032260-270&z=15&output=embed"
+              width="100%"
+              height="300"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
         </div>
       </div>
 
       <div class="container footer-bottom">
         <p>© <span id="currentYear"></span> <span id="copyrightText"></span></p>
+        <p>Catálogo completo • Visualize todos os produtos com paginação</p>
       </div>
     </footer>
   </div>
@@ -164,6 +215,6 @@
     <div class="modal-body" id="modalBody"></div>
   </dialog>
 
-  <script src="/categoria.js"></script>
-</body>
+  <script src="/catalogo.js?v=17"></script>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a25fd9004928ec3a',t:'MTc4NTg3MDQ3NA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
