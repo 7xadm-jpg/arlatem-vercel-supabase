@@ -9,9 +9,113 @@
       "source": "/acesso-tecnico-arlatem",
       "destination": "/admin.html"
     },
+
     {
-      "source": "/:slug/",
-      "destination": "/catalogo.html"
+      "source": "/bombas-arla",
+      "destination": "/bombas-arla.html"
+    },
+    {
+      "source": "/bombas-arla/",
+      "destination": "/bombas-arla.html"
+    },
+
+    {
+      "source": "/sensores-nox",
+      "destination": "/sensores-nox.html"
+    },
+    {
+      "source": "/sensores-nox/",
+      "destination": "/sensores-nox.html"
+    },
+
+    {
+      "source": "/catalisadores",
+      "destination": "/catalisadores.html"
+    },
+    {
+      "source": "/catalisadores/",
+      "destination": "/catalisadores.html"
+    },
+
+    {
+      "source": "/dosadores",
+      "destination": "/dosadores.html"
+    },
+    {
+      "source": "/dosadores/",
+      "destination": "/dosadores.html"
+    },
+
+    {
+      "source": "/filtros",
+      "destination": "/filtros.html"
+    },
+    {
+      "source": "/filtros/",
+      "destination": "/filtros.html"
+    },
+
+    {
+      "source": "/modulos",
+      "destination": "/modulos.html"
+    },
+    {
+      "source": "/modulos/",
+      "destination": "/modulos.html"
+    },
+
+    {
+      "source": "/chicotes",
+      "destination": "/chicotes.html"
+    },
+    {
+      "source": "/chicotes/",
+      "destination": "/chicotes.html"
+    },
+
+    {
+      "source": "/reservatorios",
+      "destination": "/reservatorios.html"
+    },
+    {
+      "source": "/reservatorios/",
+      "destination": "/reservatorios.html"
+    },
+
+    {
+      "source": "/tubulacoes",
+      "destination": "/tubulacoes.html"
+    },
+    {
+      "source": "/tubulacoes/",
+      "destination": "/tubulacoes.html"
+    },
+
+    {
+      "source": "/pecas-pneumaticas",
+      "destination": "/pecas-pneumaticas.html"
+    },
+    {
+      "source": "/pecas-pneumaticas/",
+      "destination": "/pecas-pneumaticas.html"
+    },
+
+    {
+      "source": "/kits-de-reparo",
+      "destination": "/kits-de-reparo.html"
+    },
+    {
+      "source": "/kits-de-reparo/",
+      "destination": "/kits-de-reparo.html"
+    },
+
+    {
+      "source": "/acessorios",
+      "destination": "/acessorios.html"
+    },
+    {
+      "source": "/acessorios/",
+      "destination": "/acessorios.html"
     }
   ]
 }
