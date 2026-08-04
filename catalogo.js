@@ -31,12 +31,67 @@ const state = {
   perPage: 12
 };
 
-function byId(id) {
-  return document.getElementById(id);
+const ICONS = {
+  pump: '<svg viewBox="0 0 24 24"><path d="M6 8h8a4 4 0 0 1 4 4v4h-2v-4a2 2 0 0 0-2-2H6v6H4V7a3 3 0 0 1 3-3h3v2H7a1 1 0 0 0-1 1v1Zm4 4h3l2 2v5H8v-5l2-2Z"/></svg>',
+  sensor: '<svg viewBox="0 0 24 24"><path d="M11 2h2v7h-2V2Zm0 13h2v7h-2v-7ZM2 11h7v2H2v-2Zm13 0h7v2h-7v-2ZM5.64 4.22l1.41-1.41 4.95 4.95-1.41 1.41-4.95-4.95Zm7.36 7.36 1.41-1.41 4.95 4.95-1.41 1.41L13 11.58ZM4.22 18.36l4.95-4.95 1.41 1.41-4.95 4.95-1.41-1.41Zm9.78-9.78 4.95-4.95 1.41 1.41-4.95 4.95L14 8.58Z"/></svg>',
+  grid: '<svg viewBox="0 0 24 24"><path d="M6 6h12v12H6V6Zm2 2v8h8V8H8Zm1 1h2v2H9V9Zm4 0h2v2h-2V9ZM9 13h2v2H9v-2Zm4 0h2v2h-2v-2Z"/></svg>',
+  doser: '<svg viewBox="0 0 24 24"><path d="M10 3h4v5h-4V3Zm-4 7h12l-1 10H7L6 10Zm3 2v6h2v-6H9Zm4 0v6h2v-6h-2Z"/></svg>',
+  filter: '<svg viewBox="0 0 24 24"><path d="M5 4h14l-5 7v7l-4 2v-9L5 4Z"/></svg>',
+  chip: '<svg viewBox="0 0 24 24"><path d="M7 7h10v10H7V7Zm-4 4h2v2H3v-2Zm16 0h2v2h-2v-2ZM11 3h2v2h-2V3Zm0 16h2v2h-2v-2ZM9 9h6v6H9V9Z"/></svg>',
+  cable: '<svg viewBox="0 0 24 24"><path d="M7 6a3 3 0 1 1 2.83 4H10a3 3 0 0 1-3-4Zm10 8a3 3 0 1 1-2.83 4H14a3 3 0 0 1 3-4ZM8 9h8a3 3 0 0 1 0 6H8V9Zm2 2v2h6a1 1 0 0 0 0-2h-6Z"/></svg>',
+  tank: '<svg viewBox="0 0 24 24"><path d="M7 4h10l1 4v9a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3V8l1-4Zm2 2-.5 2h7L15 6H9Zm1 5h4v6h-4v-6Z"/></svg>',
+  pipe: '<svg viewBox="0 0 24 24"><path d="M6 5h3v3H6V5Zm9 0h3v3h-3V5ZM7.5 6.5h4A3.5 3.5 0 0 1 15 10v4a2.5 2.5 0 1 0 5 0V11h2v3a4.5 4.5 0 1 1-9 0v-4a1.5 1.5 0 0 0-1.5-1.5h-4v-2Z"/></svg>',
+  plus: '<svg viewBox="0 0 24 24"><path d="M5 10h6V5h2v5h6v2h-6v7h-2v-7H5v-2Z"/></svg>',
+  repair: '<svg viewBox="0 0 24 24"><path d="M20.71 7.04 16.96 3.3a1 1 0 0 0-1.41 0l-2.27 2.27 5.15 5.15 2.28-2.27a1 1 0 0 0 0-1.41ZM12.57 6.29 4 14.86V20h5.14l8.57-8.57-5.14-5.14Z"/></svg>',
+  shield: '<svg viewBox="0 0 24 24"><path d="M12 3 4 7v5c0 5 3.4 9.74 8 11 4.6-1.26 8-6 8-11V7l-8-4Zm0 2.18L18 8v4c0 3.82-2.33 7.46-6 8.82C8.33 19.46 6 15.82 6 12V8l6-2.82Z"/></svg>'
+};
+
+function iconMarkup(key) {
+  return ICONS[key] || ICONS.shield;
 }
 
 function productImage(product) {
-  return product.image || '/uploads/favicon.png';
+  if (product.image) return product.image;
+  const colorMap = {
+    'Bombas ARLA': ['#0b5ed7', '#2ecc71'],
+    'Sensores NOx': ['#123a74', '#0b5ed7'],
+    'Catalisadores': ['#0b5ed7', '#0d8e61'],
+    'Dosadores': ['#1f6fe5', '#34d67d'],
+    'Filtros': ['#3b82f6', '#2ecc71'],
+    'Módulos': ['#0f3d91', '#20c997'],
+    'Chicotes': ['#214e9a', '#2ecc71'],
+    'Reservatórios': ['#0a69cc', '#4ade80'],
+    'Tubulações': ['#0e57c7', '#2dbf74'],
+    'Peças Pneumáticas': ['#1d4ed8', '#10b981'],
+    'Kits de Reparo': ['#2563eb', '#22c55e'],
+    'Acessórios': ['#0b5ed7', '#44c767']
+  };
+  const [start, end] = colorMap[product.category] || ['#0b5ed7', '#2ecc71'];
+  const category = String(product.category || '').replace(/&/g, '&amp;');
+  const name = String(product.name || '').slice(0, 28).replace(/&/g, '&amp;');
+  const brand = String(product.brand || '').replace(/&/g, '&amp;');
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 440">
+      <defs>
+        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="${start}"/>
+          <stop offset="100%" stop-color="${end}"/>
+        </linearGradient>
+      </defs>
+      <rect width="640" height="440" rx="30" fill="url(#g)"/>
+      <circle cx="540" cy="90" r="82" fill="rgba(255,255,255,0.12)"/>
+      <circle cx="100" cy="360" r="96" fill="rgba(255,255,255,0.08)"/>
+      <rect x="44" y="54" width="552" height="332" rx="26" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.18)"/>
+      <rect x="92" y="124" width="240" height="140" rx="24" fill="rgba(255,255,255,0.16)" stroke="rgba(255,255,255,0.18)"/>
+      <circle cx="175" cy="194" r="42" fill="rgba(255,255,255,0.9)"/>
+      <circle cx="175" cy="194" r="24" fill="${start}"/>
+      <rect x="240" y="164" width="210" height="18" rx="9" fill="rgba(255,255,255,0.84)"/>
+      <rect x="240" y="194" width="160" height="14" rx="7" fill="rgba(255,255,255,0.48)"/>
+      <text x="92" y="94" fill="white" font-size="28" font-family="Inter, Arial, sans-serif" font-weight="700">${category}</text>
+      <text x="92" y="350" fill="white" font-size="20" font-family="Inter, Arial, sans-serif" opacity="0.92">${brand}</text>
+      <text x="92" y="378" fill="white" font-size="18" font-family="Inter, Arial, sans-serif" opacity="0.74">${name}</text>
+    </svg>`;
+  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
 }
 
 function buildWhatsAppLink(message) {
@@ -53,34 +108,119 @@ function setWhatsAppLink(element, message) {
 
 function normalizeSocialUrl(value, platform) {
   const raw = String(value || '').trim();
-
   if (!raw || raw === '#') return '#';
   if (raw.startsWith('http://') || raw.startsWith('https://')) return raw;
-
   const username = raw.replace(/^@/, '');
-
   if (platform === 'instagram') return `https://www.instagram.com/${username}/`;
   if (platform === 'facebook') return `https://www.facebook.com/${username}`;
-
   return raw;
+}
+
+function normalizeText(value) {
+  return String(value || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .trim();
+}
+
+function slugify(value) {
+  return normalizeText(value)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function getCategoryNames() {
+  const fromContent = (state.content?.categories || []).map((item) => item.name).filter(Boolean);
+  const fromProducts = state.products.map((product) => product.category).filter(Boolean);
+  return [...new Set([...fromContent, ...fromProducts])];
+}
+
+function getCategoryFromSlug(slug) {
+  const cleanSlug = slugify(slug);
+  return getCategoryNames().find((name) => slugify(name) === cleanSlug) || '';
+}
+
+function getPathSlug() {
+  const path = window.location.pathname.replace(/^\/+|\/+$/g, '');
+  if (!path) return '';
+  if (path === 'catalogo.html') return '';
+  if (path.includes('.')) return '';
+  if (path.includes('/')) return '';
+  return path;
+}
+
+function getCatalogUrlForCategory(categoryName) {
+  return categoryName ? `/${slugify(categoryName)}/` : '/catalogo.html';
+}
+
+function updateCatalogUrl() {
+  const target = getCatalogUrlForCategory(state.category);
+  const current = `${window.location.pathname}${window.location.search}`;
+  if (current !== target) {
+    window.history.replaceState({}, '', target);
+  }
+}
+
+function updateCatalogSeo() {
+  const baseTitle = 'Catálogo de Peças para ARLA 32 e SCR | ARLATEM';
+  const baseDescription = 'Veja o catálogo completo de peças para ARLA 32, sensores NOx, bombas dosadoras, módulos, filtros e catalisadores para linha pesada. Solicite orçamento rápido com a ARLATEM.';
+
+  const title = state.category
+    ? `${state.category} | Catálogo de Peças ARLATEM`
+    : baseTitle;
+
+  const description = state.category
+    ? `Veja produtos da categoria ${state.category} no catálogo da ARLATEM. Peças para ARLA 32, sistema SCR e pós-tratamento diesel com atendimento rápido.`
+    : baseDescription;
+
+  document.title = title;
+
+  const metaDescription = document.querySelector('meta[name="description"]');
+  if (metaDescription) metaDescription.setAttribute('content', description);
+
+  let canonical = document.querySelector('link[rel="canonical"]');
+  if (!canonical) {
+    canonical = document.createElement('link');
+    canonical.setAttribute('rel', 'canonical');
+    document.head.appendChild(canonical);
+  }
+  canonical.setAttribute('href', `https://www.arlatem.com.br${getCatalogUrlForCategory(state.category)}`);
+
+  const ogUrl = document.querySelector('meta[property="og:url"]');
+  if (ogUrl) ogUrl.setAttribute('content', `https://www.arlatem.com.br${getCatalogUrlForCategory(state.category)}`);
+
+  const ogTitle = document.querySelector('meta[property="og:title"]');
+  if (ogTitle) ogTitle.setAttribute('content', title);
+
+  const ogDescription = document.querySelector('meta[property="og:description"]');
+  if (ogDescription) ogDescription.setAttribute('content', description);
 }
 
 async function loadData() {
   const response = await fetch('/api/content', { cache: 'no-store' });
   const payload = await response.json();
-
   if (!payload.ok) throw new Error('Falha ao carregar conteúdo');
 
   state.content = payload.data;
   state.products = payload.data.products || [];
 
   const params = new URLSearchParams(window.location.search);
-  const categoria = params.get('categoria');
-  if (categoria) {
-    state.category = categoria;
+  const categoryFromQuery = params.get('categoria') || '';
+  const categorySlugFromQuery = params.get('categoriaSlug') || '';
+  const categorySlugFromPath = getPathSlug();
+
+  if (categoryFromQuery) {
+    state.category = categoryFromQuery;
+  } else if (categorySlugFromQuery) {
+    state.category = getCategoryFromSlug(categorySlugFromQuery);
+  } else if (categorySlugFromPath) {
+    state.category = getCategoryFromSlug(categorySlugFromPath);
   }
 
   renderAll();
+  updateCatalogUrl();
+  updateCatalogSeo();
 }
 
 function renderAll() {
@@ -93,36 +233,24 @@ function renderAll() {
 
 function renderBrand() {
   const { settings } = state.content;
-
-  document.title = `Catálogo de Peças para ARLA 32 e SCR | ARLATEM`;
-
-  const footerBrandName = byId('footerBrandName');
+  document.title = `${settings.siteName} | Catálogo Completo`;
+  const footerBrandName = document.getElementById('footerBrandName');
   if (footerBrandName) footerBrandName.textContent = settings.siteName;
 }
 
 function renderHeroStats() {
-  const totalProductsHero = byId('totalProductsHero');
-  const totalCategoriesHero = byId('totalCategoriesHero');
-
-  if (totalProductsHero) totalProductsHero.textContent = state.products.length;
-  if (totalCategoriesHero) {
-    totalCategoriesHero.textContent = [...new Set(state.products.map((product) => product.category).filter(Boolean))].length;
-  }
-
-  setWhatsAppLink(byId('navWhatsapp'), 'Olá! Quero solicitar um orçamento na ARLATEM.');
+  document.getElementById('totalProductsHero').textContent = state.products.length;
+  document.getElementById('totalCategoriesHero').textContent = [...new Set(state.products.map((product) => product.category).filter(Boolean))].length;
+  setWhatsAppLink(document.getElementById('navWhatsapp'), 'Olá! Quero solicitar um orçamento na ARLATEM.');
 }
 
 function uniqueValues(field) {
-  return [...new Set(state.products.map((product) => product[field]).filter(Boolean))].sort((a, b) =>
-    String(a).localeCompare(String(b), 'pt-BR')
-  );
+  return [...new Set(state.products.map((product) => product[field]).filter(Boolean))].sort((a, b) => String(a).localeCompare(String(b), 'pt-BR'));
 }
 
 function fillSelect(select, values, firstLabel = 'Todas') {
   if (!select) return;
-
   select.innerHTML = `<option value="">${firstLabel}</option>`;
-
   values.forEach((value) => {
     const option = document.createElement('option');
     option.value = value;
@@ -137,9 +265,11 @@ function renderFilters() {
   fillSelect(refs.filterMontadora, uniqueValues('montadora'));
   fillSelect(refs.filterAvailability, uniqueValues('availability'));
 
-  if (refs.filterCategory && state.category) {
-    refs.filterCategory.value = state.category;
-  }
+  if (refs.search) refs.search.value = state.search;
+  if (refs.filterCategory) refs.filterCategory.value = state.category;
+  if (refs.filterBrand) refs.filterBrand.value = state.brand;
+  if (refs.filterMontadora) refs.filterMontadora.value = state.montadora;
+  if (refs.filterAvailability) refs.filterAvailability.value = state.availability;
 }
 
 function getFilteredProducts() {
@@ -172,24 +302,12 @@ function getFilteredProducts() {
 function renderProducts() {
   const filtered = getFilteredProducts();
   const totalPages = Math.max(1, Math.ceil(filtered.length / state.perPage));
-
   if (state.page > totalPages) state.page = totalPages;
 
   const start = (state.page - 1) * state.perPage;
-  const end = Math.min(start + state.perPage, filtered.length);
   const pageItems = filtered.slice(start, start + state.perPage);
 
-  if (refs.resultsInfo) {
-    refs.resultsInfo.textContent = `${filtered.length} produto${filtered.length === 1 ? '' : 's'} encontrados`;
-  }
-
-  const rangeInfo = byId('catalogRangeInfo');
-  if (rangeInfo) {
-    rangeInfo.textContent = filtered.length
-      ? `Exibindo ${start + 1}–${end} de ${filtered.length} produtos`
-      : 'Nenhum produto encontrado';
-  }
-
+  refs.resultsInfo.textContent = `${filtered.length} produto${filtered.length === 1 ? '' : 's'} encontrados`;
   renderActiveFilters();
 
   if (!pageItems.length) {
@@ -229,7 +347,7 @@ function renderProducts() {
   `).join('');
 
   bindDetailButtons();
-  renderPagination(totalPages, filtered.length, start, end);
+  renderPagination(totalPages);
 }
 
 function renderActiveFilters() {
@@ -240,12 +358,10 @@ function renderActiveFilters() {
   if (state.montadora) filters.push(`Montadora: ${state.montadora}`);
   if (state.availability) filters.push(`Disponibilidade: ${state.availability}`);
 
-  if (refs.activeFilters) {
-    refs.activeFilters.innerHTML = filters.map((item) => `<span class="tag-pill">${item}</span>`).join('');
-  }
+  refs.activeFilters.innerHTML = filters.map((item) => `<span class="tag-pill">${item}</span>`).join('');
 }
 
-function renderPagination(totalPages, totalItems, start, end) {
+function renderPagination(totalPages) {
   if (totalPages <= 1) {
     refs.paginationWrap.innerHTML = '';
     return;
@@ -257,10 +373,6 @@ function renderPagination(totalPages, totalItems, start, end) {
   }
 
   refs.paginationWrap.innerHTML = `
-    <div class="pagination-top-info">
-      <span>Página ${state.page} de ${totalPages}</span>
-      <span>Exibindo ${start + 1}–${end} de ${totalItems} produtos</span>
-    </div>
     <div class="pagination-inner">
       <button class="page-nav-btn" id="prevPageBtn" ${state.page === 1 ? 'disabled' : ''}>Anterior</button>
       <div class="page-number-wrap">${buttons}</div>
@@ -276,8 +388,8 @@ function renderPagination(totalPages, totalItems, start, end) {
     });
   });
 
-  const prevBtn = byId('prevPageBtn');
-  const nextBtn = byId('nextPageBtn');
+  const prevBtn = document.getElementById('prevPageBtn');
+  const nextBtn = document.getElementById('nextPageBtn');
 
   if (prevBtn) {
     prevBtn.addEventListener('click', () => {
@@ -291,11 +403,9 @@ function renderPagination(totalPages, totalItems, start, end) {
 
   if (nextBtn) {
     nextBtn.addEventListener('click', () => {
-      if (state.page < totalPages) {
-        state.page += 1;
-        renderProducts();
-        window.scrollTo({ top: 280, behavior: 'smooth' });
-      }
+      state.page += 1;
+      renderProducts();
+      window.scrollTo({ top: 280, behavior: 'smooth' });
     });
   }
 }
@@ -344,36 +454,22 @@ function bindDetailButtons() {
 
 function setupMisc() {
   const { settings } = state.content;
+  document.getElementById('currentYear').textContent = new Date().getFullYear();
+  document.getElementById('contactWhatsapp').textContent = `WhatsApp: ${formatPhone(settings.whatsappNumber)}`;
+  setWhatsAppLink(document.getElementById('contactWhatsapp'), 'Olá! Preciso de um orçamento na ARLATEM.');
+  setWhatsAppLink(document.getElementById('footerWhatsapp'), 'Olá! Quero falar com a ARLATEM.');
+  setWhatsAppLink(document.getElementById('floatingWhatsapp'), 'Olá! Quero solicitar um orçamento para peças do sistema de ARLA.');
 
-  const currentYear = byId('currentYear');
-  if (currentYear) currentYear.textContent = new Date().getFullYear();
+  const email = document.getElementById('contactEmail');
+  email.textContent = settings.email;
+  email.href = `mailto:${settings.email}`;
 
-  const contactWhatsapp = byId('contactWhatsapp');
-  if (contactWhatsapp) {
-    contactWhatsapp.textContent = `WhatsApp: ${formatPhone(settings.whatsappNumber)}`;
-    setWhatsAppLink(contactWhatsapp, 'Olá! Preciso de um orçamento na ARLATEM.');
-  }
-
-  setWhatsAppLink(byId('footerWhatsapp'), 'Olá! Quero falar com a ARLATEM.');
-  setWhatsAppLink(byId('floatingWhatsapp'), 'Olá! Quero solicitar um orçamento para peças do sistema de ARLA.');
-  setWhatsAppLink(byId('navWhatsapp'), 'Olá! Quero solicitar um orçamento na ARLATEM.');
-
-  const email = byId('contactEmail');
-  if (email) {
-    email.textContent = settings.email;
-    email.href = `mailto:${settings.email}`;
-  }
-
-  const instagramLink = byId('instagramLink');
-  if (instagramLink) instagramLink.href = normalizeSocialUrl(settings.instagram, 'instagram');
-
-  const facebookLink = byId('facebookLink');
-  if (facebookLink) facebookLink.href = normalizeSocialUrl(settings.facebook, 'facebook');
-
-  setText('contactLocation', `${settings.location} • Atendimento em todo o Brasil`);
-  setText('contactHours', settings.hours);
-  setText('mapLocation', settings.location);
-  setText('copyrightText', settings.copyrightText);
+  document.getElementById('instagramLink').href = normalizeSocialUrl(settings.instagram, 'instagram');
+  document.getElementById('facebookLink').href = normalizeSocialUrl(settings.facebook, 'facebook');
+  document.getElementById('contactLocation').textContent = `${settings.location} • Atendimento em todo o Brasil`;
+  document.getElementById('contactHours').textContent = settings.hours;
+  document.getElementById('mapLocation').textContent = settings.location;
+  document.getElementById('copyrightText').textContent = settings.copyrightText;
 }
 
 function formatPhone(number) {
@@ -392,12 +488,14 @@ function resetFilters() {
   state.availability = '';
   state.page = 1;
 
-  if (refs.search) refs.search.value = '';
-  if (refs.filterCategory) refs.filterCategory.value = '';
-  if (refs.filterBrand) refs.filterBrand.value = '';
-  if (refs.filterMontadora) refs.filterMontadora.value = '';
-  if (refs.filterAvailability) refs.filterAvailability.value = '';
+  refs.search.value = '';
+  refs.filterCategory.value = '';
+  refs.filterBrand.value = '';
+  refs.filterMontadora.value = '';
+  refs.filterAvailability.value = '';
 
+  updateCatalogUrl();
+  updateCatalogSeo();
   renderProducts();
 }
 
@@ -414,6 +512,8 @@ function bindEvents() {
     refs.filterCategory.addEventListener('change', () => {
       state.category = refs.filterCategory.value;
       state.page = 1;
+      updateCatalogUrl();
+      updateCatalogSeo();
       renderProducts();
     });
   }
@@ -463,12 +563,7 @@ function bindEvents() {
   if (refs.productModal) {
     refs.productModal.addEventListener('click', (event) => {
       const rect = refs.productModal.getBoundingClientRect();
-      const inside =
-        rect.top <= event.clientY &&
-        event.clientY <= rect.bottom &&
-        rect.left <= event.clientX &&
-        event.clientX <= rect.right;
-
+      const inside = rect.top <= event.clientY && event.clientY <= rect.bottom && rect.left <= event.clientX && event.clientX <= rect.right;
       if (!inside) refs.productModal.close();
     });
   }
@@ -478,22 +573,16 @@ function bindEvents() {
   });
 }
 
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    if (refs.preloader) refs.preloader.classList.add('hidden');
-  }, 450);
-});
-
 document.addEventListener('DOMContentLoaded', async () => {
   try {
+    bindEvents();
     await loadData();
-    bindFilterEvents();
-    startTestimonials();
-    handleHeader();
-    handleMenu();
-    handleModal();
   } catch (error) {
-    console.error(error);
-    alert('Não foi possível carregar o site.');
+    console.error('Erro ao iniciar o catálogo:', error);
+    alert('Não foi possível carregar o catálogo completo.');
+  } finally {
+    setTimeout(() => {
+      if (refs.preloader) refs.preloader.classList.add('hidden');
+    }, 300);
   }
 });
