@@ -6,6 +6,86 @@
   },
   "redirects": [
     {
+      "source": "/categoria/:slug",
+      "destination": "/:slug/",
+      "permanent": true
+    },
+    {
+      "source": "/categoria/:slug/",
+      "destination": "/:slug/",
+      "permanent": true
+    },
+    {
+      "source": "/bombas-arla.html",
+      "destination": "/bombas-arla/",
+      "permanent": true
+    },
+    {
+      "source": "/sensores-nox.html",
+      "destination": "/sensores-nox/",
+      "permanent": true
+    },
+    {
+      "source": "/catalisadores.html",
+      "destination": "/catalisadores/",
+      "permanent": true
+    },
+    {
+      "source": "/dosadores.html",
+      "destination": "/dosadores/",
+      "permanent": true
+    },
+    {
+      "source": "/filtros.html",
+      "destination": "/filtros/",
+      "permanent": true
+    },
+    {
+      "source": "/modulos.html",
+      "destination": "/modulos/",
+      "permanent": true
+    },
+    {
+      "source": "/chicotes.html",
+      "destination": "/chicotes/",
+      "permanent": true
+    },
+    {
+      "source": "/reservatorios.html",
+      "destination": "/reservatorios/",
+      "permanent": true
+    },
+    {
+      "source": "/tubulacoes.html",
+      "destination": "/tubulacoes/",
+      "permanent": true
+    },
+    {
+      "source": "/pecas-pneumaticas.html",
+      "destination": "/pecas-pneumaticas/",
+      "permanent": true
+    },
+    {
+      "source": "/kits-de-reparo.html",
+      "destination": "/kits-de-reparo/",
+      "permanent": true
+    },
+    {
+      "source": "/acessorios.html",
+      "destination": "/acessorios/",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/acesso-tecnico-arlatem",
+      "destination": "/admin.html"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap.xml"
+    },
+    {
       "source": "/catalogo.html",
       "has": [
         {
@@ -13,26 +93,25 @@
           "key": "categoria"
         }
       ],
-      "destination": "/categoria/:categoria",
-      "permanent": true
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/categoria/:slug",
-      "destination": "/catalogo.html"
+      "destination": "/api/legacy-category-redirect"
     },
     {
-      "source": "/categoria/:slug/",
-      "destination": "/catalogo.html"
+      "source": "/catalogo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "categoriaSlug"
+        }
+      ],
+      "destination": "/api/legacy-category-redirect"
     },
     {
-      "source": "/sitemap.xml",
-      "destination": "/api/sitemap.xml"
+      "source": "/:slug((?!acesso-tecnico-arlatem$|catalogo\\.html$|admin\\.html$|robots\\.txt$|sitemap\\.xml$|site\\.js$|slug-utils\\.js$|styles\\.css$|catalogo\\.js$|catalogo\\.css$|favicon\\.ico$|google1ecb8b99b19a1347\\.html$)[^/]+)",
+      "destination": "/api/category-page?slug=:slug"
     },
     {
-      "source": "/acesso-tecnico-arlatem",
-      "destination": "/admin.html"
+      "source": "/:slug((?!acesso-tecnico-arlatem$|catalogo\\.html$|admin\\.html$|robots\\.txt$|sitemap\\.xml$|site\\.js$|slug-utils\\.js$|styles\\.css$|catalogo\\.js$|catalogo\\.css$|favicon\\.ico$|google1ecb8b99b19a1347\\.html$)[^/]+)/",
+      "destination": "/api/category-page?slug=:slug"
     }
   ]
 }
