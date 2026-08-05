@@ -22,7 +22,6 @@ module.exports = async (req, res) => {
       '<?xml version="1.0" encoding="UTF-8"?>',
       '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
       sitemapUrl(`${baseUrl}/`, { priority: '1.0', changefreq: 'daily' }),
-      sitemapUrl(`${baseUrl}/catalogo.html`, { priority: '0.9', changefreq: 'daily' }),
       ...categoryUrls.map((url) => sitemapUrl(url)),
       '</urlset>'
     ].join('\n');
