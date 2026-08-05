@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /acesso-tecnico-arlatem
 
 Sitemap: https://www.arlatem.com.br/sitemap.xml
