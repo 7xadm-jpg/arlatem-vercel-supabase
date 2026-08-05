@@ -209,7 +209,7 @@ function renderHighlights() {
 function renderCategories() {
   const categories = state.content.categories || [];
   document.getElementById('categoryGrid').innerHTML = categories.map((category, index) => `
-    <a class="category-card reveal ${index % 3 === 1 ? 'delay-1' : index % 3 === 2 ? 'delay-2' : ''}" href="/${slugify(category.name)}/">
+    <a class="category-card reveal ${index % 3 === 1 ? 'delay-1' : index % 3 === 2 ? 'delay-2' : ''}" href="/categoria/${slugify(category.name)}/">
       <span class="icon-wrap">${iconMarkup(category.icon)}</span>
       <strong>${category.name}</strong>
       <small>${category.description}</small>
