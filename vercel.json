@@ -4,10 +4,104 @@
       "runtime": "nodejs20.x"
     }
   },
+  "redirects": [
+    {
+      "source": "/bombas-arla.html",
+      "destination": "/categoria/bombas-arla/",
+      "permanent": true
+    },
+    {
+      "source": "/sensores-nox.html",
+      "destination": "/categoria/sensores-nox/",
+      "permanent": true
+    },
+    {
+      "source": "/catalisadores.html",
+      "destination": "/categoria/catalisadores/",
+      "permanent": true
+    },
+    {
+      "source": "/dosadores.html",
+      "destination": "/categoria/dosadores/",
+      "permanent": true
+    },
+    {
+      "source": "/filtros.html",
+      "destination": "/categoria/filtros/",
+      "permanent": true
+    },
+    {
+      "source": "/modulos.html",
+      "destination": "/categoria/modulos/",
+      "permanent": true
+    },
+    {
+      "source": "/chicotes.html",
+      "destination": "/categoria/chicotes/",
+      "permanent": true
+    },
+    {
+      "source": "/reservatorios.html",
+      "destination": "/categoria/reservatorios/",
+      "permanent": true
+    },
+    {
+      "source": "/tubulacoes.html",
+      "destination": "/categoria/tubulacoes/",
+      "permanent": true
+    },
+    {
+      "source": "/pecas-pneumaticas.html",
+      "destination": "/categoria/pecas-pneumaticas/",
+      "permanent": true
+    },
+    {
+      "source": "/kits-de-reparo.html",
+      "destination": "/categoria/kits-de-reparo/",
+      "permanent": true
+    },
+    {
+      "source": "/acessorios.html",
+      "destination": "/categoria/acessorios/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/acesso-tecnico-arlatem",
       "destination": "/admin.html"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap.xml"
+    },
+    {
+      "source": "/catalogo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "categoria"
+        }
+      ],
+      "destination": "/api/legacy-category-redirect"
+    },
+    {
+      "source": "/catalogo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "categoriaSlug"
+        }
+      ],
+      "destination": "/api/legacy-category-redirect"
+    },
+    {
+      "source": "/categoria/:slug",
+      "destination": "/api/category-page?slug=:slug"
+    },
+    {
+      "source": "/categoria/:slug/",
+      "destination": "/api/category-page?slug=:slug"
     }
   ]
 }
