@@ -1,8 +1,38 @@
 {
+  "functions": {
+    "api/**/*.js": {
+      "runtime": "nodejs20.x"
+    }
+  },
+  "redirects": [
+    {
+      "source": "/catalogo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "categoria"
+        }
+      ],
+      "destination": "/categoria/:categoria",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
-      "source": "/:slug",
-      "destination": "/api/category-page?slug=:slug"
+      "source": "/categoria/:slug",
+      "destination": "/catalogo.html"
+    },
+    {
+      "source": "/categoria/:slug/",
+      "destination": "/catalogo.html"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap.xml"
+    },
+    {
+      "source": "/acesso-tecnico-arlatem",
+      "destination": "/admin.html"
     }
   ]
 }
