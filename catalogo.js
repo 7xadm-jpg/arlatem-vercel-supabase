@@ -160,9 +160,10 @@ function getPathSlug() {
 
   return '';
 }
-
 function getCatalogUrlForCategory(categoryName) {
-  return categoryName ? `/categoria/${slugify(categoryName)}/` : '/catalogo.html';
+  return categoryName
+    ? `/categoria/${slugify(categoryName)}/`
+    : '/catalogo.html';
 }
 
 function updateCatalogUrl() {
