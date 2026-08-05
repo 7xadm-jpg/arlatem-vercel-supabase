@@ -31,6 +31,8 @@ const state = {
   perPage: 12
 };
 
+const SEO_LOCKED = Boolean(window.__CATEGORY_SEO_LOCK__);
+
 const ICONS = {
   pump: '<svg viewBox="0 0 24 24"><path d="M6 8h8a4 4 0 0 1 4 4v4h-2v-4a2 2 0 0 0-2-2H6v6H4V7a3 3 0 0 1 3-3h3v2H7a1 1 0 0 0-1 1v1Zm4 4h3l2 2v5H8v-5l2-2Z"/></svg>',
   sensor: '<svg viewBox="0 0 24 24"><path d="M11 2h2v7h-2V2Zm0 13h2v7h-2v-7ZM2 11h7v2H2v-2Zm13 0h7v2h-7v-2ZM5.64 4.22l1.41-1.41 4.95 4.95-1.41 1.41-4.95-4.95Zm7.36 7.36 1.41-1.41 4.95 4.95-1.41 1.41L13 11.58ZM4.22 18.36l4.95-4.95 1.41 1.41-4.95 4.95-1.41-1.41Zm9.78-9.78 4.95-4.95 1.41 1.41-4.95 4.95L14 8.58Z"/></svg>',
@@ -116,19 +118,7 @@ function normalizeSocialUrl(value, platform) {
   return raw;
 }
 
-function normalizeText(value) {
-  return String(value || '')
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .trim();
-}
-
-function slugify(value) {
-  return normalizeText(value)
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
+const { slugify } = window.ArlaSlug;
 
 function getCategoryNames() {
   const fromContent = (state.content?.categories || []).map((item) => item.name).filter(Boolean);
@@ -145,25 +135,18 @@ function getPathSlug() {
   if (window.__CATEGORY_SLUG__) return window.__CATEGORY_SLUG__;
 
   const path = window.location.pathname.replace(/^\/+|\/+$/g, '');
-  if (!path) return '';
-  if (path === 'catalogo.html') return '';
+  if (!path || path === 'catalogo.html') return '';
 
   const segments = path.split('/').filter(Boolean);
-
-  if (segments[0] === 'categoria' && segments[1]) {
-    return segments[1];
-  }
-
   if (segments.length === 1 && !segments[0].includes('.')) {
     return segments[0];
   }
 
   return '';
 }
+
 function getCatalogUrlForCategory(categoryName) {
-  return categoryName
-    ? `/${slugify(categoryName)}/`
-    : '/catalogo.html';
+  return categoryName ? `/${slugify(categoryName)}/` : '/catalogo.html';
 }
 
 function updateCatalogUrl() {
@@ -174,7 +157,9 @@ function updateCatalogUrl() {
   }
 }
 
-function updateCatalogSeo() {
+function updateCatalogSeo(force = false) {
+  if (SEO_LOCKED && !force) return;
+
   const baseTitle = 'Catálogo de Peças para ARLA 32 e SCR | ARLATEM';
   const baseDescription = 'Veja o catálogo completo de peças para ARLA 32, sensores NOx, bombas dosadoras, módulos, filtros e catalisadores para linha pesada. Solicite orçamento rápido com a ARLATEM.';
 
@@ -207,6 +192,12 @@ function updateCatalogSeo() {
 
   const ogDescription = document.querySelector('meta[property="og:description"]');
   if (ogDescription) ogDescription.setAttribute('content', description);
+
+  const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+  if (twitterTitle) twitterTitle.setAttribute('content', title);
+
+  const twitterDescription = document.querySelector('meta[name="twitter:description"]');
+  if (twitterDescription) twitterDescription.setAttribute('content', description);
 }
 
 async function loadData() {
@@ -217,16 +208,9 @@ async function loadData() {
   state.content = payload.data;
   state.products = payload.data.products || [];
 
-  const params = new URLSearchParams(window.location.search);
-  const categoryFromQuery = params.get('categoria') || '';
-  const categorySlugFromQuery = params.get('categoriaSlug') || '';
   const categorySlugFromPath = getPathSlug();
 
-  if (categoryFromQuery) {
-    state.category = categoryFromQuery;
-  } else if (categorySlugFromQuery) {
-    state.category = getCategoryFromSlug(categorySlugFromQuery);
-  } else if (categorySlugFromPath) {
+  if (categorySlugFromPath) {
     state.category = getCategoryFromSlug(categorySlugFromPath);
   }
 
@@ -245,7 +229,6 @@ function renderAll() {
 
 function renderBrand() {
   const { settings } = state.content;
-  document.title = `${settings.siteName} | Catálogo Completo`;
   const footerBrandName = document.getElementById('footerBrandName');
   if (footerBrandName) footerBrandName.textContent = settings.siteName;
 }
@@ -507,7 +490,7 @@ function resetFilters() {
   refs.filterAvailability.value = '';
 
   updateCatalogUrl();
-  updateCatalogSeo();
+  updateCatalogSeo(true);
   renderProducts();
 }
 
@@ -525,7 +508,7 @@ function bindEvents() {
       state.category = refs.filterCategory.value;
       state.page = 1;
       updateCatalogUrl();
-      updateCatalogSeo();
+      updateCatalogSeo(true);
       renderProducts();
     });
   }
