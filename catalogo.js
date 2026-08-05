@@ -162,7 +162,7 @@ function getPathSlug() {
 }
 function getCatalogUrlForCategory(categoryName) {
   return categoryName
-    ? `/categoria/${slugify(categoryName)}/`
+    ? `/${slugify(categoryName)}/`
     : '/catalogo.html';
 }
 
