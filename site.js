@@ -60,22 +60,10 @@ const ICONS = {
   verified: '<svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 0 0-2 2v14l4-3h12a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Zm-8 9-3-3 1.4-1.4 1.6 1.6 4.6-4.6L17 6l-6 6Z"/></svg>'
 };
 
+const { slugify } = window.ArlaSlug;
+
 function iconMarkup(key) {
   return ICONS[key] || ICONS.shield;
-}
-
-function normalizeText(value) {
-  return String(value || '')
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .trim();
-}
-
-function slugify(value) {
-  return normalizeText(value)
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
 }
 
 function productImage(product) {
@@ -177,8 +165,6 @@ function renderBrand() {
   if (brandName) brandName.textContent = settings.siteName;
   if (brandTagline) brandTagline.textContent = settings.tagline;
   if (footerBrandName) footerBrandName.textContent = settings.siteName;
-
-  document.title = `${settings.siteName} | Catálogo Profissional`;
 }
 
 function renderHero() {
@@ -209,7 +195,7 @@ function renderHighlights() {
 function renderCategories() {
   const categories = state.content.categories || [];
   document.getElementById('categoryGrid').innerHTML = categories.map((category, index) => `
-    <a class="category-card reveal ${index % 3 === 1 ? 'delay-1' : index % 3 === 2 ? 'delay-2' : ''}" href="/categoria/${slugify(category.name)}/">
+    <a class="category-card reveal ${index % 3 === 1 ? 'delay-1' : index % 3 === 2 ? 'delay-2' : ''}" href="/${slugify(category.name)}/">
       <span class="icon-wrap">${iconMarkup(category.icon)}</span>
       <strong>${category.name}</strong>
       <small>${category.description}</small>
