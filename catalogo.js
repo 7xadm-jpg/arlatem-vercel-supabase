@@ -142,16 +142,27 @@ function getCategoryFromSlug(slug) {
 }
 
 function getPathSlug() {
+  if (window.__CATEGORY_SLUG__) return window.__CATEGORY_SLUG__;
+
   const path = window.location.pathname.replace(/^\/+|\/+$/g, '');
   if (!path) return '';
   if (path === 'catalogo.html') return '';
-  if (path.includes('.')) return '';
-  if (path.includes('/')) return '';
-  return path;
+
+  const segments = path.split('/').filter(Boolean);
+
+  if (segments[0] === 'categoria' && segments[1]) {
+    return segments[1];
+  }
+
+  if (segments.length === 1 && !segments[0].includes('.')) {
+    return segments[0];
+  }
+
+  return '';
 }
 
 function getCatalogUrlForCategory(categoryName) {
-  return categoryName ? `/${slugify(categoryName)}/` : '/catalogo.html';
+  return categoryName ? `/categoria/${slugify(categoryName)}/` : '/catalogo.html';
 }
 
 function updateCatalogUrl() {
