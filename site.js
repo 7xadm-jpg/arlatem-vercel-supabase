@@ -1,3 +1,4 @@
+const refs = {
   preloader: document.getElementById('preloader'),
   header: document.getElementById('siteHeader'),
   menuToggle: document.getElementById('menuToggle'),
