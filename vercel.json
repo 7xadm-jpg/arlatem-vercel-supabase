@@ -82,10 +82,6 @@
       "destination": "/admin.html"
     },
     {
-      "source": "/sitemap.xml",
-      "destination": "/api/sitemap.xml"
-    },
-    {
       "source": "/catalogo.html",
       "has": [
         {
@@ -104,14 +100,6 @@
         }
       ],
       "destination": "/api/legacy-category-redirect"
-    },
-    {
-      "source": "/:slug((?!acesso-tecnico-arlatem$|catalogo\\.html$|admin\\.html$|robots\\.txt$|sitemap\\.xml$|site\\.js$|slug-utils\\.js$|styles\\.css$|catalogo\\.js$|catalogo\\.css$|favicon\\.ico$|google1ecb8b99b19a1347\\.html$)[^/]+)",
-      "destination": "/api/category-page?slug=:slug"
-    },
-    {
-      "source": "/:slug((?!acesso-tecnico-arlatem$|catalogo\\.html$|admin\\.html$|robots\\.txt$|sitemap\\.xml$|site\\.js$|slug-utils\\.js$|styles\\.css$|catalogo\\.js$|catalogo\\.css$|favicon\\.ico$|google1ecb8b99b19a1347\\.html$)[^/]+)/",
-      "destination": "/api/category-page?slug=:slug"
     }
   ]
 }
