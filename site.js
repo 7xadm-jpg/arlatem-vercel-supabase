@@ -143,6 +143,28 @@ async function loadData() {
     payload = { ok: true, data: await fallbackResponse.json() };
   }
   if (!payload.ok) throw new Error('Falha ao carregar conteúdo');
+  const needsFallback = ['categories', 'brands', 'highlights', 'benefits', 'blog', 'testimonials', 'faq']
+    .some((key) => !Array.isArray(payload.data?.[key]) || payload.data[key].length === 0);
+
+  if (needsFallback) {
+    const fallbackResponse = await fetch('/data/default-content.json', { cache: 'no-store' });
+    if (fallbackResponse.ok) {
+      const fallback = await fallbackResponse.json();
+      const current = payload.data || {};
+      const merged = { ...fallback, ...current };
+
+      ['categories', 'brands', 'highlights', 'benefits', 'blog', 'testimonials', 'faq', 'products']
+        .forEach((key) => {
+          merged[key] = Array.isArray(current[key]) && current[key].length
+            ? current[key]
+            : (fallback[key] || []);
+        });
+
+      merged.settings = { ...(fallback.settings || {}), ...(current.settings || {}) };
+      merged.hero = { ...(fallback.hero || {}), ...(current.hero || {}) };
+      payload.data = merged;
+    }
+  }
   state.content = payload.data;
   state.products = payload.data.products || [];
   renderAll();
