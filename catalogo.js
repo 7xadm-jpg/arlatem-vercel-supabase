@@ -206,6 +206,18 @@ function updateCatalogSeo(force = false) {
 }
 
 async function loadData() {
+  if (!window.ARLATEM_DATA) throw new Error('Dados de seguranca nao carregados');
+  const safePayload = await window.ARLATEM_DATA.load();
+  state.content = safePayload.data;
+  state.products = safePayload.data.products || [];
+
+  const safeParams = new URLSearchParams(window.location.search);
+  state.search = String(safeParams.get('q') || '').trim();
+  const safeCategorySlug = getPathSlug();
+  if (safeCategorySlug) state.category = getCategoryFromSlug(safeCategorySlug);
+  renderAll();
+  return;
+
   let payload;
   try {
     const response = await fetch('/api/content', { cache: 'no-store' });

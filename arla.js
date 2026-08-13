@@ -44,6 +44,19 @@ function normalizeSocialUrl(value, platform) {
 }
 
 async function loadData() {
+  if (!window.ARLATEM_DATA) throw new Error('Dados de seguranca nao carregados');
+  const safePayload = await window.ARLATEM_DATA.load();
+  state.content = safePayload.data;
+  const safeKeywords = ['ARLA', 'Bomba', 'Dosador', 'Filtro', 'Reservatorio'];
+  state.products = (safePayload.data.products || []).filter((product) => {
+    const text = [product.name, product.category, product.description, ...(product.tags || [])]
+      .join(' ')
+      .toUpperCase();
+    return safeKeywords.some((keyword) => text.includes(keyword.toUpperCase()));
+  });
+  renderAll();
+  return;
+
   let payload;
   try {
     const response = await fetch('/api/content', { cache: 'no-store' });
