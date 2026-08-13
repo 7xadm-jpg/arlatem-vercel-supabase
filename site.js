@@ -130,8 +130,18 @@ async function loadData() {
     return;
   }
 
-  const response = await fetch('/api/content', { cache: 'no-store' });
-  const payload = await response.json();
+  let payload;
+  try {
+    const response = await fetch('/api/content', { cache: 'no-store' });
+    if (!response.ok) throw new Error(`API indisponivel (${response.status})`);
+    payload = await response.json();
+    if (!payload.ok || !payload.data) throw new Error('Resposta invalida da API');
+  } catch (error) {
+    console.warn('Usando conteudo de seguranca:', error.message);
+    const fallbackResponse = await fetch('/data/default-content.json', { cache: 'no-store' });
+    if (!fallbackResponse.ok) throw new Error('Conteudo de seguranca indisponivel');
+    payload = { ok: true, data: await fallbackResponse.json() };
+  }
   if (!payload.ok) throw new Error('Falha ao carregar conteúdo');
   state.content = payload.data;
   state.products = payload.data.products || [];
