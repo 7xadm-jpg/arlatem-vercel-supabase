@@ -130,7 +130,24 @@ async function loadData() {
     return;
   }
 
-  if (!window.ARLATEM_DATA) throw new Error('Dados de seguranca nao carregados');
+  if (!window.ARLATEM_DATA) {
+    await new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = '/fallback-data.js?v=20260813-final2';
+      script.onload = resolve;
+      script.onerror = () => reject(new Error('Dados de seguranca nao carregados'));
+      document.head.appendChild(script);
+    });
+  }
+  if (!window.ARLATEM_BRAND_LOGOS) {
+    await new Promise((resolve) => {
+      const script = document.createElement('script');
+      script.src = '/brand-logos.js?v=20260813-final2';
+      script.onload = resolve;
+      script.onerror = resolve;
+      document.head.appendChild(script);
+    });
+  }
   const safePayload = await window.ARLATEM_DATA.load();
   state.content = safePayload.data;
   state.products = safePayload.data.products || [];
@@ -214,9 +231,9 @@ function renderHero() {
   const heroImage = document.getElementById('heroImage');
   heroImage.onerror = () => {
     heroImage.onerror = null;
-    heroImage.src = '/uploads/hero-trucks-arla.png';
+    heroImage.src = '/uploads/hero-trucks-arla-web.jpg';
   };
-  heroImage.src = hero.backgroundImage || '/uploads/hero-trucks-arla.png';
+  heroImage.src = hero.backgroundImage || '/uploads/hero-trucks-arla-web.jpg';
   refs.heroSearch.placeholder = hero.searchPlaceholder;
   document.getElementById('productCountBadge').textContent = `+${state.products.length}`;
 
@@ -262,9 +279,10 @@ function renderBrands() {
 
   document.getElementById('brandGrid').innerHTML = brands.map((brand) => {
     const slug = logoSlug(brand.name);
+    const inlineLogo = window.ARLATEM_BRAND_LOGOS?.[slug] || '';
     return `
       <div class="brand-pill">
-        <img src="/uploads/brands/${slug}.svg" alt="Logo ${brand.name}" loading="lazy" onerror="this.hidden=true" />
+        <span class="brand-inline-logo" role="img" aria-label="Logo ${brand.name}">${inlineLogo}</span>
         <span>${brand.name}</span>
       </div>`;
   }).join('');

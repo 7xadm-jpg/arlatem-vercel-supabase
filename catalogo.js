@@ -206,7 +206,15 @@ function updateCatalogSeo(force = false) {
 }
 
 async function loadData() {
-  if (!window.ARLATEM_DATA) throw new Error('Dados de seguranca nao carregados');
+  if (!window.ARLATEM_DATA) {
+    await new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = '/fallback-data.js?v=20260813-final2';
+      script.onload = resolve;
+      script.onerror = () => reject(new Error('Dados de seguranca nao carregados'));
+      document.head.appendChild(script);
+    });
+  }
   const safePayload = await window.ARLATEM_DATA.load();
   state.content = safePayload.data;
   state.products = safePayload.data.products || [];

@@ -18,7 +18,7 @@
     "eyebrow": "Especialistas em peças ARLA e sistema SCR",
     "title": "Peças para ARLA 32, Sistema SCR e Catalisadores",
     "subtitle": "Sensores NOx, bombas dosadoras, módulos eletrônicos, catalisadores e componentes para linha pesada, com atendimento em Contagem, Belo Horizonte, RMBH e todo o Brasil.",
-    "backgroundImage": "/uploads/hero-trucks-arla.png",
+    "backgroundImage": "/uploads/hero-trucks-arla-web.jpg",
     "searchPlaceholder": "Pesquisar por Sensor NOx, Bomba ARLA, Catalisador, Dosador, Chicote, Filtro ou Módulo..."
   },
   "highlights": [
