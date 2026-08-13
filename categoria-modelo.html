@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
@@ -6,7 +6,7 @@
   <title>Categoria | ARLATEM</title>
   <meta name="description" content="Página de categoria ARLATEM." />
   <meta name="theme-color" content="#0B5ED7" />
-  <meta name="robots" content="index, follow" />
+  <meta name="robots" content="noindex, follow" />
 
   <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="/uploads/favicon.png" />
@@ -15,6 +15,8 @@
 
   <link rel="stylesheet" href="/styles.css" />
   <link rel="stylesheet" href="/categoria.css" />
+  <meta name="google-analytics-id" content="" />
+  <script defer src="/analytics.js"></script>
 </head>
 <body>
   <div class="preloader" id="preloader" aria-hidden="true">
@@ -34,7 +36,7 @@
 
         <nav class="main-nav" id="mainNav">
           <a href="/">Home</a>
-          <a href="/catalogo.html">Produtos</a>
+          <a href="/catalogo/">Produtos</a>
           <a href="/#categorias">Categorias</a>
           <a href="/#marcas">Marcas</a>
           <a href="/#quem-somos">Quem Somos</a>
@@ -43,7 +45,7 @@
         </nav>
 
         <div class="nav-actions">
-          <a class="btn btn-ghost desktop-only" href="/catalogo.html">Ver catálogo completo</a>
+          <a class="btn btn-ghost desktop-only" href="/catalogo/">Ver catálogo completo</a>
           <a class="btn btn-primary whatsapp-cta" id="navWhatsapp">Solicitar Orçamento</a>
           <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
             <span></span><span></span><span></span>
@@ -142,7 +144,7 @@
 
         <div class="footer-links">
           <h3>Links rápidos</h3>
-          <a href="/catalogo.html">Produtos</a>
+          <a href="/catalogo/">Produtos</a>
           <a href="/#categorias">Categorias</a>
           <a href="/#marcas">Marcas</a>
           <a href="/#quem-somos">Quem Somos</a>
@@ -163,6 +165,7 @@
             <strong id="mapLocation">Contagem - MG</strong><br>
             Atendimento nacional com suporte comercial especializado.
           </p>
+          <a class="map-directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=R.%20Maestro%20Az%C3%A9rias%2C%20133%20-%20Inconfidentes%2C%20Contagem%20-%20MG%2C%2032260-270" target="_blank" rel="noopener noreferrer">Abrir rota no Google Maps</a>
           <div class="map-embed-wrap">
             <iframe
               src="https://www.google.com/maps?q=R.%20Maestro%20Az%C3%A9rias,%20133%20-%20Inconfidentes,%20Contagem%20-%20MG,%2032260-270&z=15&output=embed"
@@ -202,3 +205,4 @@
   <script src="/categoria.js?v=1"></script>
 </body>
 </html>
+

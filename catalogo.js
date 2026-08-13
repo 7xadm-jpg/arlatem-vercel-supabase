@@ -135,7 +135,7 @@ function getPathSlug() {
   if (window.__CATEGORY_SLUG__) return window.__CATEGORY_SLUG__;
 
   const path = window.location.pathname.replace(/^\/+|\/+$/g, '');
-  if (!path || path === 'catalogo.html') return '';
+  if (!path || path === 'catalogo' || path === 'catalogo.html') return '';
 
   const segments = path.split('/').filter(Boolean);
   if (segments.length === 1 && !segments[0].includes('.')) {
@@ -146,11 +146,16 @@ function getPathSlug() {
 }
 
 function getCatalogUrlForCategory(categoryName) {
-  return categoryName ? `/${slugify(categoryName)}/` : '/catalogo.html';
+  return categoryName ? `/${slugify(categoryName)}/` : '/catalogo/';
 }
 
 function updateCatalogUrl() {
-  const target = getCatalogUrlForCategory(state.category);
+  const searchQuery = String(state.search || '').trim();
+  const target = state.category
+    ? getCatalogUrlForCategory(state.category)
+    : searchQuery
+      ? `/catalogo/?q=${encodeURIComponent(searchQuery)}`
+      : '/catalogo/';
   const current = `${window.location.pathname}${window.location.search}`;
   if (current !== target) {
     window.history.replaceState({}, '', target);
@@ -208,6 +213,9 @@ async function loadData() {
   state.content = payload.data;
   state.products = payload.data.products || [];
 
+  const params = new URLSearchParams(window.location.search);
+  state.search = String(params.get('q') || '').trim();
+
   const categorySlugFromPath = getPathSlug();
 
   if (categorySlugFromPath) {
@@ -234,8 +242,49 @@ function renderBrand() {
 }
 
 function renderHeroStats() {
-  document.getElementById('totalProductsHero').textContent = state.products.length;
-  document.getElementById('totalCategoriesHero').textContent = [...new Set(state.products.map((product) => product.category).filter(Boolean))].length;
+  const categoryData = (state.content?.categories || []).find((item) => item.name === state.category);
+  const categoryProducts = state.category
+    ? state.products.filter((product) => product.category === state.category)
+    : state.products;
+  const isCategoryPage = Boolean(state.category);
+
+  document.body.classList.toggle('category-page', isCategoryPage);
+  document.getElementById('catalogPageHero')?.classList.toggle('category-view', isCategoryPage);
+  document.getElementById('totalProductsHero').textContent = categoryProducts.length;
+  document.getElementById('productsHeroLabel').textContent = isCategoryPage
+    ? `Produto${categoryProducts.length === 1 ? '' : 's'} nesta categoria`
+    : 'Produtos cadastrados';
+
+  const categoriesTotal = [...new Set(state.products.map((product) => product.category).filter(Boolean))].length;
+  document.getElementById('totalCategoriesHero').textContent = isCategoryPage ? 'Técnico' : categoriesTotal;
+  document.getElementById('categoriesHeroLabel').textContent = isCategoryPage ? 'Suporte especializado' : 'Categorias';
+  document.getElementById('supportHeroValue').textContent = isCategoryPage ? 'Brasil' : 'WhatsApp';
+  document.getElementById('supportHeroLabel').textContent = isCategoryPage ? 'Atendimento nacional' : 'Atendimento rápido';
+
+  const title = document.getElementById('catalogPageTitle');
+  const description = document.getElementById('catalogPageDescription');
+  const kicker = document.getElementById('catalogPageKicker');
+  const context = document.getElementById('categoryContext');
+  const breadcrumbWrap = document.getElementById('categoryBreadcrumbWrap');
+  const breadcrumb = document.getElementById('categoryBreadcrumb');
+
+  if (isCategoryPage) {
+    kicker.textContent = 'Categoria de peças';
+    title.textContent = state.category;
+    const categoryDescription = String(categoryData?.description || '').replace(/[.\s]+$/, '');
+    description.textContent = categoryDescription
+      ? `${categoryDescription}. Encontre aplicações para ARLA 32, sistema SCR e linha pesada com suporte especializado.`
+      : `Peças da categoria ${state.category} para ARLA 32, sistema SCR e linha pesada com suporte especializado.`;
+    context.hidden = false;
+    breadcrumbWrap.hidden = false;
+    breadcrumb.textContent = state.category;
+  } else {
+    kicker.textContent = 'Catálogo completo';
+    title.textContent = 'Veja todas as peças em um só lugar';
+    description.textContent = 'Pesquise, filtre e navegue pelo catálogo completo da ARLATEM para encontrar a peça certa em segundos.';
+    context.hidden = true;
+    breadcrumbWrap.hidden = true;
+  }
   setWhatsAppLink(document.getElementById('navWhatsapp'), 'Olá! Quero solicitar um orçamento na ARLATEM.');
 }
 
@@ -302,15 +351,22 @@ function renderProducts() {
   const start = (state.page - 1) * state.perPage;
   const pageItems = filtered.slice(start, start + state.perPage);
 
+  refs.productGrid.classList.toggle('single-result', pageItems.length === 1);
+
   refs.resultsInfo.textContent = `${filtered.length} produto${filtered.length === 1 ? '' : 's'} encontrados`;
   renderActiveFilters();
 
   if (!pageItems.length) {
+    const emptyTitle = state.category ? `${state.category}: catálogo em atualização` : 'Nenhum produto encontrado';
+    const emptyText = state.category
+      ? `Ainda não há um item publicado nesta categoria. Nossa equipe pode localizar a peça por código, veículo ou aplicação.`
+      : 'Tente ajustar os filtros ou falar com nossa equipe no WhatsApp.';
     refs.productGrid.innerHTML = `
       <div class="no-results catalog-empty-state">
-        <h3>Nenhum produto encontrado</h3>
-        <p>Tente ajustar os filtros ou falar com nossa equipe no WhatsApp.</p>
-        <a class="btn btn-primary" href="${buildWhatsAppLink('Olá! Não encontrei o produto que procuro no catálogo completo.')}" target="_blank" rel="noopener noreferrer">Falar com a equipe</a>
+        <span class="empty-kicker">Atendimento sob consulta</span>
+        <h3>${emptyTitle}</h3>
+        <p>${emptyText}</p>
+        <a class="btn btn-primary" href="${buildWhatsAppLink(`Olá! Preciso de ajuda para localizar uma peça da categoria ${state.category || 'do catálogo'}.`)}" target="_blank" rel="noopener noreferrer">Localizar uma peça</a>
       </div>
     `;
     refs.paginationWrap.innerHTML = '';
@@ -324,18 +380,21 @@ function renderProducts() {
         <span class="product-badge">${product.availability || 'Consulte'}</span>
       </div>
       <div class="product-body">
+        <div class="product-heading-line">
+          <span class="product-kicker">${product.category || 'Peça para sistema SCR'}</span>
+          <span class="product-code-badge">${product.code || 'Consulte'}</span>
+        </div>
         <h3>${product.name}</h3>
-        <div class="product-meta">
-          <div class="meta-row"><span>Código</span><strong>${product.code || '-'}</strong></div>
-          <div class="meta-row"><span>Marca</span><strong>${product.brand || '-'}</strong></div>
-          <div class="meta-row"><span>Compatibilidade</span><strong>${product.compatibility || '-'}</strong></div>
+        <div class="product-specs">
+          <div class="product-spec"><span>Marca</span><strong>${product.brand || '-'}</strong></div>
+          <div class="product-spec product-spec-wide"><span>Aplicação</span><strong>${product.compatibility || '-'}</strong></div>
         </div>
         <div class="product-tags">
           ${(product.tags || []).map((tag) => `<span class="tag-pill">${tag}</span>`).join('')}
         </div>
         <div class="product-actions">
-          <button class="btn-card details-trigger" data-id="${product.id}">Ver detalhes</button>
-          <a class="btn-card primary" href="${buildWhatsAppLink(`Olá! Quero solicitar orçamento para ${product.name} (${product.code || ''}).`)}" target="_blank" rel="noopener noreferrer">Solicitar orçamento</a>
+          <button class="btn-card details-trigger" data-id="${product.id}">Detalhes da peça</button>
+          <a class="btn-card primary" href="${buildWhatsAppLink(`Olá! Quero solicitar orçamento para ${product.name} (${product.code || ''}).`)}" target="_blank" rel="noopener noreferrer">Pedir orçamento</a>
         </div>
       </div>
     </article>
@@ -430,7 +489,7 @@ function openProductModal(productId) {
         <div class="product-tags">${(product.tags || []).map((tag) => `<span class="tag-pill">${tag}</span>`).join('')}</div>
         <div class="modal-actions">
           <a class="btn btn-primary" href="${buildWhatsAppLink(`Olá! Quero orçamento para ${product.name} (${product.code || ''}).`)}" target="_blank" rel="noopener noreferrer">Solicitar orçamento</a>
-          <a class="btn btn-secondary" href="/catalogo.html">Continuar navegando</a>
+          <a class="btn btn-secondary" href="/catalogo/">Continuar navegando</a>
         </div>
       </div>
     </div>

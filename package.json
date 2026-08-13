@@ -3,6 +3,11 @@
   "private": true,
   "version": "1.0.0",
   "description": "Site e painel administrativo ARLATEM com Vercel + Supabase",
+  "scripts": {
+    "dev": "node scripts/local-server.js",
+    "dev:vercel": "vercel dev",
+    "check": "node scripts/check-project.js"
+  },
   "dependencies": {
     "@supabase/supabase-js": "^2.53.0"
   },

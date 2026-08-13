@@ -130,7 +130,7 @@ function openProductModal(productId) {
         <div class="product-tags">${(product.tags || []).map((tag) => `<span class="tag-pill">${tag}</span>`).join('')}</div>
         <div class="modal-actions">
           <a class="btn btn-primary" href="${buildWhatsAppLink(`Olá! Quero orçamento para ${product.name} (${product.code || ''}).`)}" target="_blank" rel="noopener noreferrer">Solicitar orçamento</a>
-          <a class="btn btn-secondary" href="/arla.html">Continuar navegando</a>
+          <a class="btn btn-secondary" href="/catalogo/">Continuar navegando</a>
         </div>
       </div>
     </div>

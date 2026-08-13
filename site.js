@@ -172,7 +172,12 @@ function renderHero() {
   document.getElementById('heroEyebrow').textContent = hero.eyebrow;
   document.getElementById('heroTitle').textContent = hero.title;
   document.getElementById('heroSubtitle').textContent = hero.subtitle;
-  document.getElementById('heroImage').src = hero.backgroundImage;
+  const heroImage = document.getElementById('heroImage');
+  heroImage.onerror = () => {
+    heroImage.onerror = null;
+    heroImage.src = '/uploads/hero-trucks-arla.png';
+  };
+  heroImage.src = hero.backgroundImage || '/uploads/hero-trucks-arla.png';
   refs.heroSearch.placeholder = hero.searchPlaceholder;
   document.getElementById('productCountBadge').textContent = `+${state.products.length}`;
 
@@ -195,10 +200,11 @@ function renderHighlights() {
 function renderCategories() {
   const categories = state.content.categories || [];
   document.getElementById('categoryGrid').innerHTML = categories.map((category, index) => `
-    <a class="category-card reveal ${index % 3 === 1 ? 'delay-1' : index % 3 === 2 ? 'delay-2' : ''}" href="/${slugify(category.name)}/">
+    <a class="category-card reveal ${index % 3 === 1 ? 'delay-1' : index % 3 === 2 ? 'delay-2' : ''}" href="/${slugify(category.name)}/" aria-label="Ver produtos da categoria ${category.name}">
       <span class="icon-wrap">${iconMarkup(category.icon)}</span>
       <strong>${category.name}</strong>
       <small>${category.description}</small>
+      <span class="category-link-label">Ver produtos <b aria-hidden="true">→</b></span>
     </a>
   `).join('');
 
@@ -209,7 +215,20 @@ function renderCategories() {
 
 function renderBrands() {
   const brands = state.content.brands || [];
-  document.getElementById('brandGrid').innerHTML = brands.map((brand) => `<div class="brand-pill">${brand.name}</div>`).join('');
+  const logoSlug = (name) => String(name || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '');
+
+  document.getElementById('brandGrid').innerHTML = brands.map((brand) => {
+    const slug = logoSlug(brand.name);
+    return `
+      <div class="brand-pill">
+        <img src="/uploads/brands/${slug}.svg" alt="Logo ${brand.name}" loading="lazy" onerror="this.hidden=true" />
+        <span>${brand.name}</span>
+      </div>`;
+  }).join('');
 }
 
 function renderBenefits() {
@@ -310,18 +329,21 @@ function renderProducts() {
         <span class="product-badge">${product.availability || 'Consulte'}</span>
       </div>
       <div class="product-body">
+        <div class="product-heading-line">
+          <span class="product-kicker">${product.category || 'Peça para sistema SCR'}</span>
+          <span class="product-code-badge">${product.code || 'Consulte'}</span>
+        </div>
         <h3>${product.name}</h3>
-        <div class="product-meta">
-          <div class="meta-row"><span>Código</span><strong>${product.code || '-'}</strong></div>
-          <div class="meta-row"><span>Marca</span><strong>${product.brand || '-'}</strong></div>
-          <div class="meta-row"><span>Compatibilidade</span><strong>${product.compatibility || '-'}</strong></div>
+        <div class="product-specs">
+          <div class="product-spec"><span>Marca</span><strong>${product.brand || '-'}</strong></div>
+          <div class="product-spec product-spec-wide"><span>Aplicação</span><strong>${product.compatibility || '-'}</strong></div>
         </div>
         <div class="product-tags">
           ${(product.tags || []).map((tag) => `<span class="tag-pill">${tag}</span>`).join('')}
         </div>
         <div class="product-actions">
-          <button class="btn-card details-trigger" data-id="${product.id}">Ver detalhes</button>
-          <a class="btn-card primary" href="${buildWhatsAppLink(`Olá! Quero solicitar orçamento para ${product.name} (${product.code}).`)}" target="_blank" rel="noopener noreferrer">Solicitar orçamento</a>
+          <button class="btn-card details-trigger" data-id="${product.id}">Detalhes da peça</button>
+          <a class="btn-card primary" href="${buildWhatsAppLink(`Olá! Quero solicitar orçamento para ${product.name} (${product.code}).`)}" target="_blank" rel="noopener noreferrer">Pedir orçamento</a>
         </div>
       </div>
     </article>
@@ -457,8 +479,14 @@ function renderTestimonials() {
 }
 
 function showTestimonial() {
-  const testimonials = state.content.testimonials || [];
-  if (!testimonials.length) return;
+  const testimonials = Array.isArray(state.content.testimonials) && state.content.testimonials.length
+    ? state.content.testimonials
+    : [{
+        quote: 'Atendimento técnico, rápido e objetivo para encontrar a peça correta.',
+        author: 'Cliente ARLATEM',
+        role: 'Atendimento especializado',
+        stars: 5
+      }];
   const testimonial = testimonials[testimonialIndex];
   refs.testimonialsTrack.innerHTML = `
     <article class="testimonial-card">
@@ -472,13 +500,13 @@ function showTestimonial() {
 }
 
 function nextTestimonial() {
-  const total = (state.content.testimonials || []).length || 1;
+  const total = Math.max((state.content.testimonials || []).length, 1);
   testimonialIndex = (testimonialIndex + 1) % total;
   showTestimonial();
 }
 
 function prevTestimonial() {
-  const total = (state.content.testimonials || []).length || 1;
+  const total = Math.max((state.content.testimonials || []).length, 1);
   testimonialIndex = (testimonialIndex - 1 + total) % total;
   showTestimonial();
 }
@@ -531,12 +559,25 @@ function setupMisc() {
   const email = document.getElementById('contactEmail');
   email.textContent = settings.email;
   email.href = `mailto:${settings.email}`;
-  document.getElementById('instagramLink').href = settings.instagram || '#';
-  document.getElementById('facebookLink').href = settings.facebook || '#';
+  document.getElementById('instagramLink').href = normalizeSocialUrl(settings.instagram, 'instagram');
+  document.getElementById('facebookLink').href = normalizeSocialUrl(settings.facebook, 'facebook');
   document.getElementById('contactLocation').textContent = `${settings.location} • Atendimento em todo o Brasil`;
   document.getElementById('contactHours').textContent = settings.hours;
   document.getElementById('mapLocation').textContent = settings.location;
   document.getElementById('copyrightText').textContent = settings.copyrightText;
+}
+
+function normalizeSocialUrl(value, network) {
+  const raw = String(value || '').trim();
+  if (!raw || raw === '#') return '#';
+  if (/^https?:\/\//i.test(raw)) return raw;
+
+  const handle = raw.replace(/^@/, '').replace(/^\/+|\/+$/g, '');
+  if (!handle) return '#';
+
+  return network === 'instagram'
+    ? `https://www.instagram.com/${handle}/`
+    : `https://www.facebook.com/${handle}`;
 }
 
 function formatPhone(number) {

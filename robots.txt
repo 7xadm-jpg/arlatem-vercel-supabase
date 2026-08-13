@@ -2,5 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /acesso-tecnico-arlatem
+Disallow: /admin.html
+Disallow: /categoria/
 
 Sitemap: https://www.arlatem.com.br/sitemap.xml

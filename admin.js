@@ -83,6 +83,7 @@ const refs = {
   loginUsername: document.getElementById('loginUsername'),
   loginPassword: document.getElementById('loginPassword'),
   loginMessage: document.getElementById('loginMessage'),
+  loginHint: document.getElementById('loginHint'),
   statusBar: document.getElementById('statusBar'),
   saveBtn: document.getElementById('saveBtn'),
   backupBtn: document.getElementById('backupBtn'),
@@ -117,7 +118,12 @@ async function api(url, options = {}) {
   const response = await fetch(url, config);
   const payload = await response.json().catch(() => ({}));
   if (!response.ok) {
-    throw new Error(payload.message || 'Erro na requisição');
+    const staleLocalServer = ['127.0.0.1', 'localhost'].includes(location.hostname)
+      && response.status === 404
+      && url.startsWith('/api/');
+    throw new Error(staleLocalServer
+      ? 'Servidor local antigo detectado. Encerre o terminal anterior com Ctrl+C e execute npm run dev novamente.'
+      : payload.message || `Erro na requisição (${response.status})`);
   }
   return payload;
 }
@@ -267,7 +273,7 @@ function renderProducts(products) {
         <button class="remove-btn" data-remove-product="${index}">Remover produto</button>
       </div>
       <div class="image-row">
-        <img class="image-preview" src="${escapeHtml(product.image || '')}" alt="Preview do produto" />
+        <img class="image-preview"${product.image ? ` src="${escapeHtml(product.image)}"` : ''} alt="Preview do produto" />
         <div class="product-fields">
           <label class="full">Imagem do produto (URL interna)
             <input type="text" data-product-field="image" value="${escapeHtml(product.image || '')}" />
@@ -547,7 +553,11 @@ function wireEvents() {
       const card = event.target.closest('[data-product-item]');
       if (card) {
         const preview = card.querySelector('.image-preview');
-        if (preview) preview.src = event.target.value.trim();
+        if (preview) {
+          const imagePath = event.target.value.trim();
+          if (imagePath) preview.src = imagePath;
+          else preview.removeAttribute('src');
+        }
       }
     }
 
@@ -568,6 +578,11 @@ function wireEvents() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+  const isLocal = ['127.0.0.1', 'localhost'].includes(location.hostname);
+  if (isLocal && refs.loginHint) {
+    refs.loginUsername.value = 'gestor-arlatem';
+    refs.loginHint.innerHTML = '<strong>Modo local:</strong><span>Use a senha <code>arlatem-local</code>. As alterações ficam somente neste computador e não modificam o Supabase.</span>';
+  }
   wireEvents();
   await trySession();
 });

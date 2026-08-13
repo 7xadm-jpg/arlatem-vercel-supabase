@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
@@ -13,13 +13,13 @@
   <meta property="og:description" content="Catálogo completo com peças para ARLA 32, sistema SCR e pós-tratamento diesel para caminhões, ônibus e linha pesada." />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="pt_BR" />
-  <meta property="og:url" content="https://www.arlatem.com.br/catalogo.html" />
-  <meta property="og:image" content="https://www.arlatem.com.br/uploads/favicon.png" />
+  <meta property="og:url" content="https://www.arlatem.com.br/catalogo/" />
+  <meta property="og:image" content="https://www.arlatem.com.br/uploads/hero-trucks-arla.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Catálogo de Peças para ARLA 32 e SCR | ARLATEM" />
   <meta name="twitter:description" content="Catálogo completo com peças para ARLA 32, sistema SCR e pós-tratamento diesel para caminhões, ônibus e linha pesada." />
-  <meta name="twitter:image" content="https://www.arlatem.com.br/uploads/favicon.png" />
-  <link rel="canonical" href="https://www.arlatem.com.br/catalogo.html" />
+  <meta name="twitter:image" content="https://www.arlatem.com.br/uploads/hero-trucks-arla.png" />
+  <link rel="canonical" href="https://www.arlatem.com.br/catalogo/" />
 
   <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="/uploads/favicon.png" />
@@ -29,6 +29,8 @@
   <link rel="preconnect" href="https://vjgmveusvasulipbloks.supabase.co" crossorigin />
   <link rel="stylesheet" href="/styles.css?v=32" />
   <link rel="stylesheet" href="/catalogo.css?v=32" />
+  <meta name="google-analytics-id" content="" />
+  <script defer src="/analytics.js"></script>
 </head>
 <body>
   <div class="preloader" id="preloader" aria-hidden="true">
@@ -48,7 +50,7 @@
 
         <nav class="main-nav" id="mainNav">
           <a href="/">Home</a>
-          <a href="/catalogo.html">Produtos</a>
+          <a href="/catalogo/">Produtos</a>
           <a href="/#categorias">Categorias</a>
           <a href="/#marcas">Marcas</a>
           <a href="/#quem-somos">Quem Somos</a>
@@ -67,25 +69,33 @@
     </header>
 
     <main>
-      <section class="catalog-page-hero">
+      <section class="catalog-page-hero" id="catalogPageHero">
         <div class="container catalog-page-hero-grid">
-          <div>
-            <span class="section-kicker">Catálogo completo</span>
-            <h1>Veja todas as peças em um só lugar</h1>
-            <p>Pesquise, filtre e navegue pelo catálogo completo da ARLATEM para encontrar a peça certa em segundos.</p>
+          <div class="catalog-hero-copy">
+            <nav class="catalog-breadcrumb" aria-label="Navegação estrutural">
+              <a href="/">Home</a><span aria-hidden="true">/</span><a href="/catalogo/">Catálogo</a><span id="categoryBreadcrumbWrap" hidden><span aria-hidden="true">/</span><strong id="categoryBreadcrumb"></strong></span>
+            </nav>
+            <span class="section-kicker" id="catalogPageKicker">Catálogo completo</span>
+            <h1 id="catalogPageTitle">Veja todas as peças em um só lugar</h1>
+            <p id="catalogPageDescription">Pesquise, filtre e navegue pelo catálogo completo da ARLATEM para encontrar a peça certa em segundos.</p>
+            <div class="category-context" id="categoryContext" hidden>
+              <span>Aplicação em linha pesada</span>
+              <span>Suporte técnico</span>
+              <span>Orçamento pelo WhatsApp</span>
+            </div>
           </div>
           <div class="catalog-page-hero-stats">
             <div class="catalog-mini-card glass-card">
               <strong id="totalProductsHero">0</strong>
-              <span>Produtos cadastrados</span>
+              <span id="productsHeroLabel">Produtos cadastrados</span>
             </div>
             <div class="catalog-mini-card glass-card">
               <strong id="totalCategoriesHero">0</strong>
-              <span>Categorias</span>
+              <span id="categoriesHeroLabel">Categorias</span>
             </div>
             <div class="catalog-mini-card glass-card">
-              <strong>WhatsApp</strong>
-              <span>Atendimento rápido</span>
+              <strong id="supportHeroValue">WhatsApp</strong>
+              <span id="supportHeroLabel">Atendimento rápido</span>
             </div>
           </div>
         </div>
@@ -127,8 +137,9 @@
           <div class="catalog-main-area">
             <div class="catalog-toolbar catalog-toolbar-page">
               <div>
+                <span class="toolbar-kicker">Resultado da busca</span>
                 <strong id="catalogResultsInfo">0 produtos encontrados</strong>
-                <span>Navegue por páginas para visualizar todo o catálogo.</span>
+                <span>Compare as informações e peça a confirmação de compatibilidade.</span>
               </div>
               <div class="toolbar-tags" id="activeFiltersPage"></div>
             </div>
@@ -158,7 +169,7 @@
 
         <div class="footer-links">
           <h3>Links rápidos</h3>
-          <a href="/catalogo.html">Produtos</a>
+          <a href="/catalogo/">Produtos</a>
           <a href="/#categorias">Categorias</a>
           <a href="/#marcas">Marcas</a>
           <a href="/#quem-somos">Quem Somos</a>
@@ -179,6 +190,7 @@
             <strong id="mapLocation">Contagem - MG</strong><br>
             Atendimento nacional com suporte comercial especializado.
           </p>
+          <a class="map-directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=R.%20Maestro%20Az%C3%A9rias%2C%20133%20-%20Inconfidentes%2C%20Contagem%20-%20MG%2C%2032260-270" target="_blank" rel="noopener noreferrer">Abrir rota no Google Maps</a>
           <div class="map-embed-wrap">
             <iframe
               src="https://www.google.com/maps?q=R.%20Maestro%20Az%C3%A9rias,%20133%20-%20Inconfidentes,%20Contagem%20-%20MG,%2032260-270&z=15&output=embed"
@@ -213,10 +225,11 @@
     <div class="modal-body" id="modalBody"></div>
   </dialog>
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Catálogo de Peças para ARLA 32 e SCR | ARLATEM","url":"https://www.arlatem.com.br/catalogo.html"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Catálogo de Peças para ARLA 32 e SCR | ARLATEM","url":"https://www.arlatem.com.br/catalogo/"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"ARLATEM","url":"https://www.arlatem.com.br/","logo":"https://www.arlatem.com.br/uploads/favicon.png"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"ARLATEM","url":"https://www.arlatem.com.br/"}</script>
   <script src="/slug-utils.js?v=1"></script>
   <script src="/catalogo.js?v=32"></script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a267dd7f9e74e012',t:'MTc4NTk1NDU0NA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
+
