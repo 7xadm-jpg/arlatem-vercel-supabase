@@ -54,6 +54,7 @@ module.exports = async (req, res) => {
     );
   } catch (error) {
     const fallback = getDefaultPayload();
+
     return sendJson(
       res,
       200,
