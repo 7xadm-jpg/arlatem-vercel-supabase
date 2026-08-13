@@ -307,21 +307,21 @@ function renderHeroStats() {
   const breadcrumb = document.getElementById('categoryBreadcrumb');
 
   if (isCategoryPage) {
-    kicker.textContent = 'Categoria de peças';
-    title.textContent = state.category;
+    if (kicker) kicker.textContent = 'Categoria de peças';
+    if (title) title.textContent = state.category;
     const categoryDescription = String(categoryData?.description || '').replace(/[.\s]+$/, '');
-    description.textContent = categoryDescription
+    if (description) description.textContent = categoryDescription
       ? `${categoryDescription}. Encontre aplicações para ARLA 32, sistema SCR e linha pesada com suporte especializado.`
       : `Peças da categoria ${state.category} para ARLA 32, sistema SCR e linha pesada com suporte especializado.`;
-    context.hidden = false;
-    breadcrumbWrap.hidden = false;
-    breadcrumb.textContent = state.category;
+    if (context) context.hidden = false;
+    if (breadcrumbWrap) breadcrumbWrap.hidden = false;
+    if (breadcrumb) breadcrumb.textContent = state.category;
   } else {
-    kicker.textContent = 'Catálogo completo';
-    title.textContent = 'Veja todas as peças em um só lugar';
-    description.textContent = 'Pesquise, filtre e navegue pelo catálogo completo da ARLATEM para encontrar a peça certa em segundos.';
-    context.hidden = true;
-    breadcrumbWrap.hidden = true;
+    if (kicker) kicker.textContent = 'Catálogo completo';
+    if (title) title.textContent = 'Veja todas as peças em um só lugar';
+    if (description) description.textContent = 'Pesquise, filtre e navegue pelo catálogo completo da ARLATEM para encontrar a peça certa em segundos.';
+    if (context) context.hidden = true;
+    if (breadcrumbWrap) breadcrumbWrap.hidden = true;
   }
   setWhatsAppLink(document.getElementById('navWhatsapp'), 'Olá! Quero solicitar um orçamento na ARLATEM.');
 }
@@ -671,7 +671,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     await loadData();
   } catch (error) {
     console.error('Erro ao iniciar o catálogo:', error);
-    alert('Não foi possível carregar o catálogo completo.');
+    if (refs.resultsInfo) refs.resultsInfo.textContent = 'Catálogo temporariamente indisponível. Atualize a página.';
   } finally {
     setTimeout(() => {
       if (refs.preloader) refs.preloader.classList.add('hidden');
