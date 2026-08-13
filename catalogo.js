@@ -280,16 +280,24 @@ function renderHeroStats() {
 
   document.body.classList.toggle('category-page', isCategoryPage);
   document.getElementById('catalogPageHero')?.classList.toggle('category-view', isCategoryPage);
-  document.getElementById('totalProductsHero').textContent = categoryProducts.length;
-  document.getElementById('productsHeroLabel').textContent = isCategoryPage
-    ? `Produto${categoryProducts.length === 1 ? '' : 's'} nesta categoria`
-    : 'Produtos cadastrados';
+  const totalProductsHero = document.getElementById('totalProductsHero');
+  const productsHeroLabel = document.getElementById('productsHeroLabel');
+  if (totalProductsHero) totalProductsHero.textContent = categoryProducts.length;
+  if (productsHeroLabel) {
+    productsHeroLabel.textContent = isCategoryPage
+      ? `Produto${categoryProducts.length === 1 ? '' : 's'} nesta categoria`
+      : 'Produtos cadastrados';
+  }
 
   const categoriesTotal = [...new Set(state.products.map((product) => product.category).filter(Boolean))].length;
-  document.getElementById('totalCategoriesHero').textContent = isCategoryPage ? 'Técnico' : categoriesTotal;
-  document.getElementById('categoriesHeroLabel').textContent = isCategoryPage ? 'Suporte especializado' : 'Categorias';
-  document.getElementById('supportHeroValue').textContent = isCategoryPage ? 'Brasil' : 'WhatsApp';
-  document.getElementById('supportHeroLabel').textContent = isCategoryPage ? 'Atendimento nacional' : 'Atendimento rápido';
+  const totalCategoriesHero = document.getElementById('totalCategoriesHero');
+  if (totalCategoriesHero) totalCategoriesHero.textContent = isCategoryPage ? 'Técnico' : categoriesTotal;
+  const categoriesHeroLabel = document.getElementById('categoriesHeroLabel');
+  if (categoriesHeroLabel) categoriesHeroLabel.textContent = isCategoryPage ? 'Suporte especializado' : 'Categorias';
+  const supportHeroValue = document.getElementById('supportHeroValue');
+  if (supportHeroValue) supportHeroValue.textContent = isCategoryPage ? 'Brasil' : 'WhatsApp';
+  const supportHeroLabel = document.getElementById('supportHeroLabel');
+  if (supportHeroLabel) supportHeroLabel.textContent = isCategoryPage ? 'Atendimento nacional' : 'Atendimento rápido';
 
   const title = document.getElementById('catalogPageTitle');
   const description = document.getElementById('catalogPageDescription');

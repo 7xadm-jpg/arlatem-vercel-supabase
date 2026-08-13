@@ -231,9 +231,9 @@ function renderHero() {
   const heroImage = document.getElementById('heroImage');
   heroImage.onerror = () => {
     heroImage.onerror = null;
-    heroImage.src = '/uploads/hero-trucks-arla-web.jpg';
+    heroImage.src = window.ARLATEM_HERO_IMAGE || '/uploads/hero-trucks-arla-web.jpg';
   };
-  heroImage.src = hero.backgroundImage || '/uploads/hero-trucks-arla-web.jpg';
+  heroImage.src = window.ARLATEM_HERO_IMAGE || hero.backgroundImage || '/uploads/hero-trucks-arla-web.jpg';
   refs.heroSearch.placeholder = hero.searchPlaceholder;
   document.getElementById('productCountBadge').textContent = `+${state.products.length}`;
 
