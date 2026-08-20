@@ -135,10 +135,11 @@ async function loadData() {
       const script = document.createElement('script');
       script.src = '/fallback-data.js?v=20260813-final2';
       script.onload = resolve;
-      script.onerror = () => reject(new Error('Dados de seguranca nao carregados'));
+      script.onerror = () => reject(new Error('Dados de segurança não carregados'));
       document.head.appendChild(script);
     });
   }
+
   if (!window.ARLATEM_BRAND_LOGOS) {
     await new Promise((resolve) => {
       const script = document.createElement('script');
@@ -148,12 +149,30 @@ async function loadData() {
       document.head.appendChild(script);
     });
   }
-  const safePayload = await window.ARLATEM_DATA.load();
-  state.content = safePayload.data;
-  state.products = safePayload.data.products || [];
-  renderAll();
-  return;
 
+  const defaults = window.ARLATEM_DATA?.defaults || {};
+  let remote = {};
+
+  try {
+    const response = await fetch('/api/content', { cache: 'no-store' });
+    if (!response.ok) throw new Error(`API indisponível (${response.status})`);
+
+    const payload = await response.json();
+    if (!payload?.ok || !payload.data) throw new Error('Resposta inválida da API');
+
+    remote = payload.data;
+  } catch (error) {
+    console.warn('Usando conteúdo de segurança:', error.message);
+  }
+
+  const merged = window.ARLATEM_DATA?.merge
+    ? window.ARLATEM_DATA.merge(remote)
+    : { ...defaults, ...remote };
+
+  state.content = merged;
+  state.products = merged.products || [];
+  renderAll();
+}
   let payload;
   try {
     const response = await fetch('/api/content', { cache: 'no-store' });
