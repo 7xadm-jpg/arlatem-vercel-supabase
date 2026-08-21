@@ -1,3 +1,122 @@
+
+
+Texto colado(7).txt
+Documento
+Corrija o erro
+
+Corrigi. O problema estava exatamente no site.js: havia um segundo bloco de carregamento duplicado depois do fechamento de async function loadData(). Por isso o await fetch(...) ficava fora de uma função async, gerando o erro de sintaxe. O arquivo publicado no GitHub mostra essa duplicação. 
+
+Removi somente o bloco duplicado, mantive o loadData() correto e rodei uma validação de sintaxe com Node. Agora o arquivo passa sem erros.
+
+Arquivo corrigido
+⬇️ Baixar site.js corrigido
+
+Agora no GitHub:
+
+Abra site.js.
+
+Clique no lápis.
+
+Apague todo o conteúdo.
+
+Cole o conteúdo do arquivo que te enviei ou faça upload substituindo o arquivo.
+
+Commit:
+Corrige erro de sintaxe no carregamento da home
+
+Aguarde a Vercel ficar Ready.
+
+Abra o site e dê Ctrl + F5.
+
+Não mexa nas variáveis do Supabase. Esse erro específico era JavaScript e está corrigido.
+
+
+site.js
+Código
+
+
+Não está abrindo
+
+A correção pode ser feita diretamente no GitHub:
+
+Abra o repositório arlatem-vercel-supabase.
+Clique no arquivo site.js.
+Clique no ícone de lápis Edit this file.
+Pressione Ctrl + F e procure:
+let payload;
+Você verá esse trecho logo depois de:
+state.content = merged;
+state.products = merged.products || [];
+renderAll();
+}
+Apague o bloco duplicado que começa em:
+let payload;
+e termina no segundo:
+
+renderAll();
+}
+Apague somente esse bloco duplicado. O próximo código depois dele deverá começar com:
+
+function renderAll() {
+Clique em Commit changes.
+Na mensagem, escreva:
+Corrige erro de sintaxe no carregamento da home
+
+Marque Commit directly to the main branch e confirme.
+Aguarde o deploy automático da Vercel ficar Ready.
+Atualize o site com Ctrl + F5.
+Depois corrigiremos separadamente a imagem do caminhão que está retornando 404. Não altere mais nenhuma variável do Supabase.
+
+12:12
+
+
+Corrigi o arquivo completo. Removi apenas o bloco duplicado que quebrava o JavaScript e validei com node --check: nenhum erro de sintaxe.
+
+Baixar o site.js corrigido
+
+No GitHub, substitua o site.js atual por esse arquivo e faça o commit:
+
+Corrige erro de sintaxe no carregamento da home
+
+Depois aguarde a Vercel ficar Ready e teste com Ctrl + F5.
+
+
+site.js
+Código
+
+
+Não está abrindo 
+
+Gerei novamente e conferi: o arquivo existe e o JavaScript está com a sintaxe válida.
+
+Tente este primeiro:
+
+⬇️ Baixar site_corrigido_arlatem.js
+
+Se o navegador não abrir .js, use o ZIP:
+
+⬇️ Baixar site_corrigido_arlatem.zip
+
+Ou, como terceira opção, o mesmo código em .txt:
+
+⬇️ Baixar site_corrigido_arlatem.txt
+
+O ZIP é o mais garantido. Dentro dele está o site_corrigido_arlatem.js, pronto para substituir o site.js no GitHub.
+
+
+site_corrigido_arlatem.js
+Código
+
+
+site_corrigido_arlatem.txt
+Documento
+
+
+Biblioteca
+/
+site_corrigido_arlatem.txt
+
+
 const refs = {
   preloader: document.getElementById('preloader'),
   header: document.getElementById('siteHeader'),
@@ -173,46 +292,6 @@ async function loadData() {
   state.products = merged.products || [];
   renderAll();
 }
-  let payload;
-  try {
-    const response = await fetch('/api/content', { cache: 'no-store' });
-    if (!response.ok) throw new Error(`API indisponivel (${response.status})`);
-    payload = await response.json();
-    if (!payload.ok || !payload.data) throw new Error('Resposta invalida da API');
-  } catch (error) {
-    console.warn('Usando conteudo de seguranca:', error.message);
-    const fallbackResponse = await fetch('/data/default-content.json', { cache: 'no-store' });
-    if (!fallbackResponse.ok) throw new Error('Conteudo de seguranca indisponivel');
-    payload = { ok: true, data: await fallbackResponse.json() };
-  }
-  if (!payload.ok) throw new Error('Falha ao carregar conteúdo');
-  const needsFallback = ['categories', 'brands', 'highlights', 'benefits', 'blog', 'testimonials', 'faq']
-    .some((key) => !Array.isArray(payload.data?.[key]) || payload.data[key].length === 0);
-
-  if (needsFallback) {
-    const fallbackResponse = await fetch('/data/default-content.json', { cache: 'no-store' });
-    if (fallbackResponse.ok) {
-      const fallback = await fallbackResponse.json();
-      const current = payload.data || {};
-      const merged = { ...fallback, ...current };
-
-      ['categories', 'brands', 'highlights', 'benefits', 'blog', 'testimonials', 'faq', 'products']
-        .forEach((key) => {
-          merged[key] = Array.isArray(current[key]) && current[key].length
-            ? current[key]
-            : (fallback[key] || []);
-        });
-
-      merged.settings = { ...(fallback.settings || {}), ...(current.settings || {}) };
-      merged.hero = { ...(fallback.hero || {}), ...(current.hero || {}) };
-      payload.data = merged;
-    }
-  }
-  state.content = payload.data;
-  state.products = payload.data.products || [];
-  renderAll();
-}
-
 function renderAll() {
   renderBrand();
   renderHero();
